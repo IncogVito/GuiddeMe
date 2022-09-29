@@ -1,0 +1,9 @@
+.tile-category-primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 25rem;
+
+  border: 1px solid var(--blue);
+  border-radius: .25rem;
+}
