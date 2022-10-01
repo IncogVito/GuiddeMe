@@ -1,15 +1,18 @@
 import {Meta, moduleMetadata, Story} from '@storybook/angular';
 
-import { action } from '@storybook/addon-actions';
-import {TileCategoryPrimaryComponent} from "./tile-category-primary.component";
+import {TilePrimaryComponent} from "./tile-primary.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
+import {
+  SbConventionHighestDivision,
+  SbConventionMiddleDivision
+} from "../../../../../../.storybook/storybook-naming-convention";
 
 
 export default {
-  component: TileCategoryPrimaryComponent,
-  title: 'Tile Category Primary',
+  component: TilePrimaryComponent,
+  title: SbConventionHighestDivision.DesignSystem + '/' + SbConventionMiddleDivision.Atoms + '/Tile Primary',
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
@@ -23,11 +26,6 @@ export default {
 
 } as Meta;
 
-export const actionsData = {
-  onPinTask: action('onPinTask'),
-  onArchiveTask: action('onArchiveTask'),
-};
-
 const Template: Story = args => ({
   props: {
     ...args
@@ -35,4 +33,7 @@ const Template: Story = args => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  text: 'Category first',
+  iconName: 'highlight_off'
+};

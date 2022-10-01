@@ -1,0 +1,20 @@
+<div class="tile-secondary"
+     [class.tile-secondary--expanded]="expanded"
+     (click)="onToggle()"
+>
+  <span class="tile-secondary__left-label">
+    {{leftLabel}}
+  </span>
+
+  <span class="tile-secondary__right-label">
+    {{rightLabel}}
+  </span>
+
+  <div class="tile-secondary__expanded-elem">
+    <span>MAP</span>
+  </div>
+
+  <p class="tile-secondary__content-text">
+    {{contentText}}
+  </p>
+</div>

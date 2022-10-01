@@ -1,3 +1,11 @@
-{
-  --blue: #00b; // or any global you wish to share with components
+:root {
+  --main-color-primary: #af1c47;
+  --main-color-primary-oposite: white;
+
+  --border-primary-color: #e8e8e8;
+  --border-radius-primary: .25rem;
+
+
+  --padding-content-default: .5rem;
+
 }

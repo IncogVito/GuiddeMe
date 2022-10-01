@@ -1,0 +1,41 @@
+.tile-secondary {
+  display: grid;
+  grid-template-rows: min-content max-content 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border-primary-color);
+  padding: var(--padding-content-default);
+
+  &__left-label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  &__right-label {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: flex-end;
+  }
+
+  &__expanded-elem {
+    grid-column: 1 / end;
+    grid-row: 2;
+    height: 0;
+    visibility: hidden;
+  }
+
+  &--expanded &__expanded-elem {
+    visibility: visible;
+    height: 4rem;
+    background-color: black;
+
+    & > span {
+      color: white;
+    }
+  }
+
+  &__content-text {
+    grid-column: 1 / end;
+    grid-row: 3;
+    margin: 0;
+  }
+}

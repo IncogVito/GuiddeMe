@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 25rem;
 
-  border: 1px solid var(--blue);
   border-radius: .25rem;
+  padding: var(--padding-content-default);
+  border: 1px solid var(--border-primary-color);
 }
