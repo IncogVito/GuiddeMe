@@ -1,0 +1,12 @@
+<section class="categories" id="category-section-id">
+  <label class="categories__label">
+    Kategorie
+  </label>
+
+  <app-tile-primary class="categories__single-item" *ngFor="let singleCategory of categories"
+                    [buttonText]="singleCategory.name"
+                    [rightText]="singleCategory.toursCount + ''"
+  >
+  </app-tile-primary>
+
+</section>

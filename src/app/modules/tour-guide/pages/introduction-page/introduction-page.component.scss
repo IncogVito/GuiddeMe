@@ -26,10 +26,16 @@
   &__text {
     font-size: 2.5rem;
     color: white;
+    text-align: center;
+    margin: 0 3rem;
   }
 
   &__swipe-icon {
     margin-top: 5rem;
+
+    &:active {
+      animation: blowUp .1s ease-in-out;
+    }
 
     & > mat-icon {
       font-size: 3rem;
@@ -38,6 +44,6 @@
     }
 
     color: white;
-    animation: moveDownApplications 2s ease-in-out infinite;
+    animation: moveDownTwice 2s ease-in-out infinite;
   }
 }

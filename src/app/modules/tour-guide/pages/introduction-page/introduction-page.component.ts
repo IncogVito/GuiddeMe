@@ -8,6 +8,8 @@ import {WindowUtilService} from "../../../shared/services/utils/window-util.serv
 })
 export class IntroductionPageComponent implements OnInit, AfterViewInit {
 
+  public showIntroduction: boolean = true; // TODO redux
+
   constructor() {
   }
 
@@ -20,6 +22,7 @@ export class IntroductionPageComponent implements OnInit, AfterViewInit {
   }
 
   swipeDown() {
-
+    WindowUtilService.scrollToElementOfId('category-section-id', 'start');
+    setTimeout(() => this.showIntroduction = false, 500);
   }
 }

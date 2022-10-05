@@ -1,5 +1,4 @@
 import {Meta, moduleMetadata, Story} from '@storybook/angular';
-
 import {TilePrimaryComponent} from "./tile-primary.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -8,6 +7,7 @@ import {
   SbConventionHighestDivision,
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
 
 
 export default {
@@ -16,6 +16,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
+      declarations: [ButtonPrimaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -34,6 +35,7 @@ const Template: Story = args => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  text: 'Category first',
-  iconName: 'highlight_off'
+  rightText: '1',
+  buttonText: 'Turystyka',
+  imageUrl: '../../../../../assets/main-photo.jpg'
 };
