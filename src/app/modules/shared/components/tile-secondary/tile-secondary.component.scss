@@ -7,16 +7,29 @@
   transition: var(--transition-default);
   border-radius: 1rem;
   overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-.5rem);
+  }
 
   &--expanded {
     grid-template-rows: 1.5rem 1rem 1fr min-content;
+
+    &:hover {
+      transform: translateY(0);
+    }
   }
 
   &__main-label {
-    grid-column: 1;
+    grid-column: 1 / span 2;
     grid-row: 1;
     color: var(--font-color-primary);
     font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 90%;
+    white-space: nowrap;
   }
 
   &__right-icon {
@@ -25,6 +38,7 @@
     display: flex;
     align-items: center;
     justify-self: flex-end;
+    align-self: center;
     justify-content: center;
     transition: inherit;
   }
@@ -99,6 +113,7 @@
       align-items: center;
       justify-content: center;
       background-color: var(--missing-image-background-color);
+      text-align: center;
     }
   }
 

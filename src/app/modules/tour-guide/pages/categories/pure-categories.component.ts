@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryModel} from "../../models/category.model";
+import {CategoryViewModel} from "../../models/category.model";
 
 @Component({
   selector: 'app-categories',
@@ -9,7 +9,7 @@ import {CategoryModel} from "../../models/category.model";
 export class PureCategoriesComponent implements OnInit {
 
   @Input()
-  public categories: CategoryModel[] = [];
+  public categories: CategoryViewModel[] = [];
 
   constructor() { }
 

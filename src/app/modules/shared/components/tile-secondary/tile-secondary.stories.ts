@@ -48,6 +48,7 @@ Default.args = {
   topRightIcon: 'expand_less',
   descriptionIcon: 'schedule',
   descriptionText: '120 min',
+  buttonText: 'See more',
   imageUrl: '/assets/mapa.jpg',
   expanded: false
 };
@@ -61,6 +62,16 @@ Expanded.args = {
 export const MissingImage = Template.bind({});
 MissingImage.args = {
   ...Default.args,
+  expanded: true,
+  imageUrl: 'notExisting'
+};
+
+export const OverflowingText = Template.bind({});
+OverflowingText.args = {
+  ...Default.args,
+  mainLabel: 'Duis ornare metus vitae est euismod mattis. ' +
+    'Praesent vitae orci vitae augue lacinia feugiat. Pellentesque tellus ipsum,' +
+    ' lacinia in lorem ac',
   expanded: true,
   imageUrl: 'notExisting'
 };

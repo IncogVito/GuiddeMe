@@ -1,4 +1,4 @@
-export interface CategoryModel {
+export interface CategoryViewModel {
   name: string;
   toursCount: number;
 }

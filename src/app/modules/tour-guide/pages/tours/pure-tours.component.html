@@ -1,0 +1,20 @@
+<section class="tours">
+  <h2 class="header-secondary">
+    {{pageTitle}}
+  </h2>
+
+  <div class="tours__list">
+    <app-tile-secondary *ngFor="let singleTour of tours"
+                        class="tours__single-item"
+                        [mainLabel]="singleTour.title"
+                        [descriptionText]="singleTour.time + ' minut'"
+                        [imageUrl]="singleTour.imageUrl"
+                        topRightIcon="expand_more"
+                        descriptionIcon="schedule"
+                        buttonText="Zobacz"
+    >
+      <!-- TODO directive for converting inflections -->
+
+    </app-tile-secondary>
+  </div>
+</section>

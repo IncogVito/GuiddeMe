@@ -5,6 +5,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {PureCategoriesComponent} from './pages/categories/pure-categories.component';
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../shared/shared.module";
+import { PureToursComponent } from './pages/tours/pure-tours.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -18,7 +19,8 @@ export const tourGuideRoutes: Routes = [
 @NgModule({
   declarations: [
     IntroductionPageComponent,
-    PureCategoriesComponent
+    PureCategoriesComponent,
+    PureToursComponent
   ],
   imports: [
     CommonModule,
