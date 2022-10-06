@@ -1,20 +1,40 @@
 <div class="tile-secondary"
      [class.tile-secondary--expanded]="expanded"
-     (click)="onToggle()"
+     (click)="toggle()"
 >
-  <span class="tile-secondary__left-label">
-    {{leftLabel}}
+  <span class="tile-secondary__main-label">
+    {{mainLabel}}
   </span>
 
-  <span class="tile-secondary__right-label">
-    {{rightLabel}}
-  </span>
+  <mat-icon class="tile-secondary__right-icon">
+    {{topRightIcon}}
+  </mat-icon>
 
-  <div class="tile-secondary__expanded-elem">
-    <span>MAP</span>
+  <div class="tile-secondary__description">
+    <mat-icon class="tile-secondary__description-icon" *ngIf="descriptionIcon">
+      {{descriptionIcon}}
+    </mat-icon>
+
+    <span class="tile-secondary__description-text">
+      {{descriptionText}}
+    </span>
   </div>
 
-  <p class="tile-secondary__content-text">
-    {{contentText}}
-  </p>
+  <div class="tile-secondary__expanded-elem">
+    <img *ngIf="imageUrl"
+         [src]="imageUrl"
+         alt="tile-image"
+         [class.tile-secondary__missing-image]="missingImage"
+         (error)="handleMissingImage()"
+    >
+    <!--    TODO alt image-->
+  </div>
+
+  <app-button-primary class="tile-secondary__button"
+                      label="Zobacz"
+                      iconName="chevron_right"
+                      (click)="clickButton($event)"
+  >
+
+  </app-button-primary>
 </div>

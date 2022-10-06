@@ -34,5 +34,6 @@ const Template: Story = args => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  label: 'Button primary'
+  label: 'Button primary',
+  iconName: 'chevron_right'
 };

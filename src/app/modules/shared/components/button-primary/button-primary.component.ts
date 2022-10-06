@@ -10,6 +10,9 @@ export class ButtonPrimaryComponent implements OnInit {
   @Input()
   public label = '';
 
+  @Input()
+  public iconName = '';
+
   constructor() {
   }
 

@@ -9,6 +9,7 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {TileSecondaryComponent} from "./tile-secondary.component";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
 
 
 export default {
@@ -17,6 +18,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
+      declarations: [ButtonPrimaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -28,21 +30,25 @@ export default {
 } as Meta;
 
 export const actionsData = {
-  onExpand: action('onExpand')
+  onToggle: action('onToggle'),
+  buttonClicked: action('buttonClicked')
 };
 
 const Template: Story = args => ({
   props: {
     ...args,
-    onExpand: actionsData.onExpand
+    onToggle: actionsData.onToggle,
+    buttonClicked: actionsData.buttonClicked,
   },
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  leftLabel: 'Category first',
-  rightLabel: '4h',
-  contentText: 'Good trip',
+  mainLabel: 'Category first',
+  topRightIcon: 'expand_less',
+  descriptionIcon: 'schedule',
+  descriptionText: '120 min',
+  imageUrl: '/assets/mapa.jpg',
   expanded: false
 };
 
@@ -50,4 +56,11 @@ export const Expanded = Template.bind({});
 Expanded.args = {
   ...Default.args,
   expanded: true
+};
+
+export const MissingImage = Template.bind({});
+MissingImage.args = {
+  ...Default.args,
+  expanded: true,
+  imageUrl: 'notExisting'
 };

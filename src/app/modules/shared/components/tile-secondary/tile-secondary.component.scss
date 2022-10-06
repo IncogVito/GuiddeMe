@@ -1,41 +1,123 @@
 .tile-secondary {
   display: grid;
-  grid-template-rows: min-content max-content 1fr;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--border-primary-color);
+  grid-template-rows: 1.75rem 1rem;
+  grid-template-columns: repeat(2, 1fr);
   padding: var(--padding-content-default);
+  box-shadow: var(--box-shadow-primary);
+  transition: var(--transition-default);
+  border-radius: 1rem;
+  overflow: hidden;
 
-  &__left-label {
-    grid-column: 1;
-    grid-row: 1;
+  &--expanded {
+    grid-template-rows: 1.5rem 1rem 1fr min-content;
   }
 
-  &__right-label {
-    grid-column: 3;
+  &__main-label {
+    grid-column: 1;
     grid-row: 1;
+    color: var(--font-color-primary);
+    font-weight: 500;
+  }
+
+  &__right-icon {
+    font-size: 2rem;
+    grid-row: 1 / span 2;
+    display: flex;
+    align-items: center;
     justify-self: flex-end;
+    justify-content: center;
+    transition: inherit;
+  }
+
+  &--expanded &__right-icon {
+    transform: rotate(180deg);
+  }
+
+  &__description {
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--font-color-secondary);
+
+    font-size: .8rem;
+
+    & > mat-icon {
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 
   &__expanded-elem {
-    grid-column: 1 / end;
-    grid-row: 2;
+    grid-row: 3;
+    grid-column: 1/end;
     height: 0;
     visibility: hidden;
+    transition: all linear .3s;
+    opacity: 0;
+    border-radius: 1rem;
   }
 
   &--expanded &__expanded-elem {
+    margin-top: 1rem;
     visibility: visible;
-    height: 4rem;
-    background-color: black;
+    height: min-content;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    & > img {
+      display: flex;
+      width: 100%;
+      max-height: 10rem;
+      object-fit: cover;
+    }
 
     & > span {
       color: white;
     }
   }
 
-  &__content-text {
+  &__missing-image {
+    height: 5rem;
+    background-color: var(--missing-image-background-color);
+    position: relative;
+
+    &:after {
+      content: "Couldn't load the image. Sorry for the inconvenience.";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--missing-image-background-color);
+    }
+  }
+
+  &__button {
     grid-column: 1 / end;
-    grid-row: 3;
-    margin: 0;
+    grid-row: 4;
+    transition: inherit;
+    transition-delay: 0s;
+
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+  }
+
+  &--expanded &__button {
+    margin-top: .5rem;
+    visibility: visible;
+    opacity: 1;
+    height: unset;
+    transition-delay: .4s;
   }
 }

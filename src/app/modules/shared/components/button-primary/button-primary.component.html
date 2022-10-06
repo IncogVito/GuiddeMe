@@ -1,3 +1,13 @@
 <button class="button-primary" (click)="buttonClicked()">
-  {{label}}
+
+  <span class="button-primary__label"
+        [class.button-primary__label--with-icon]="iconName"
+  > {{label}} </span>
+
+  <mat-icon *ngIf="iconName"
+            [attr.aria-label]="iconName"
+            class="button-primary__icon"
+  >
+    {{iconName}}
+  </mat-icon>
 </button>

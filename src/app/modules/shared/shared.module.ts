@@ -4,6 +4,7 @@ import {ButtonPrimaryComponent} from "./components/button-primary/button-primary
 import {ButtonSecondaryComponent} from "./components/button-secondary/button-secondary.component";
 import {TilePrimaryComponent} from "./components/tile-primary/tile-primary.component";
 import {TileSecondaryComponent} from "./components/tile-secondary/tile-secondary.component";
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -21,8 +22,9 @@ import {TileSecondaryComponent} from "./components/tile-secondary/tile-secondary
     TileSecondaryComponent
   ],
 
-  imports: [
-    CommonModule,
-  ]
+    imports: [
+        CommonModule,
+        MatIconModule,
+    ]
 })
 export class SharedModule { }
