@@ -1,3 +1,16 @@
-<button class="button-secondary" (click)="buttonClicked()">
-  {{label}}
+<button class="button-secondary"
+        (click)="!disabled && buttonClicked()"
+        [disabled]="disabled"
+>
+
+  <span class="button-secondary__label"
+        [class.button-secondary__label--with-icon]="iconName"
+  > {{label}} </span>
+
+  <mat-icon *ngIf="iconName"
+            [attr.aria-label]="iconName"
+            class="button-secondary__icon"
+  >
+    {{iconName}}
+  </mat-icon>
 </button>

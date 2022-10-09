@@ -20,4 +20,9 @@ export class PureToursComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleTour(singleTour: TourViewModel) {
+    const defaultExpandState = !singleTour.expanded;
+    this.tours.forEach(singleTour => singleTour.expanded = false);
+    singleTour.expanded = defaultExpandState;
+  }
 }

@@ -9,7 +9,7 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {TileSecondaryComponent} from "./tile-secondary.component";
-import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
+import {ButtonSecondaryComponent} from "../button-secondary/button-secondary.component";
 
 
 export default {
@@ -18,7 +18,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
-      declarations: [ButtonPrimaryComponent],
+      declarations: [ButtonSecondaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,

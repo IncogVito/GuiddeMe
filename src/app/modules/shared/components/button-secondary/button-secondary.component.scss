@@ -1,14 +1,38 @@
 .button-secondary {
+  background-color: var(--main-color-primary--light);
   color: var(--main-color-primary);
-  background-color: var(--main-color-primary-oposite);
   outline: none;
   border: 1px solid var(--main-color-primary);
   min-width: 7rem;
-  padding: var(--padding-content-default);
-  border-radius: var(--border-radius-primary);
+  border-radius: var(--button-primary-border-radius);
   cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-default);
+  padding: .5rem .75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 2.3rem;
+
+  width: 100%;
 
   &:active {
-    filter: brightness(1.15);
+    transform: scale(1.03);
+  }
+
+  &:disabled {
+    background-color: var(--disabled-color-primary--light);
+    border-color: var(--disabled-color-primary);
+    color: var(--disabled-color-primary);
+  }
+
+  &__icon {
+    position: absolute;
+    right: .5rem;
+  }
+
+  &__label {
+    margin: auto;
   }
 }

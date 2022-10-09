@@ -5,6 +5,7 @@ import {ButtonSecondaryComponent} from "./components/button-secondary/button-sec
 import {TilePrimaryComponent} from "./components/tile-primary/tile-primary.component";
 import {TileSecondaryComponent} from "./components/tile-secondary/tile-secondary.component";
 import {MatIconModule} from "@angular/material/icon";
+import { HamburgerMenuComponent } from './components/menu/hamburger-menu.component';
 
 
 
@@ -13,7 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
     ButtonPrimaryComponent,
     ButtonSecondaryComponent,
     TilePrimaryComponent,
-    TileSecondaryComponent
+    TileSecondaryComponent,
+    HamburgerMenuComponent
   ],
   exports: [
     ButtonPrimaryComponent,

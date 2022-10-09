@@ -9,9 +9,11 @@
                         [mainLabel]="singleTour.title"
                         [descriptionText]="singleTour.time + ' minut'"
                         [imageUrl]="singleTour.imageUrl"
+                        [expanded]="singleTour.expanded"
                         topRightIcon="expand_more"
                         descriptionIcon="schedule"
                         buttonText="Zobacz"
+                        (onToggle)="toggleTour(singleTour)"
     >
       <!-- TODO directive for converting inflections -->
 

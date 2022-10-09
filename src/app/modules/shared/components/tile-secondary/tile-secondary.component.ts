@@ -44,7 +44,6 @@ export class TileSecondaryComponent implements OnInit {
 
   public toggle() {
     this.onToggle.emit();
-    this.expanded = !this.expanded;
   }
 
   public clickButton($event: MouseEvent) {

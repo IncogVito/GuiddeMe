@@ -8,7 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {PureToursComponent} from "../tours/pure-tours.component";
 import {TileSecondaryComponent} from "../../../shared/components/tile-secondary/tile-secondary.component";
 import {TourViewModel} from "../../models/tour.model";
-import {ButtonPrimaryComponent} from "../../../shared/components/button-primary/button-primary.component";
+import {ButtonSecondaryComponent} from "../../../shared/components/button-secondary/button-secondary.component";
 
 export default {
   component: PureToursComponent,
@@ -16,7 +16,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
-      declarations: [TileSecondaryComponent, ButtonPrimaryComponent],
+      declarations: [TileSecondaryComponent, ButtonSecondaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -38,17 +38,20 @@ const tours: TourViewModel[] = [
   {
     title: 'Smok wawelski',
     time: 120,
-    imageUrl: '/assets/mapa.jpg'
+    imageUrl: '/assets/mapa.jpg',
+    expanded: false
   },
   {
     title: 'Tajemnice zamku królewskiego',
     time: 180,
-    imageUrl: ''
+    imageUrl: '',
+    expanded: false
   },
   {
     title: 'Kawiarniany szlak',
     time: 90,
-    imageUrl: 'xxxxx'
+    imageUrl: 'xxxxx',
+    expanded: false
   },
 ]
 
