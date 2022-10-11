@@ -1,0 +1,20 @@
+<div class="toggle">
+  <a class="toggle__active-background"
+          [class.toggle__active-background--toggled]="toggled"
+  >
+
+  </a>
+
+  <span class="toggle__item"
+        [class.toggle__item--active]="!toggled"
+        (click)="toggled && toggle()"
+  >
+    {{leftLabel}}
+  </span>
+
+  <span class="toggle__item"
+        [class.toggle__item--active]="toggled"
+        (click)="!toggled && toggle()">
+    {{rightLabel}}
+  </span>
+</div>

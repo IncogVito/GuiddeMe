@@ -18,7 +18,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   z-index: 4;
-  filter: drop-shadow(3px 3px 3px var(--main-color-primary));
+  filter: drop-shadow(3px 3px 3px black);
 }
 
 .hamRotate.active {
