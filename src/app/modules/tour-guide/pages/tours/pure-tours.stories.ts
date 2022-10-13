@@ -58,5 +58,6 @@ const tours: TourViewModel[] = [
 export const Default = Template.bind({});
 Default.args = {
   pageTitle: 'Turystyka (3)',
+  backgroundImageUrl: 'touristic-category.jpg',
   tours
 };

@@ -6,6 +6,7 @@ import {PureCategoriesComponent} from './pages/categories/pure-categories.compon
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../shared/shared.module";
 import { PureToursComponent } from './pages/tours/pure-tours.component';
+import { SingleTourComponent } from './pages/single-tour/single-tour.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -20,7 +21,8 @@ export const tourGuideRoutes: Routes = [
   declarations: [
     IntroductionPageComponent,
     PureCategoriesComponent,
-    PureToursComponent
+    PureToursComponent,
+    SingleTourComponent
   ],
   imports: [
     CommonModule,

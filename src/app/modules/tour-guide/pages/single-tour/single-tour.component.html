@@ -1,0 +1,27 @@
+<div class="single-tour">
+
+  <section class="single-tour__details">
+    <img class="single-tour__image"
+         src="assets/touristic-category.jpg"
+         alt="heheh"
+    />
+
+    <span class="single-tour__title">
+      Title
+    </span>
+
+    <div class="single-tour__extra-info"
+         *ngFor="let singleIconWithDescription of iconWithDescription"
+    >
+      <mat-icon *ngIf="singleIconWithDescription.leftValue">
+        {{singleIconWithDescription.leftValue}}
+      </mat-icon>
+
+      <span>
+        {{singleIconWithDescription.rightValue}}
+      </span>
+    </div>
+
+  </section>
+
+</div>
