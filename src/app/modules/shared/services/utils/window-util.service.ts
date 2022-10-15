@@ -1,3 +1,5 @@
+import {NumberUtilService} from "./number-util.service";
+
 export class WindowUtilService {
   public static focusById(elementId: string, delayMs: number = 0) {
     setTimeout(() => {
@@ -9,7 +11,6 @@ export class WindowUtilService {
   }
 
   public static scrollToTheTop() {
-    console.log('Jade do gury');
     window.scroll({
       top: 0,
       left: 0,
@@ -21,6 +22,16 @@ export class WindowUtilService {
     const foundElement = document.getElementById(elementId);
     if (foundElement) {
       foundElement.scrollIntoView({behavior: "smooth", block: position});
+    }
+  }
+
+  public static scrollToElementOfIdWithOffset(elementId: string, offset: number = 0) {
+    const foundElement = document.getElementById(elementId);
+    if (foundElement) {
+      const position = foundElement.offsetTop;
+      window.scrollTo({
+        top: NumberUtilService.add(position, offset),
+        behavior: "smooth"});
     }
   }
 }

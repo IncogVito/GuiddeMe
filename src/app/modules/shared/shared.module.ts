@@ -7,6 +7,9 @@ import {TileSecondaryComponent} from "./components/tile-secondary/tile-secondary
 import {MatIconModule} from "@angular/material/icon";
 import { HamburgerMenuComponent } from './components/menu/hamburger-menu.component';
 import { TogglePrimaryComponent } from './components/toggle-primary/toggle-primary.component';
+import { CardPrimaryComponent } from './components/card-primary/card-primary.component';
+import { NavbarScrollComponent } from './components/navbar-scroll/navbar-scroll.component';
+import {AddClassOnVisibleDirective} from "./directives/add-class-on-visible.directive";
 
 
 
@@ -17,7 +20,10 @@ import { TogglePrimaryComponent } from './components/toggle-primary/toggle-prima
     TilePrimaryComponent,
     TileSecondaryComponent,
     HamburgerMenuComponent,
-    TogglePrimaryComponent
+    TogglePrimaryComponent,
+    CardPrimaryComponent,
+    NavbarScrollComponent,
+    AddClassOnVisibleDirective
   ],
   exports: [
     ButtonPrimaryComponent,

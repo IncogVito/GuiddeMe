@@ -1,0 +1,37 @@
+<nav class="navigation">
+  <ul class="navigation__list">
+    <li class="navigation__item"
+        *ngFor="let navItem of navigationList;let index = index;"
+        [class.navigation__item--active]="activeIndex === index"
+        (click)="scrollInto(navItem)"
+    >
+      <a class="navigation__link">
+        {{navItem.title}}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="u-mt-4 d-block">
+  &nbsp;
+</div>
+
+<div class="single-content" *ngFor="let navItem of navigationList; let index = index;">
+
+  <h2 class="header-secondary" [id]="navItem.title"
+      appAddClassOnVisible
+      [className]="navItem.title"
+      [additionalOffset]="250"
+      sourcePosition="top"
+      [range]="120"
+      (onVisible)="changeActivity(index)"
+  >
+    {{navItem.title}}
+  </h2>
+
+  <p>
+    {{navItem.content}}
+  </p>
+
+
+</div>
