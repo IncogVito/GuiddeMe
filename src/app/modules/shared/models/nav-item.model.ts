@@ -1,5 +1,7 @@
+import {ContentModel} from "./content.model";
+
 export interface NavItemModel {
   title: string;
-  content: string;
+  content: ContentModel[];
   active?: boolean;
 }

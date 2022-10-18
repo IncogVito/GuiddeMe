@@ -19,7 +19,7 @@
 <div class="single-content" *ngFor="let navItem of navigationList; let index = index;">
 
   <h2 class="header-secondary" [id]="navItem.title"
-      appAddClassOnVisible
+      visible
       [className]="navItem.title"
       [additionalOffset]="250"
       sourcePosition="top"

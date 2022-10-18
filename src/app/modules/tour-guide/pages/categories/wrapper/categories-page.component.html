@@ -1,0 +1,6 @@
+<app-categories *ngIf="categories$ | async as categories"
+                [categories]="categories"
+                (chooseCategory)="chooseCategory($event)"
+>
+
+</app-categories>

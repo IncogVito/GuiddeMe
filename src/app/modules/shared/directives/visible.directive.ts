@@ -1,12 +1,10 @@
 import {Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2} from '@angular/core';
 import {NumberUtilService} from "../services/utils/number-util.service";
-import * as Console from "console";
 
-// TODO nazwa do zmiany
 @Directive({
-  selector: '[appAddClassOnVisible]'
+  selector: '[visible]'
 })
-export class AddClassOnVisibleDirective {
+export class VisibleDirective {
 
   @Input()
   public className: string = '';

@@ -1,14 +1,14 @@
 import {
   SbConventionHighestDivision
-} from "../../../../../../.storybook/storybook-naming-convention";
+} from "../../../../../../../.storybook/storybook-naming-convention";
 import {Meta, moduleMetadata, Story} from "@storybook/angular";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
-import {PureToursComponent} from "../tours/pure-tours.component";
-import {TileSecondaryComponent} from "../../../shared/components/tile-secondary/tile-secondary.component";
-import {TourViewModel} from "../../models/tour.model";
-import {ButtonSecondaryComponent} from "../../../shared/components/button-secondary/button-secondary.component";
+import {PureToursComponent} from "./pure-tours.component";
+import {TileSecondaryComponent} from "../../../../shared/components/tile-secondary/tile-secondary.component";
+import {TourViewModel} from "../../../models/tour.model";
+import {ButtonSecondaryComponent} from "../../../../shared/components/button-secondary/button-secondary.component";
 
 export default {
   component: PureToursComponent,

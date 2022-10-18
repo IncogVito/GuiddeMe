@@ -6,7 +6,7 @@ import {Meta, moduleMetadata, Story} from "@storybook/angular";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
-import {PureCategoriesComponent} from "./pure-categories.component";
+import {PureCategoriesComponent} from "./pure/pure-categories.component";
 import {CategoryViewModel} from "../../models/category.model";
 
 export default {

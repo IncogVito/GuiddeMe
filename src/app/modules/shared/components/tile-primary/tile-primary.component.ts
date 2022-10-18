@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-tile-primary',
@@ -15,6 +15,9 @@ export class TilePrimaryComponent implements OnInit {
 
   @Input()
   public imageUrl: string = '';
+
+  @Output()
+  public buttonClicked = new EventEmitter<void>();
 
   public backgroundStyle: any = {};
 

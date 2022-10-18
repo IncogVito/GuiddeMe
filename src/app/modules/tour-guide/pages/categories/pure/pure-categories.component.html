@@ -6,6 +6,7 @@
   <app-tile-primary class="categories__single-item" *ngFor="let singleCategory of categories"
                     [buttonText]="singleCategory.name"
                     [rightText]="singleCategory.toursCount + ''"
+                    (buttonClicked)="chooseCategory.emit(singleCategory.id)"
   >
   </app-tile-primary>
 

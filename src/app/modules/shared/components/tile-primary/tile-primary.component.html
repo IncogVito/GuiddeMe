@@ -5,7 +5,9 @@
     {{rightText}}
   </span>
 
-  <button class="tile-category-primary__button">
+  <button class="tile-category-primary__button"
+          (click)="buttonClicked.emit()"
+  >
     {{buttonText}}
   </button>
 

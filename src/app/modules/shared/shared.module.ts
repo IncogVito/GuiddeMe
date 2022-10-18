@@ -9,7 +9,7 @@ import { HamburgerMenuComponent } from './components/menu/hamburger-menu.compone
 import { TogglePrimaryComponent } from './components/toggle-primary/toggle-primary.component';
 import { CardPrimaryComponent } from './components/card-primary/card-primary.component';
 import { NavbarScrollComponent } from './components/navbar-scroll/navbar-scroll.component';
-import {AddClassOnVisibleDirective} from "./directives/add-class-on-visible.directive";
+import {VisibleDirective} from "./directives/visible.directive";
 
 
 
@@ -23,7 +23,7 @@ import {AddClassOnVisibleDirective} from "./directives/add-class-on-visible.dire
     TogglePrimaryComponent,
     CardPrimaryComponent,
     NavbarScrollComponent,
-    AddClassOnVisibleDirective
+    VisibleDirective
   ],
   exports: [
     ButtonPrimaryComponent,

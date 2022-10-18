@@ -8,7 +8,7 @@ import {
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {NavbarScrollComponent} from "./navbar-scroll.component";
 import {NavItemModel} from "../../models/nav-item.model";
-import {AddClassOnVisibleDirective} from "../../directives/add-class-on-visible.directive";
+import {VisibleDirective} from "../../directives/visible.directive";
 
 
 export default {
@@ -17,7 +17,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
-      declarations: [AddClassOnVisibleDirective],
+      declarations: [VisibleDirective],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -36,16 +36,20 @@ const Template: Story = args => ({
 
 const navigationList: NavItemModel[] = [{
   title: 'First',
-  content: "Aenean elementum accumsan tellus vel bibendum. Ut rhoncus pulvinar justo, sed porttitor enim hendrerit ac. Aliquam ut mauris arcu. Mauris blandit, ipsum vitae blandit dignissim, purus tellus convallis ante, mattis lobortis mauris neque sed diam. Suspendisse scelerisque orci eget ante consectetur, id placerat nisi placerat. Aenean mi eros, semper vel quam eu, fermentum eleifend odio. Quisque vitae vulputate tortor. Fusce ut nibh at est blandit venenatis nec venenatis nunc. Etiam eget iaculis nisi. Sed aliquam diam eget justo aliquam, sed placerat velit pellentesque.\n" +
-    "\n" +
-    "Nullam malesuada et orci quis fringilla. Nam libero risus, efficitur nec sodales vitae, viverra quis enim. Pellentesque cursus elit turpis, sit amet suscipit augue facilisis at. Nulla volutpat lectus nec elit posuere rhoncus. Mauris porttitor libero augue, vel tincidunt nibh ornare eget. Phasellus eget dui vitae neque faucibus sodales eget quis quam. Sed pretium sapien molestie turpis elementum tincidunt. Quisque a velit porttitor, scelerisque purus ut, malesuada metus. Nulla ut placerat lectus. Suspendisse potenti. Cras dignissim nunc nec volutpat accumsan. Sed eu sapien tellus. Suspendisse pharetra varius scelerisque. Vivamus ante diam, bibendum non justo at, accumsan dapibus metus. Suspendisse porta lectus lacus, vitae iaculis nisl hendrerit a. Vestibulum nulla sapien, tristique id imperdiet id, tempor eu dolor."
-
-},{
+  content: [{
+    title: 'First 1',
+    text: '"Aenean elementum accumsan tellus vel bibendum. Ut rhoncus pulvinar justo, sed porttitor enim hendrerit ac. Aliquam ut mauris arcu. Mauris blandit, ipsum vitae blandit dignissim, purus tellus convallis ante, mattis lobortis mauris neque sed diam. Suspendisse scelerisque orci eget ante consectetur, id placerat nisi placerat. Aenean mi eros, semper vel quam eu, fermentum eleifend odio. Quisque vitae vulputate tortor. Fusce ut nibh at est blandit venenatis nec venenatis nunc. Etiam eget iaculis nisi. Sed aliquam diam eget justo aliquam, sed placerat velit pellentesque.\\n" +\n' +
+      '    "\\n" +\n' +
+      '    "Nullam malesuada et orci quis fringilla. Nam libero risus, efficitur nec sodales vitae, viverra quis enim. Pellentesque cursus elit turpis, sit amet suscipit augue facilisis at. Nulla volutpat lectus nec elit posuere rhoncus. Mauris porttitor libero augue, vel tincidunt nibh ornare eget. Phasellus eget dui vitae neque faucibus sodales eget quis quam. Sed pretium sapien molestie turpis elementum tincidunt. Quisque a velit porttitor, scelerisque purus ut, malesuada metus. Nulla ut placerat lectus. Suspendisse potenti. Cras dignissim nunc nec volutpat accumsan. Sed eu sapien tellus. Suspendisse pharetra varius scelerisque. ' +
+      'Vivamus ante diam, bibendum non justo at, accumsan dapibus metus. Suspendisse porta lectus lacus, vitae iaculis nisl hendrerit a. Vestibulum nulla sapien, tristique id imperdiet id, tempor eu dolor."\n',
+    imageUrl: ''
+  }
+  ]
+}, {
   title: 'Second',
-  content: "Aenean elementum accumsan tellus vel bibendum. Ut rhoncus pulvinar justo, sed porttitor enim hendrerit ac. Aliquam ut mauris arcu. Mauris blandit, ipsum vitae blandit dignissim, purus tellus convallis ante, mattis lobortis mauris neque sed diam. Suspendisse scelerisque orci eget ante consectetur, id placerat nisi placerat. Aenean mi eros, semper vel quam eu, fermentum eleifend odio. Quisque vitae vulputate tortor. Fusce ut nibh at est blandit venenatis nec venenatis nunc. Etiam eget iaculis nisi. Sed aliquam diam eget justo aliquam, sed placerat velit pellentesque.\n" +
-    "\n" +
-    "Nullam malesuada et orci quis fringilla. Nam libero risus, efficitur nec sodales vitae, viverra quis enim. Pellentesque cursus elit turpis, sit amet suscipit augue facilisis at. Nulla volutpat lectus nec elit posuere rhoncus. Mauris porttitor libero augue, vel tincidunt nibh ornare eget. Phasellus eget dui vitae neque faucibus sodales eget quis quam. Sed pretium sapien molestie turpis elementum tincidunt. Quisque a velit porttitor, scelerisque purus ut, malesuada metus. Nulla ut placerat lectus. Suspendisse potenti. Cras dignissim nunc nec volutpat accumsan. Sed eu sapien tellus. Suspendisse pharetra varius scelerisque. Vivamus ante diam, bibendum non justo at, accumsan dapibus metus. Suspendisse porta lectus lacus, vitae iaculis nisl hendrerit a. Vestibulum nulla sapien, tristique id imperdiet id, tempor eu dolor."
-},{
+  content: []
+
+}, {
   title: 'Third',
   content: "Aenean volutpat, ligula id hendrerit tempor, mi felis suscipit sem, nec egestas tellus odio a nisl. Curabitur a accumsan ipsum, eget tempor orci. Mauris efficitur velit velit, ut rutrum nisl mollis in. Aenean vulputate mattis egestas. Sed maximus velit ac tincidunt tincidunt. Vestibulum sed lobortis lacus, nec maximus arcu. Ut vulputate consectetur felis, et rutrum erat. Fusce pretium ante a massa mattis, sed tempor nisi ullamcorper. Quisque ac eros pharetra, interdum mauris sit amet, dictum leo. In venenatis scelerisque magna ac efficitur. Suspendisse commodo, lectus a eleifend ultricies, lorem lacus vulputate felis, id consectetur erat nisl nec nisi. Sed ipsum nibh, iaculis lacinia arcu sed, fermentum pharetra ligula. Vivamus ex velit, venenatis id tortor a, dignissim laoreet magna.\n" +
     "\n" +

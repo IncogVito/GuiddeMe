@@ -13,14 +13,15 @@
   <div class="tours__list">
     <app-tile-secondary *ngFor="let singleTour of tours"
                         class="tours__single-item"
-                        [mainLabel]="singleTour.title"
-                        [descriptionText]="singleTour.time + ' minut'"
-                        [imageUrl]="singleTour.imageUrl"
-                        [expanded]="singleTour.expanded"
                         topRightIcon="expand_more"
                         descriptionIcon="schedule"
                         buttonText="Zobacz"
                         (onToggle)="toggleTour(singleTour)"
+                        (buttonClicked)="chooseTour.emit()"
+                        [mainLabel]="singleTour.title"
+                        [descriptionText]="singleTour.time + ' minut'"
+                        [imageUrl]="singleTour.imageUrl"
+                        [expanded]="singleTour.expanded"
     >
       <!-- TODO directive for converting inflections -->
 

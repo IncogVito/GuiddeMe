@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {TourViewModel} from "../../models/tour.model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TourViewModel} from "../../../models/tour.model";
 
 @Component({
   selector: 'app-tours',
@@ -16,6 +16,9 @@ export class PureToursComponent implements OnInit {
 
   @Input()
   public backgroundImageUrl: string = '';
+
+  @Output()
+  public chooseTour = new EventEmitter<string>();
 
   backgroundImageStyle: { 'background-image': string } | undefined;
 
