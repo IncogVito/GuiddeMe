@@ -1,27 +1,17 @@
-<div class="single-tour">
+<app-card-primary class="single-tour__card"
+  title="Smok wawelski"
+  imageUrl="assets/main-photo.jpg"
+  [details]="singleDetails"
+>
 
-  <section class="single-tour__details">
-    <img class="single-tour__image"
-         src="assets/touristic-category.jpg"
-         alt="heheh"
-    />
+</app-card-primary>
 
-    <span class="single-tour__title">
-      Title
-    </span>
+<app-navbar-scroll [navigationList]="navigationList"
+                   class="single-tour__nav-scroll"
+>
 
-    <div class="single-tour__extra-info"
-         *ngFor="let singleIconWithDescription of iconWithDescription"
-    >
-      <mat-icon *ngIf="singleIconWithDescription.leftValue">
-        {{singleIconWithDescription.leftValue}}
-      </mat-icon>
+</app-navbar-scroll>
 
-      <span>
-        {{singleIconWithDescription.rightValue}}
-      </span>
-    </div>
-
-  </section>
-
-</div>
+<app-button-primary  class="single-tour__start-button"
+                    label="Rozpocznij!"
+></app-button-primary>

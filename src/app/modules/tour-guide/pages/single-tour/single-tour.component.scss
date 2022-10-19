@@ -1,3 +1,9 @@
 .single-tour {
 
+  &__start-button {
+    width: calc(100% - 2rem);
+    position: fixed;
+    bottom: .5rem;
+    left: 1rem
+  }
 }

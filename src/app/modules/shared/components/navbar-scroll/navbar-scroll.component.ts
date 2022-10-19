@@ -13,6 +13,7 @@ export class NavbarScrollComponent implements OnInit {
   public navigationList: NavItemModel[] = [];
 
   public activeIndex: number = 0;
+  public navigationFixed: boolean = false;
 
   constructor() {
   }
@@ -26,5 +27,9 @@ export class NavbarScrollComponent implements OnInit {
 
   changeActivity(index: number) {
     this.activeIndex = index;
+  }
+
+  changeState(shouldBeFixed: boolean) {
+    this.navigationFixed = shouldBeFixed;
   }
 }

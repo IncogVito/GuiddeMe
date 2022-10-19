@@ -1,4 +1,14 @@
-<nav class="navigation">
+<div class="u-invisible"
+     appOffsetFixedActivity
+     sourcePosition="top"
+     (onChangedFixedActivity)="changeState($event)"
+>
+  &nbsp;
+</div>
+
+<nav class="navigation"
+     [class.navigation--fixed]="navigationFixed"
+>
   <ul class="navigation__list">
     <li class="navigation__item"
         *ngFor="let navItem of navigationList;let index = index;"
@@ -12,26 +22,35 @@
   </ul>
 </nav>
 
-<div class="u-mt-4 d-block">
-  &nbsp;
-</div>
+<div class="single-content" *ngFor="let navItem of navigationList; let index = index;"
+     [id]="navItem.title"
+     visible
+     sourcePosition="top"
+     [additionalOffset]="250"
+     [range]="120"
+     (onVisible)="changeActivity(index)"
+>
 
-<div class="single-content" *ngFor="let navItem of navigationList; let index = index;">
+  <div class="single-content__section" *ngFor="let singleContent of navItem.content">
+    <h3 *ngIf="singleContent.title"
+        class="single-content__section-header header-tertiary"
+    >
+      {{singleContent.title}}
+    </h3>
 
-  <h2 class="header-secondary" [id]="navItem.title"
-      visible
-      [className]="navItem.title"
-      [additionalOffset]="250"
-      sourcePosition="top"
-      [range]="120"
-      (onVisible)="changeActivity(index)"
-  >
-    {{navItem.title}}
-  </h2>
+    <img *ngIf="singleContent.imageUrl"
+         class="single-content__image"
+         [src]="singleContent.imageUrl"
+         [alt]=""
+    >
+    <!-- TODO - alt image-->
 
-  <p>
-    {{navItem.content}}
-  </p>
+    <p *ngIf="singleContent.text"
+       class="single-content__text"
+    >
+      {{singleContent.text}}
+    </p>
 
+  </div>
 
 </div>

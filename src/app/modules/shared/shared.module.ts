@@ -10,6 +10,7 @@ import { TogglePrimaryComponent } from './components/toggle-primary/toggle-prima
 import { CardPrimaryComponent } from './components/card-primary/card-primary.component';
 import { NavbarScrollComponent } from './components/navbar-scroll/navbar-scroll.component';
 import {VisibleDirective} from "./directives/visible.directive";
+import { OffsetFixedActivityDirective } from './directives/offset-fixed-activity.directive';
 
 
 
@@ -23,13 +24,16 @@ import {VisibleDirective} from "./directives/visible.directive";
     TogglePrimaryComponent,
     CardPrimaryComponent,
     NavbarScrollComponent,
-    VisibleDirective
+    VisibleDirective,
+    OffsetFixedActivityDirective
   ],
   exports: [
     ButtonPrimaryComponent,
     ButtonSecondaryComponent,
     TilePrimaryComponent,
-    TileSecondaryComponent
+    TileSecondaryComponent,
+    CardPrimaryComponent,
+    NavbarScrollComponent
   ],
 
     imports: [

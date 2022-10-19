@@ -1,8 +1,16 @@
 .navigation {
-  position: fixed;
+  position: relative;
   width: 100%;
   background-color: white;
   top: 0;
+  left: 0;
+  transition: var(--transition-default);
+
+  &--fixed {
+    position: fixed;
+    left: 1rem;
+    width: calc(100% - 2rem);
+  }
 
   &__list {
     display: grid;
@@ -26,6 +34,18 @@
       color: var(--main-color-primary);
       border: 1px solid var(--main-color-primary);
     }
+  }
+
+}
+
+.single-content {
+
+
+  &__image {
+    display: flex;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-primary);
   }
 
 }

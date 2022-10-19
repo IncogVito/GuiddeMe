@@ -56,14 +56,18 @@ export class VisibleDirective {
   }
 
   private addClassIntoContainer() {
-    this.renderer.addClass(this.elementRef.nativeElement, this.className);
+    if (this.className) {
+      this.renderer.addClass(this.elementRef.nativeElement, this.className);
+    }
   }
 
   private removeClassFromContainer() {
     if (this.removeTimeOutMs) {
       setTimeout(() => this.renderer.removeClass(this.elementRef.nativeElement, this.className), this.removeTimeOutMs);
     } else {
-      this.renderer.removeClass(this.elementRef.nativeElement, this.className);
+      if (this.className) {
+        this.renderer.removeClass(this.elementRef.nativeElement, this.className);
+      }
     }
   }
 }
