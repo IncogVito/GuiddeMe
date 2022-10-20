@@ -12,6 +12,7 @@ import {environment} from "../environments/environment";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
+import {CategoriesStore} from "./modules/tour-guide/stores/categories/categories.store";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
     TourGuideModule,
     RouterOutlet,
     AppRoutingModule,
-    NgxsModule.forRoot([], {developmentMode: !environment.production,}),
+    NgxsModule.forRoot([CategoriesStore], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
     NgxsRouterPluginModule.forRoot()

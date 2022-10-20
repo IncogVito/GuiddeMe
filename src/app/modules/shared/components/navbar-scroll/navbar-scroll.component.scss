@@ -1,15 +1,17 @@
 .navigation {
   position: relative;
-  width: 100%;
+  width: 96vw;
   background-color: white;
   top: 0;
-  left: 0;
   transition: var(--transition-default);
 
   &--fixed {
     position: fixed;
-    left: 1rem;
-    width: calc(100% - 2rem);
+    width: calc(100% - 2rem)
+  }
+
+  &__blank {
+
   }
 
   &__list {

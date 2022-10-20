@@ -3,6 +3,7 @@ import {EMPTY, Observable, of} from "rxjs";
 import {CategoryViewModel} from "../../../models/category.model";
 import {Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
+import {CategoriesStore, Category} from "../../../stores/categories/categories.store";
 
 @Component({
   selector: 'app-categories-wrapper',
@@ -13,19 +14,17 @@ export class CategoriesPageComponent implements OnInit {
 
   public categories$: Observable<CategoryViewModel[]> = EMPTY;
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store,
+              private readonly categoriesStore: CategoriesStore) {
   }
 
   ngOnInit(): void {
-    this.categories$ = this.loadCategories$();
+    this.loadCategories$();
+    this.categories$ = this.categoriesStore.categories$;
   }
 
-  private loadCategories$(): Observable<CategoryViewModel[]> {
-    return of([{
-      id: '1',
-      name: 'First Tour',
-      toursCount: 3
-    }]);
+  private loadCategories$(): void {
+    this.store.dispatch(new Category.FetchAll());
   }
 
   public chooseCategory(categoryId: string) {
