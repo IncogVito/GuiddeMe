@@ -35,10 +35,12 @@ const Template: Story = args => ({
 
 const categories: CategoryViewModel[] = [
   {
+    id: '21',
     name: 'Turystyka',
     toursCount: 14
   },
   {
+    id: '12',
     name: 'Coffee places',
     toursCount: 22
   },
