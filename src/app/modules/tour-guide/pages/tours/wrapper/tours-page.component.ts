@@ -28,6 +28,6 @@ export class ToursPageComponent implements OnInit {
   }
 
   navigateToTour(tourId: string) {
-    
+
   }
 }

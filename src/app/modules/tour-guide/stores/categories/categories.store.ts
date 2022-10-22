@@ -49,11 +49,11 @@ export class CategoriesStore {
   @Action(Category.FetchAll)
   feedAnimals(ctx: StateContext<CategoriesState>, _: Category.FetchAll) {
     return this.categoryApiService.fetchAllEntities().pipe(
-      tap(categories => {
+      tap(result => {
         const state = ctx.getState();
         ctx.setState({
           ...state,
-          categories: [...categories]
+          categories: [...result.entity.entities]
         });
       })
     );
