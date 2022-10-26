@@ -11,6 +11,8 @@ import { CardPrimaryComponent } from './components/card-primary/card-primary.com
 import { NavbarScrollComponent } from './components/navbar-scroll/navbar-scroll.component';
 import {VisibleDirective} from "./directives/visible.directive";
 import { OffsetFixedActivityDirective } from './directives/offset-fixed-activity.directive';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { FooterPrimaryComponent } from './components/footer-primary/footer-primary.component';
 
 
 
@@ -25,7 +27,9 @@ import { OffsetFixedActivityDirective } from './directives/offset-fixed-activity
     CardPrimaryComponent,
     NavbarScrollComponent,
     VisibleDirective,
-    OffsetFixedActivityDirective
+    OffsetFixedActivityDirective,
+    TaskListComponent,
+    FooterPrimaryComponent
   ],
   exports: [
     ButtonPrimaryComponent,

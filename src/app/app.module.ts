@@ -13,6 +13,8 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
 import {CategoriesStore} from "./modules/tour-guide/stores/categories/categories.store";
+import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
+import {AngularFireModule} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
@@ -28,9 +30,19 @@ import {CategoriesStore} from "./modules/tour-guide/stores/categories/categories
     NgxsModule.forRoot([CategoriesStore], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
-    NgxsRouterPluginModule.forRoot()
+    NgxsRouterPluginModule.forRoot(),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: FIRESTORE_SETTINGS,
+      useValue: environment.emulator ? {
+        host: 'localhost:7200',
+        ssl: false
+      } : undefined
+    }
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })

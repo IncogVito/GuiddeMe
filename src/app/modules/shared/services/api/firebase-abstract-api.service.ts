@@ -4,8 +4,9 @@ import {EntitiesResult, EntitySearchParams, FirestoreModel, PaginationParams} fr
 import {catchError, map, Observable, of, take} from "rxjs";
 import {EntityProcessResult, ProcessType} from "../../models/entity-process-result.model";
 
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 import Query = firebase.firestore.Query;
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,15 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
   }
 
   public loadAllEntities(): Observable<EntityProcessResult<EntitiesResult<ENTITY>>> {
-    return this.loadEntitiesByParams({});
+    return fromPromise(firebase.firestore().collection(this.entityPath).get())
+      .pipe(map(snapshot =>
+          snapshot.docs.map(doc => FirebaseAbstractApiService.combineWithGeneratedId(doc.data(), doc.id))
+        ),
+        map(entities => EntityProcessResult.ofSuccess(
+          ProcessType.READ,
+          {entities: entities as ENTITY[]}
+        ))
+      )
   }
 
 

@@ -53,6 +53,8 @@ export class CategoriesStore {
         const state = ctx.getState();
         ctx.setState({
           ...state,
+          fetched: true,
+          loading: true,
           categories: [...result.entity.entities]
         });
       })

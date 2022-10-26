@@ -1,0 +1,67 @@
+.task-list {
+  display: block;
+  margin: auto;
+
+  padding: 0;
+
+  & > ul {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: 4rem;
+  align-items: center;
+  position: relative;
+
+  &__icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow-primary);
+    background-color: var(--color-grey-2);
+    color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: auto;
+    transition: var(--transition-default);
+
+    &--done {
+      background-color: var(--color-success);
+      color: white;
+    }
+
+    &--current {
+      background-color: var(--main-color-primary);
+      width: 2rem;
+      height: 2rem;
+    }
+
+
+    & > mat-icon {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__name--active {
+    font-weight: bold;
+  }
+
+  &:not(:first-child):after {
+    content: "";
+    width: .1rem;
+    height: calc((80% / 2));
+    background-color: transparent;
+    border-right: dashed 1px grey;
+    position: absolute;
+    top: calc((80% / 4) * (-1));
+    left: 1.15rem;
+  }
+}
