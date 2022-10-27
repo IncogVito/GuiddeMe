@@ -13,6 +13,7 @@ import {VisibleDirective} from "./directives/visible.directive";
 import { OffsetFixedActivityDirective } from './directives/offset-fixed-activity.directive';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { FooterPrimaryComponent } from './components/footer-primary/footer-primary.component';
+import { ImageCarouselPrimaryComponent } from './components/image-carousel-primary/image-carousel-primary.component';
 
 
 
@@ -29,7 +30,8 @@ import { FooterPrimaryComponent } from './components/footer-primary/footer-prima
     VisibleDirective,
     OffsetFixedActivityDirective,
     TaskListComponent,
-    FooterPrimaryComponent
+    FooterPrimaryComponent,
+    ImageCarouselPrimaryComponent
   ],
   exports: [
     ButtonPrimaryComponent,
