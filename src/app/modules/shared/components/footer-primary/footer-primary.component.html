@@ -1,1 +1,19 @@
-<p>footbar-primary works!</p>
+<span class="footer__dummy">
+  &nbsp;
+</span>
+
+<div class="footer">
+  <span class="footer__additional-label">
+    {{additionalLabel}}
+  </span>
+
+  <span class="footer__main-label">
+    {{mainLabel}}
+  </span>
+
+  <app-button-primary class="footer__button"
+    [label]="buttonLabel"
+  >
+  </app-button-primary>
+
+</div>

@@ -14,6 +14,7 @@ import { OffsetFixedActivityDirective } from './directives/offset-fixed-activity
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { FooterPrimaryComponent } from './components/footer-primary/footer-primary.component';
 import { ImageCarouselPrimaryComponent } from './components/image-carousel-primary/image-carousel-primary.component';
+import { HeaderTextPrimaryComponent } from './components/header-text-primary/header-text-primary.component';
 
 
 
@@ -31,7 +32,8 @@ import { ImageCarouselPrimaryComponent } from './components/image-carousel-prima
     OffsetFixedActivityDirective,
     TaskListComponent,
     FooterPrimaryComponent,
-    ImageCarouselPrimaryComponent
+    ImageCarouselPrimaryComponent,
+    HeaderTextPrimaryComponent
   ],
   exports: [
     ButtonPrimaryComponent,
