@@ -1,4 +1,5 @@
-<div class="tile-category-primary"
+<div *ngIf="!loadingInProgress; else loadingSkeletonTemplate"
+     class="tile-category-primary"
      [ngStyle]="backgroundStyle"
 >
   <span class="tile-category-primary__info">
@@ -12,3 +13,11 @@
   </button>
 
 </div>
+
+<ng-template #loadingSkeletonTemplate>
+  <div class="tile-category-primary"
+       *skeleton="true; repeat: 1; className: 'tile-category-primary'; height: '7.5rem'; width: '100%' "
+  >
+
+  </div>
+</ng-template>

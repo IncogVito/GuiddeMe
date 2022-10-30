@@ -37,3 +37,9 @@ Default.args = {
   label: 'Button primary',
   iconName: 'chevron_right'
 };
+
+export const ReversedColor = Template.bind({});
+ReversedColor.args = {
+  ...Default.args,
+  reversedColor: true
+};

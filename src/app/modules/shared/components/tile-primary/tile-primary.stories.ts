@@ -8,6 +8,8 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
+import {SkeletonLoaderComponent} from "../skeleton-loader/skeleton-loader.component";
+import {SkeletonDirective} from "../../directives/skeleton.directive";
 
 
 export default {
@@ -16,7 +18,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
-      declarations: [ButtonPrimaryComponent],
+      declarations: [ButtonPrimaryComponent, SkeletonDirective, SkeletonLoaderComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -38,4 +40,10 @@ Default.args = {
   rightText: '1',
   buttonText: 'Turystyka',
   imageUrl: '../../../../../assets/main-photo.jpg'
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  ...Default.args,
+  loadingInProgress: true
 };

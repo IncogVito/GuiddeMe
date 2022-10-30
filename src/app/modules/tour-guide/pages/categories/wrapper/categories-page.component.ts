@@ -3,7 +3,7 @@ import {EMPTY, Observable, of} from "rxjs";
 import {CategoryViewModel} from "../../../models/category.model";
 import {Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
-import {CategoriesStore, Category} from "../../../stores/categories/categories.store";
+import {CategoriesState, Category} from "../../../stores/categories/categories.state";
 
 @Component({
   selector: 'app-categories-wrapper',
@@ -15,7 +15,7 @@ export class CategoriesPageComponent implements OnInit {
   public categories$: Observable<CategoryViewModel[]> = EMPTY;
 
   constructor(private readonly store: Store,
-              private readonly categoriesStore: CategoriesStore) {
+              private readonly categoriesStore: CategoriesState) {
   }
 
   ngOnInit(): void {

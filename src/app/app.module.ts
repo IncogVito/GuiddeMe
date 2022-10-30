@@ -12,7 +12,7 @@ import {environment} from "../environments/environment";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
-import {CategoriesStore} from "./modules/tour-guide/stores/categories/categories.store";
+import {CategoriesState} from "./modules/tour-guide/stores/categories/categories.state";
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/fire/compat/firestore";
 import {AngularFireModule} from "@angular/fire/compat";
 
@@ -27,7 +27,7 @@ import {AngularFireModule} from "@angular/fire/compat";
     TourGuideModule,
     RouterOutlet,
     AppRoutingModule,
-    NgxsModule.forRoot([CategoriesStore], {developmentMode: !environment.production,}),
+    NgxsModule.forRoot([CategoriesState], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
     NgxsRouterPluginModule.forRoot(),

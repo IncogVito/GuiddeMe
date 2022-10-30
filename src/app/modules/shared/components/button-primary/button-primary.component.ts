@@ -13,6 +13,9 @@ export class ButtonPrimaryComponent implements OnInit {
   @Input()
   public iconName = '';
 
+  @Input()
+  public reversedColor: boolean = false;
+
   constructor() {
   }
 

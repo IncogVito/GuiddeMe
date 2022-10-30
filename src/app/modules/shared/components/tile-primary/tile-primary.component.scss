@@ -3,7 +3,7 @@
   grid-template-columns: 1fr max-content;
   grid-template-rows: min-content 1fr min-content;
 
-  border-radius: 1rem;
+  border-radius: var(--border-radius-secondary);
   padding: var(--padding-content-default);
   border: 1px solid var(--border-primary-color);
   background-image: url("../../../../../assets/main-photo.jpg");

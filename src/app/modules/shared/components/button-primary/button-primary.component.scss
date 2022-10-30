@@ -15,6 +15,11 @@
   position: relative;
   min-height: 2.3rem;
 
+  &--reversed-color {
+    background-color: var(--main-color-primary-oposite);
+    color: var(--main-color-primary);
+  }
+
   width: 100%;
 
   &:active {

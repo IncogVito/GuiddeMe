@@ -16,6 +16,9 @@ export class TilePrimaryComponent implements OnInit {
   @Input()
   public imageUrl: string = '';
 
+  @Input()
+  public loadingInProgress: boolean = false;
+
   @Output()
   public buttonClicked = new EventEmitter<void>();
 

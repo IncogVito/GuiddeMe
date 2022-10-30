@@ -1,0 +1,26 @@
+<div class="modal">
+  <header class="modal__header">
+    {{headerTitle}}
+  </header>
+
+  <div class="modal__body">
+    <p [innerHTML]="htmlText">
+    </p>
+  </div>
+
+
+  <div class="modal__footer modal__footer--middle-bottom u-mt-1">
+
+    <app-button-primary class="u-full-width u-mr-025"
+                        [reversedColor]="true"
+                        [label]="rejectButtonLabel"
+    >
+    </app-button-primary>
+
+    <app-button-primary class="u-full-width u-ml-025"
+                        [label]="acceptButtonLabel"
+    >
+    </app-button-primary>
+  </div>
+
+</div>

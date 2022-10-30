@@ -1,4 +1,6 @@
-<button class="button-primary" (click)="buttonClicked()">
+<button class="button-primary" (click)="buttonClicked()"
+        [class.button-primary--reversed-color]="reversedColor"
+>
 
   <span class="button-primary__label"
         [class.button-primary__label--with-icon]="iconName"
