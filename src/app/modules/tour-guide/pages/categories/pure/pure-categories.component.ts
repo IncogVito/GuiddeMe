@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryViewModel} from "../../../models/category.model";
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-pure-categories',
   templateUrl: './pure-categories.component.html',
   styleUrls: ['./pure-categories.component.scss']
 })

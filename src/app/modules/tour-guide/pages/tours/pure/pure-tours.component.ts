@@ -2,31 +2,32 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TourViewModel} from "../../../models/tour.model";
 
 @Component({
-  selector: 'app-tours',
+  selector: 'app-pure-tours',
   templateUrl: './pure-tours.component.html',
   styleUrls: ['./pure-tours.component.scss']
 })
 export class PureToursComponent implements OnInit {
 
   @Input()
-  public pageTitle: string = '';
-
-  @Input()
   public tours: TourViewModel[] = [];
-
-  @Input()
-  public backgroundImageUrl: string = '';
 
   @Output()
   public chooseTour = new EventEmitter<string>();
 
-  backgroundImageStyle: { 'background-image': string } | undefined;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.resolveBackgroundStyle();
+    this.tours = this.tours.map(singleTour => {
+      return Object.defineProperties({...singleTour}, {
+        expanded: {
+          value: false,
+          configurable: true,
+          writable: true
+        }
+      });
+    })
   }
 
   toggleTour(singleTour: TourViewModel) {
@@ -35,11 +36,4 @@ export class PureToursComponent implements OnInit {
     singleTour.expanded = defaultExpandState;
   }
 
-  private resolveBackgroundStyle() {
-    if (this.backgroundImageUrl) {
-      this.backgroundImageStyle = {
-        'background-image': `url('${this.backgroundImageUrl}')`
-      }
-    }
-  }
 }

@@ -8,7 +8,8 @@ import {SharedModule} from "../shared/shared.module";
 import {PureToursComponent} from './pages/tours/pure/pure-tours.component';
 import {SingleTourComponent} from './pages/single-tour/single-tour.component';
 import {CategoriesPageComponent} from './pages/categories/wrapper/categories-page.component';
-import { ToursPageComponent } from './pages/tours/wrapper/tours-page.component';
+import {ToursPageComponent} from './pages/tours/wrapper/tours-page.component';
+import {ToursPageResolver} from "./resolvers/tours-page.resolver";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -22,9 +23,11 @@ export const tourGuideRoutes: Routes = [
     component: CategoriesPageComponent
   },
   {
-    path: 'category/:categoryId',
+    title: 'Trasy',
+    path: 'tours',
     canActivate: [],
-    component: ToursPageComponent
+    component: ToursPageComponent,
+    resolve: {tours: ToursPageResolver}
   },
 ];
 

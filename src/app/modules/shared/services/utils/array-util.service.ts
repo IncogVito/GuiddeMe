@@ -1,4 +1,3 @@
-
 export class ArrayUtilService {
 
   public static emptyIfNull<T>(obj: T[] | undefined | null): T[] {
@@ -31,6 +30,17 @@ export class ArrayUtilService {
       return undefined;
     }
     const matchingElements = elements.filter(elem => matchingFn(elem));
+    if (this.isEmpty(matchingElements)) {
+      return undefined;
+    }
+    return this.getFirst<T>(matchingElements);
+  }
+
+  public static getFirstByFieldEq<T>(elements: T[], fieldName: keyof T, value: T[keyof T]): T | undefined {
+    if (this.isEmpty(elements)) {
+      return undefined;
+    }
+    const matchingElements = elements.filter(elem => elem[fieldName] === value);
     if (this.isEmpty(matchingElements)) {
       return undefined;
     }

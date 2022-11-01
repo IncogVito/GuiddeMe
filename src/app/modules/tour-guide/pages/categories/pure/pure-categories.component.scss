@@ -1,16 +1,9 @@
-.categories {
-  min-height: 100vh;
+:host {
   display: grid;
-  grid-template-rows: 2rem repeat(auto-fit, minmax(9rem, max-content));;
-  grid-row-gap: 1rem;
-  padding: 1rem;
+  grid-template-rows: repeat(auto-fit, minmax(9rem, max-content));
+  grid-row-gap: .5rem;
+}
 
-  &__label {
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
-
-  &__single-item {
-    height: 8rem;
-  }
+.single-category {
+  height: min-content;
 }

@@ -1,0 +1,29 @@
+.tours {
+  padding: 0 var(--padding-content-default);
+
+  &__background-photo {
+    margin: 0 calc((-1) * var(--padding-content-default));
+    padding: 0;
+    width: calc(100% + var(--padding-content-default) * 2);
+    height: 24vh;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 2rem 2rem;
+    position: relative;
+    z-index: -1;
+  }
+
+  &__header {
+    margin-top: -1rem;
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow-primary);
+    width: max-content;
+    padding: .5rem 1rem;
+  }
+
+  &__single-item {
+    display: block;
+    margin-top: 1rem;
+  }
+}

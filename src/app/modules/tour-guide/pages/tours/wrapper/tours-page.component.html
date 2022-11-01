@@ -1,7 +1,30 @@
-<app-tours *ngIf="tours$ | async as tours"
-           pageTitle="Kategoria 2"
-           [tours]="tours"
-           backgroundImageUrl="main-photo.jpg"
-           (chooseTour)="navigateToTour($event)"
->
-</app-tours>
+<section class="tours">
+
+  <figure class="tours__background-photo"
+          [ngStyle]="backgroundImageStyle"
+  >
+
+  </figure>
+
+  <ng-container *ngIf="toursState$ | async as tourState">
+
+    <ng-container *ngIf="tourState.fetched; else loadingToursTemplate">
+      <h2 class="header-secondary tours__header">
+        {{tourState.categoryName}}
+      </h2>
+
+      <app-pure-tours [tours]="tourState.toursViewModel"
+                      (chooseTour)="navigateToTour($event)"
+      >
+      </app-pure-tours>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #loadingToursTemplate>
+    <div *skeleton="true; repeat: 3;  height: '6rem'; width: '100%' ">
+    </div>
+  </ng-template>
+
+
+</section>

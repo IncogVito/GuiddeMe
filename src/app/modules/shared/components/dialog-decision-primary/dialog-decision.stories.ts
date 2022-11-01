@@ -7,7 +7,6 @@ import {
   SbConventionHighestDivision,
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
-import {CardSingleDetailModel} from "../../models/card-single-detail.model";
 import {DialogDecisionPrimaryComponent} from "./dialog-decision-primary.component";
 import {DialogDecisionPrimaryWrapperComponent} from "./dialog-decision-primary-wrapper.component";
 import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
