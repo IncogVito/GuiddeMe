@@ -36,18 +36,21 @@ const Template: Story = args => ({
 
 const tours: TourViewModel[] = [
   {
+    id: '1',
     title: 'Smok wawelski',
     time: 120,
     imageUrl: '/assets/mapa.jpg',
     expanded: false
   },
   {
+    id: '2',
     title: 'Tajemnice zamku królewskiego',
     time: 180,
     imageUrl: '',
     expanded: false
   },
   {
+    id: '3',
     title: 'Kawiarniany szlak',
     time: 90,
     imageUrl: 'xxxxx',

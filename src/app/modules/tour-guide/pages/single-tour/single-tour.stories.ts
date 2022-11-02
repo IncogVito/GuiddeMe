@@ -12,6 +12,7 @@ import {VisibleDirective} from "../../../shared/directives/visible.directive";
 import {OffsetFixedActivityDirective} from "../../../shared/directives/offset-fixed-activity.directive";
 import {ButtonPrimaryComponent} from "../../../shared/components/button-primary/button-primary.component";
 import {NavItemModel} from "../../../shared/models/nav-item.model";
+import {CardSingleDetailModel} from "../../../shared/models/card-single-detail.model";
 
 export default {
   component: SingleTourComponent,
@@ -73,7 +74,20 @@ const navigationList: NavItemModel[] = [{
 }
 ];
 
+const singleDetails: CardSingleDetailModel[] = [{
+  icon: 'schedule',
+  text: '180 min',
+}, {
+  icon: 'map',
+  text: '7 punktów',
+}, {
+  icon: 'sports_esports',
+  text: 'Quiz dostępny',
+  colorStyle: 'orange'
+}]
+
 export const Default = Template.bind({});
 Default.args = {
-  navigationList: navigationList
+  navigationList: navigationList,
+  singleDetails: singleDetails
 };
