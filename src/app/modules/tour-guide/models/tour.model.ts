@@ -15,6 +15,9 @@ export interface TourModel {
   mainImageUrl: string;
   allImages: string[];
   categoryId: string;
+  stopsCount: number;
+  descriptionHtml: string;
+  mapImageUrl: string;
 }
 
 export interface TourSearchParams extends EntitySearchParams {

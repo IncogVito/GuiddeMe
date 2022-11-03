@@ -29,12 +29,6 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     this.loadCategories$();
     this.categories$ = this.categoriesState.categories$;
     this.categoriesState$ = this.categoriesState.categoriesState$;
-
-    this.actions$.pipe(
-      tap(res => console.log(res))
-    )
-      .subscribe();
-
   }
 
   private loadCategories$(): void {

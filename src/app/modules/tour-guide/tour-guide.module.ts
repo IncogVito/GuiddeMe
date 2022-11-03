@@ -6,10 +6,12 @@ import {PureCategoriesComponent} from './pages/categories/pure/pure-categories.c
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../shared/shared.module";
 import {PureToursComponent} from './pages/tours/pure/pure-tours.component';
-import {SingleTourComponent} from './pages/single-tour/single-tour.component';
+import {PureSingleTourComponent} from './pages/single-tour/pure/pure-single-tour.component';
 import {CategoriesPageComponent} from './pages/categories/wrapper/categories-page.component';
 import {ToursPageComponent} from './pages/tours/wrapper/tours-page.component';
 import {ToursPageResolver} from "./resolvers/tours-page.resolver";
+import {SingleTourPageComponent} from './pages/single-tour/wrapper/single-tour-page.component';
+import {TourPreviewResolver} from "./resolvers/tour-preview.resolver";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -29,6 +31,13 @@ export const tourGuideRoutes: Routes = [
     component: ToursPageComponent,
     resolve: {tours: ToursPageResolver}
   },
+  {
+    title: 'Trasa',
+    path: 'tour-preview',
+    canActivate: [],
+    component: SingleTourPageComponent,
+    resolve: {tourWithStops: TourPreviewResolver},
+  }
 ];
 
 
@@ -37,9 +46,10 @@ export const tourGuideRoutes: Routes = [
     IntroductionPageComponent,
     PureCategoriesComponent,
     PureToursComponent,
-    SingleTourComponent,
+    PureSingleTourComponent,
     CategoriesPageComponent,
-    ToursPageComponent
+    ToursPageComponent,
+    SingleTourPageComponent
   ],
   imports: [
     CommonModule,

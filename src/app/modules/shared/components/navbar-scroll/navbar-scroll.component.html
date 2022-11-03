@@ -47,8 +47,8 @@
 
     <p *ngIf="singleContent.text"
        class="single-content__text"
+       [innerHTML]="singleContent.text"
     >
-      {{singleContent.text}}
     </p>
 
   </div>

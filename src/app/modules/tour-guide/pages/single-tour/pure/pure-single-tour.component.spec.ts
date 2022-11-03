@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleTourComponent } from './single-tour.component';
+import { PureSingleTourComponent } from './pure-single-tour.component';
 
 describe('SingleTourComponent', () => {
-  let component: SingleTourComponent;
-  let fixture: ComponentFixture<SingleTourComponent>;
+  let component: PureSingleTourComponent;
+  let fixture: ComponentFixture<PureSingleTourComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleTourComponent ]
+      declarations: [ PureSingleTourComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SingleTourComponent);
+    fixture = TestBed.createComponent(PureSingleTourComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
