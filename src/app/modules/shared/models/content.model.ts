@@ -1,5 +1,5 @@
 export interface ContentModel {
-  title?: string;
+  subtitle?: string;
   imageUrl?: string;
   text?: string;
 }

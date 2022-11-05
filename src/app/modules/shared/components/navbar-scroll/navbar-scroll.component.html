@@ -1,4 +1,4 @@
-<div class="u-invisible"
+<div class="u-invisible navigation__blank"
      appOffsetFixedActivity
      sourcePosition="top"
      (onChangedFixedActivity)="changeState($event)"
@@ -6,24 +6,30 @@
   &nbsp;
 </div>
 
-<nav class="navigation"
-     [class.navigation--fixed]="navigationFixed"
->
-  <ul class="navigation__list">
-    <li class="navigation__item"
-        *ngFor="let navItem of navigationList;let index = index;"
-        [class.navigation__item--active]="activeIndex === index"
-        (click)="scrollInto(navItem)"
-    >
-      <a class="navigation__link">
-        {{navItem.title}}
-      </a>
-    </li>
-  </ul>
-</nav>
+
+<div class="navigation__wrapper"
+     [class.navigation__wrapper--fixed]="navigationFixed"
+     >
+  <nav class="navigation"
+       [class.navigation--fixed]="navigationFixed"
+  >
+    <ul class="navigation__list">
+      <li class="navigation__item"
+          *ngFor="let navItem of navigationList;let index = index;"
+          [class.navigation__item--active]="activeIndex === index"
+          (click)="scrollInto(navItem)"
+      >
+        <a class="navigation__link">
+          {{navItem.navTitle}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
 
 <div class="single-content" *ngFor="let navItem of navigationList; let index = index;"
-     [id]="navItem.title"
+     [id]="navItem.mainTextTitle"
      visible
      sourcePosition="top"
      [additionalOffset]="250"
@@ -31,12 +37,16 @@
      (onVisible)="changeActivity(index)"
 >
 
+  <h3 class="single-content__header">
+    {{navItem.mainTextTitle}}
+  </h3>
+
   <div class="single-content__section" *ngFor="let singleContent of navItem.content">
-    <h3 *ngIf="singleContent.title"
+    <h5 *ngIf="singleContent.subtitle"
         class="single-content__section-header header-tertiary"
     >
-      {{singleContent.title}}
-    </h3>
+      {{singleContent.subtitle}}
+    </h5>
 
     <img *ngIf="singleContent.imageUrl"
          class="single-content__image"

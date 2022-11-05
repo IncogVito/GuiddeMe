@@ -12,6 +12,9 @@ import {ToursPageComponent} from './pages/tours/wrapper/tours-page.component';
 import {ToursPageResolver} from "./resolvers/tours-page.resolver";
 import {SingleTourPageComponent} from './pages/single-tour/wrapper/single-tour-page.component';
 import {TourPreviewResolver} from "./resolvers/tour-preview.resolver";
+import { PureGameStopListComponent } from './pages/game-in-progress-page/pure/pure-game-stop-list/pure-game-stop-list.component';
+import { PureGameCurrentStopComponent } from './pages/game-in-progress-page/pure/pure-game-current-stop/pure-game-current-stop.component';
+import { PureGameComponent } from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -49,7 +52,10 @@ export const tourGuideRoutes: Routes = [
     PureSingleTourComponent,
     CategoriesPageComponent,
     ToursPageComponent,
-    SingleTourPageComponent
+    SingleTourPageComponent,
+    PureGameStopListComponent,
+    PureGameCurrentStopComponent,
+    PureGameComponent
   ],
   imports: [
     CommonModule,

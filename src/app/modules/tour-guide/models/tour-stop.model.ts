@@ -5,6 +5,8 @@ export interface TourStopModel {
   tourId: string;
   name: string;
   descriptionHtml: string;
+  mainImageUrl: string;
+  imagesUrls: string[];
   address: string;
   orderIndex: number;
 }

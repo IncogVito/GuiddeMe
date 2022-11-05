@@ -2,7 +2,7 @@ import {Action, State, StateContext, Store} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {CategoriesStateModel, getDefaultCategoriesState} from "./categories.state-model";
 import {CategoryApiService} from "../../services/category-api.service";
-import {delay, EMPTY, Observable, tap} from "rxjs";
+import {EMPTY, Observable, tap} from "rxjs";
 import {CategoryViewModel} from "../../models/category.model";
 
 export namespace Category {

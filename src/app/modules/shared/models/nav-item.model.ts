@@ -1,7 +1,8 @@
 import {ContentModel} from "./content.model";
 
 export interface NavItemModel {
-  title: string;
+  navTitle: string;
+  mainTextTitle: string;
   content: ContentModel[];
   active?: boolean;
 }

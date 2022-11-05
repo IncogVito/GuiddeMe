@@ -45,15 +45,16 @@ import {SkeletonDirective} from "./directives/skeleton.directive";
     SkeletonLoaderComponent,
     SkeletonDirective
   ],
-  exports: [
-    ButtonPrimaryComponent,
-    ButtonSecondaryComponent,
-    TilePrimaryComponent,
-    TileSecondaryComponent,
-    CardPrimaryComponent,
-    NavbarScrollComponent,
-    SkeletonDirective
-  ],
+    exports: [
+        ButtonPrimaryComponent,
+        ButtonSecondaryComponent,
+        TilePrimaryComponent,
+        TileSecondaryComponent,
+        CardPrimaryComponent,
+        NavbarScrollComponent,
+        SkeletonDirective,
+        TogglePrimaryComponent
+    ],
 
   imports: [
     CommonModule,

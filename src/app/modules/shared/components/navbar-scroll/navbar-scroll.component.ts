@@ -22,7 +22,7 @@ export class NavbarScrollComponent implements OnInit {
   }
 
   scrollInto(navItem: NavItemModel) {
-    WindowUtilService.scrollToElementOfIdWithOffset(navItem.title, -100);
+    WindowUtilService.scrollToElementOfIdWithOffset(navItem.mainTextTitle, -100);
   }
 
   changeActivity(index: number) {
