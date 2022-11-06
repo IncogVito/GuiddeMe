@@ -18,6 +18,7 @@ export interface TourModel {
   stopsCount: number;
   descriptionHtml: string;
   mapImageUrl: string;
+  quizAvailable: boolean;
 }
 
 export interface TourSearchParams extends EntitySearchParams {

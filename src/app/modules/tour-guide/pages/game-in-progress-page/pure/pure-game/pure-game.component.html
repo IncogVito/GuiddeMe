@@ -1,13 +1,42 @@
 <div class="game-page">
-  <app-toggle-primary class="d-flex u-m-auto u-width-min-content"
+  <app-toggle-primary class="d-flex u-m-auto u-width-min-content u-mb-1"
                       leftLabel="Trasa"
                       rightLabel="Miejsce"
+                      (toggle)="currentStopVisible = !currentStopVisible"
+
   >
   </app-toggle-primary>
 
-  <guidde-me-pure-game-stop-list>
-  </guidde-me-pure-game-stop-list>
+  <div class="game-page__body">
+    <guidde-me-pure-game-stop-list class="game-page__list"
+                                   [stopList]="stopsList"
+                                   [class.game-page__list--active]="!currentStopVisible"
+    >
+    </guidde-me-pure-game-stop-list>
 
-  <guidde-me-pure-game-current-stop>
-  </guidde-me-pure-game-current-stop>
+    <guidde-me-pure-game-current-stop class="game-page__current-stop"
+                                      [tourStop]="currentStop"
+                                      [class.game-page__current-stop--active]="currentStopVisible"
+
+    >
+    </guidde-me-pure-game-current-stop>
+  </div>
+
+  <app-footer-primary *ngIf="nextStop; else lastStopFooter"
+                      additionalLabel="Następny przystanek"
+                      [mainLabel]="nextStop.name"
+                      buttonLabel="Przejdź dalej"
+                      class="u-mt-2"
+                      (btnClick)="emitDoNextStepAction()"
+  >
+  </app-footer-primary>
+
+  <ng-template #lastStopFooter>
+    <app-footer-primary mainLabel="To ostatni przystanek"
+                        buttonLabel="Zakończ!"
+                        class="u-mt-2"
+    >
+    </app-footer-primary>
+  </ng-template>
+
 </div>

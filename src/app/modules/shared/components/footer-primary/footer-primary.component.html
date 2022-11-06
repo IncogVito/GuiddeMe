@@ -12,7 +12,9 @@
   </span>
 
   <app-button-primary class="footer__button"
-    [label]="buttonLabel"
+                      [label]="buttonLabel"
+                      (btnClick)="btnClick.emit()"
+
   >
   </app-button-primary>
 

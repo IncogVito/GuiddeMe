@@ -28,7 +28,6 @@ export class TourPreviewResolver implements Resolve<[TourModel, TourStopModel[]]
     const tourStops$: Observable<TourStopModel[]> = this.tourStopsState.tourStopsState$.pipe(
       filter(state => state.fetched),
       take(1),
-      tap(val => console.log(val)),
       map(state => state.tourStops)
     );
 

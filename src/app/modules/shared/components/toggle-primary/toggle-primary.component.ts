@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-toggle-primary',
@@ -16,13 +16,17 @@ export class TogglePrimaryComponent implements OnInit {
   @Input()
   public rightLabel: string = '';
 
+  @Output()
+  public toggle = new EventEmitter<boolean>();
+
   constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  toggle() {
+  doToggleAction() {
     this.toggled = !this.toggled;
+    this.toggle.emit(this.toggled);
   }
 }

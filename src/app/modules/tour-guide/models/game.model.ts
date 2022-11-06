@@ -3,7 +3,7 @@ import {TourStopModel} from "./tour-stop.model";
 
 export interface GameModel {
   tour: TourModel;
-  stops: TourStopModel;
+  stops: TourStopModel[];
   currentStopIndex: number;
   quizAvailable: boolean;
   quizEnabled: boolean;

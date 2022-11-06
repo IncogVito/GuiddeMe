@@ -1,13 +1,13 @@
 .carousel {
   position: relative;
-  height: 20rem;
+  height: 18rem;
   display: flex;
   justify-content: center;
   margin: auto;
   transition: var(--transition-default);
 
   &__wrapper {
-    position: absolute;
+    position: relative;
     width: 100%;
     left: 0;
     overflow: hidden;

@@ -17,6 +17,7 @@ import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from "@angular/f
 import {AngularFireModule} from "@angular/fire/compat";
 import {ToursState} from "./modules/tour-guide/stores/tours/tours.state";
 import {TourStopsState} from "./modules/tour-guide/stores/tour-stops/tour-stops.state";
+import {GameState} from "./modules/tour-guide/stores/game/game.state";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import {TourStopsState} from "./modules/tour-guide/stores/tour-stops/tour-stops.
     TourGuideModule,
     RouterOutlet,
     AppRoutingModule,
-    NgxsModule.forRoot([CategoriesState, ToursState, TourStopsState], {developmentMode: !environment.production,}),
+    NgxsModule.forRoot([
+      CategoriesState,
+      ToursState,
+      TourStopsState,
+      GameState
+    ], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
     NgxsRouterPluginModule.forRoot(),

@@ -15,6 +15,7 @@ import {TourPreviewResolver} from "./resolvers/tour-preview.resolver";
 import { PureGameStopListComponent } from './pages/game-in-progress-page/pure/pure-game-stop-list/pure-game-stop-list.component';
 import { PureGameCurrentStopComponent } from './pages/game-in-progress-page/pure/pure-game-current-stop/pure-game-current-stop.component';
 import { PureGameComponent } from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
+import { GamePageComponent } from './pages/game-in-progress-page/wrapper/game-page.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -40,6 +41,12 @@ export const tourGuideRoutes: Routes = [
     canActivate: [],
     component: SingleTourPageComponent,
     resolve: {tourWithStops: TourPreviewResolver},
+  },
+  {
+    title: 'Aktywna trasa',
+    path: 'tour-active',
+    canActivate: [],
+    component: GamePageComponent,
   }
 ];
 
@@ -55,7 +62,8 @@ export const tourGuideRoutes: Routes = [
     SingleTourPageComponent,
     PureGameStopListComponent,
     PureGameCurrentStopComponent,
-    PureGameComponent
+    PureGameComponent,
+    GamePageComponent
   ],
   imports: [
     CommonModule,

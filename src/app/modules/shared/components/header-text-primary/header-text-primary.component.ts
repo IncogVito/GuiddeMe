@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header-text-primary',
@@ -7,9 +7,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderTextPrimaryComponent implements OnInit {
 
+  @Input()
   public mainText: string = '';
+
+  @Input()
   public descriptionText: string = '';
+
+  @Input()
   public icon: string = '';
+
+  @Input()
   public customStrIcon: string = '1';
 
   constructor() {

@@ -7,14 +7,14 @@
 
   <span class="toggle__item"
         [class.toggle__item--active]="!toggled"
-        (click)="toggled && toggle()"
+        (click)="toggled && doToggleAction()"
   >
     {{leftLabel}}
   </span>
 
   <span class="toggle__item"
         [class.toggle__item--active]="toggled"
-        (click)="!toggled && toggle()">
+        (click)="!toggled && doToggleAction()">
     {{rightLabel}}
   </span>
 </div>

@@ -10,8 +10,11 @@
   box-shadow:  rgba(99, 99, 99, 0.2) 0px -2px 8px 0px;
   padding: 0 1rem;
   box-sizing: border-box;
+  background-color: white;
+  z-index: 3;
 
   &__dummy {
+    display: block;
     height: 4rem;
     width: 100%;
   }

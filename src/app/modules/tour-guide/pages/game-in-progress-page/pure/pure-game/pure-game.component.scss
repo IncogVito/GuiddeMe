@@ -1,0 +1,39 @@
+.game-page {
+
+  &__body {
+    width: 100%;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  &__list {
+    grid-column: 1;
+    grid-row: 1;
+    transition: var(--transition-default);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100vw);
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+
+  &__current-stop {
+    grid-column: 1;
+    grid-row: 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100vw);
+    transition: var(--transition-default);
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+}

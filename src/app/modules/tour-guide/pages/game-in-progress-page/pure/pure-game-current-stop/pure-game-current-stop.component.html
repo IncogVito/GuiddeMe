@@ -1,1 +1,24 @@
-<p>pure-game-current-stop works!</p>
+<div class="game-single-stop" *ngIf="tourStop; else errorTemplate">
+  <app-image-carousel-primary [images]="tourStop.imagesUrls">
+
+  </app-image-carousel-primary>
+
+  <app-header-text-primary [mainText]="tourStop.name"
+                           [customStrIcon]="tourStop.orderIndex + ''"
+                           [descriptionText]="tourStop.address"
+                           class="u-mt-1 d-block"
+  >
+
+  </app-header-text-primary>
+
+  <p class="game-single-stop__text"
+     [innerHTML]="tourStop.descriptionHtml"
+  >
+  </p>
+</div>
+
+<ng-template #errorTemplate>
+  <div class="d-flex flex-center-center">
+    <span>Wystąpił błąd! Przepraszamy!</span>
+  </div>
+</ng-template>

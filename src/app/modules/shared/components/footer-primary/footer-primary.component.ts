@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-footer-primary',
@@ -6,9 +6,18 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./footer-primary.component.scss']
 })
 export class FooterPrimaryComponent implements OnInit {
-  additionalLabel: string = 'additionalLabel';
-  mainLabel: string = 'mainLabel';
-  buttonLabel: string = 'buttonLabel';
+
+  @Input()
+  public additionalLabel: string = 'additionalLabel';
+
+  @Input()
+  public mainLabel: string = 'mainLabel';
+
+  @Input()
+  public buttonLabel: string = 'buttonLabel';
+
+  @Output()
+  public btnClick = new EventEmitter<void>();
 
   constructor() {
   }

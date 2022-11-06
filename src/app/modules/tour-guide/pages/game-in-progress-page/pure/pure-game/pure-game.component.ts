@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {TourStopModel} from "../../../../models/tour-stop.model";
 
 @Component({
   selector: 'guidde-me-pure-game',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PureGameComponent implements OnInit {
 
-  constructor() { }
+  public currentStopVisible: boolean = false;
+
+  @Input()
+  public stopsList: TourStopModel[] = [];
+
+  @Input()
+  public currentStop: TourStopModel | undefined;
+
+  @Input()
+  public nextStop: TourStopModel | undefined;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  public emitDoNextStepAction() {
+
+  }
+
+  public doNextStep() {
+
+  }
 }

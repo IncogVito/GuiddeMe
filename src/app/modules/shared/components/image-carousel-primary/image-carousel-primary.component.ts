@@ -13,7 +13,10 @@ export class ImageCarouselPrimaryComponent implements OnInit {
 
   @Input()
   public defaultOffset = 0;
+
+  @Input()
   public carouselElements: ImageCarouselViewModel[] = [];
+
   public currentOffset = 0;
 
   constructor() {
@@ -45,7 +48,6 @@ export class ImageCarouselPrimaryComponent implements OnInit {
   }
 
   nextElementWithCheck() {
-    console.log(this.currentOffset);
     if (this.currentOffset < this.carouselElements.length - 1) {
       this.nextElement();
     }
