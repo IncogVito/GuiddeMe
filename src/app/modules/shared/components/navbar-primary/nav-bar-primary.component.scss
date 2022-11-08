@@ -1,0 +1,22 @@
+.navbar-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 5rem;
+  left: 0;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 2;
+
+  &__back-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    color: white;
+    filter: drop-shadow(3px 3px 3px black);
+  }
+}

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from './User';
 
 @Component({
-  selector: 'storybook-header',
+  selector: 'storybook-navbar-primary',
   template: `<header>
     <div class="wrapper">
       <div>

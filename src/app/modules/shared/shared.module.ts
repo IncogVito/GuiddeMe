@@ -22,6 +22,7 @@ import {
 } from "./components/dialog-decision-primary/dialog-decision-primary-wrapper.component";
 import {SkeletonLoaderComponent} from "./components/skeleton-loader/skeleton-loader.component";
 import {SkeletonDirective} from "./directives/skeleton.directive";
+import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-primary.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {SkeletonDirective} from "./directives/skeleton.directive";
     DialogDecisionPrimaryComponent,
     DialogDecisionPrimaryWrapperComponent,
     SkeletonLoaderComponent,
-    SkeletonDirective
+    SkeletonDirective,
+    NavBarPrimaryComponent
   ],
   exports: [
     ButtonPrimaryComponent,
@@ -57,7 +59,8 @@ import {SkeletonDirective} from "./directives/skeleton.directive";
     TaskListComponent,
     FooterPrimaryComponent,
     ImageCarouselPrimaryComponent,
-    HeaderTextPrimaryComponent
+    HeaderTextPrimaryComponent,
+    NavBarPrimaryComponent
   ],
 
   imports: [
