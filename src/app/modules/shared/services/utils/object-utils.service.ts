@@ -132,6 +132,10 @@ export class ObjectUtilService {
     return val !== null && val !== undefined && val !== '';
   }
 
+  public static isValueNonDefined(val: any) {
+    return !this.isValueDefined(val);
+  }
+
   //
   // public static assignProperty<T>(target: T, propertyName: keyof T, value: any): void {
   //   if (this.isValueDefined(value)) {

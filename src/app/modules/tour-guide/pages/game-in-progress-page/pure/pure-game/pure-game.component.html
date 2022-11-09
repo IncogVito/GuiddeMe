@@ -1,7 +1,8 @@
 <div class="game-page">
-  <app-toggle-primary class="d-flex u-m-auto u-width-min-content u-mb-1"
+  <app-toggle-primary class="align-self-center"
                       leftLabel="Trasa"
                       rightLabel="Miejsce"
+                      [toggled]="currentStopVisible"
                       (toggle)="currentStopVisible = !currentStopVisible"
 
   >

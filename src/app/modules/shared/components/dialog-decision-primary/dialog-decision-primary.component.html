@@ -11,7 +11,8 @@
 
   <div class="modal__footer modal__footer--middle-bottom u-mt-1">
 
-    <app-button-primary class="u-full-width u-mr-025"
+    <app-button-primary *ngIf="rejectButtonLabel"
+                        class="u-full-width u-mr-025"
                         [reversedColor]="true"
                         [label]="rejectButtonLabel"
     >

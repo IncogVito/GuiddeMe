@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TourStopModel} from "../../../../models/tour-stop.model";
+import {TaskListComponent} from "../../../../../shared/components/task-list/task-list.component";
+import {PureGameStopListComponent} from "../pure-game-stop-list/pure-game-stop-list.component";
 
 @Component({
   selector: 'guidde-me-pure-game',
@@ -8,7 +10,11 @@ import {TourStopModel} from "../../../../models/tour-stop.model";
 })
 export class PureGameComponent implements OnInit {
 
-  public currentStopVisible: boolean = false;
+  @ViewChild(PureGameStopListComponent)
+  public pureGameStopListComponent!: PureGameStopListComponent;
+
+  @Output()
+  public nextStopRequest = new EventEmitter();
 
   @Input()
   public stopsList: TourStopModel[] = [];
@@ -19,6 +25,8 @@ export class PureGameComponent implements OnInit {
   @Input()
   public nextStop: TourStopModel | undefined;
 
+  public currentStopVisible: boolean = false;
+
   constructor() {
   }
 
@@ -26,10 +34,15 @@ export class PureGameComponent implements OnInit {
   }
 
   public emitDoNextStepAction() {
-
+    this.nextStopRequest.emit();
   }
 
   public doNextStep() {
-
+    if (this.currentStopVisible) {
+      this.currentStopVisible = false;
+      setTimeout(() => this.pureGameStopListComponent.doNextStep(), 500);
+    } else {
+      this.pureGameStopListComponent.doNextStep();
+    }
   }
 }

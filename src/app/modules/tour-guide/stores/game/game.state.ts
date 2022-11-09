@@ -12,6 +12,7 @@ import {combineLatest} from "rxjs/internal/operators/combineLatest";
 import {TourModel} from "../../models/tour.model";
 import {TourStopModel} from "../../models/tour-stop.model";
 import {ArrayUtilService} from "../../../shared/services/utils/array-util.service";
+import {SortUtilService} from "../../../shared/services/utils/sort-util.service";
 
 @State<GameStateModel>({
   name: 'game',
@@ -63,7 +64,7 @@ export class GameState {
       quizAvailable: payload.tour.quizAvailable,
       quizEnabled: payload.quizEnabled,
       started: true,
-      stops: payload.tourStops,
+      stops: SortUtilService.sortByNumberField(payload.tourStops, 'orderIndex', 'ASC'),
       tour: payload.tour,
       finished: false
     })

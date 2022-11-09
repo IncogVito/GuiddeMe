@@ -1,5 +1,10 @@
 .game-page {
   padding: var(--padding-page-default);
+  display: grid;
+  grid-template-rows: 1fr 8fr 1fr;
+  max-height: 100%;
+  justify-items: center;
+  box-sizing: border-box;
 
   &__body {
     width: 100%;
