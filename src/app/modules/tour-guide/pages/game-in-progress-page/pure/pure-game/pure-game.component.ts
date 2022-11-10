@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TourStopModel} from "../../../../models/tour-stop.model";
-import {TaskListComponent} from "../../../../../shared/components/task-list/task-list.component";
 import {PureGameStopListComponent} from "../pure-game-stop-list/pure-game-stop-list.component";
 
 @Component({

@@ -9,7 +9,10 @@ import {ImageCarouselViewModel} from "../../models/image-carousel.model";
 export class ImageCarouselPrimaryComponent implements OnInit {
 
   @Input()
-  public images: string[] = [];
+  set images(value: string[]) {
+    this._images = value;
+    this.initializeCarousel();
+  }
 
   @Input()
   public defaultOffset = 0;
@@ -18,17 +21,17 @@ export class ImageCarouselPrimaryComponent implements OnInit {
   public carouselElements: ImageCarouselViewModel[] = [];
 
   public currentOffset = 0;
+  public _images: string[] = [];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.initializeCarousel();
   }
 
   private initializeCarousel() {
     this.currentOffset = this.defaultOffset;
-    this.carouselElements = this.images.map((singleUrl, index) => {
+    this.carouselElements = this._images.map((singleUrl, index) => {
       return {
         url: singleUrl,
         displayIndex: index + 1 - this.defaultOffset,

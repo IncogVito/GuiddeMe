@@ -33,9 +33,10 @@
   </app-footer-primary>
 
   <ng-template #lastStopFooter>
-    <app-footer-primary mainLabel="To ostatni przystanek"
+    <app-footer-primary mainLabel="Meta"
                         buttonLabel="Zakończ!"
                         class="u-mt-2"
+                        (btnClick)="emitDoNextStepAction()"
     >
     </app-footer-primary>
   </ng-template>

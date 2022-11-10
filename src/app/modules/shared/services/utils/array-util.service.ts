@@ -13,6 +13,12 @@ export class ArrayUtilService {
     }
     return elements[0];
   }
+  public static getAtIndex<T>(elements: T[], index: number): T | undefined {
+    if (this.isEmpty(elements) || this.lengthOf(elements) <= index) {
+      return undefined;
+    }
+    return elements[index];
+  }
 
   public static getFirstByMatchingFnRequired<T>(elements: T[], matchingFn: (elem: T) => boolean): T {
     if (this.isEmpty(elements)) {

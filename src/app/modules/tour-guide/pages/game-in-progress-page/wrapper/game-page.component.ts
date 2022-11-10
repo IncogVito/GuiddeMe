@@ -5,12 +5,12 @@ import {GameStateModel} from "../../../stores/game/game.state-model";
 import {TourStopModel} from "../../../models/tour-stop.model";
 import {Store} from "@ngxs/store";
 import {GameActions} from "../../../stores/game/game.actions";
-import {PureGameStopListComponent} from "../pure/pure-game-stop-list/pure-game-stop-list.component";
 import {PureGameComponent} from "../pure/pure-game/pure-game.component";
 import {MatDialog} from "@angular/material/dialog";
 import {
   DialogDecisionPrimaryComponent
 } from "../../../../shared/components/dialog-decision-primary/dialog-decision-primary.component";
+import {ArrayUtilService} from "../../../../shared/services/utils/array-util.service";
 
 @Component({
   selector: 'guidde-me-wrapper',
@@ -26,6 +26,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   public tourStops: TourStopModel[] = [];
   public currentStop!: TourStopModel;
   public nextStop: TourStopModel | undefined;
+  public currentStopIndex: number = 0;
 
   public gameState$: Observable<GameStateModel> = EMPTY;
 
@@ -72,6 +73,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
     )
       .subscribe(currState => {
         if (!currState.finished && this.pureGameComponent) {
+          ++this.currentStopIndex;
+          this.currentStop = ArrayUtilService.getAtIndex(this.tourStops, this.currentStopIndex)!;
+          this.nextStop = ArrayUtilService.getAtIndex(this.tourStops, this.currentStopIndex + 1);
           this.pureGameComponent.doNextStep();
         }
       });

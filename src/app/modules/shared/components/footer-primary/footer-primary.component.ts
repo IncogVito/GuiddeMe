@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class FooterPrimaryComponent implements OnInit {
 
   @Input()
-  public additionalLabel: string = 'additionalLabel';
+  public additionalLabel: string = '';
 
   @Input()
   public mainLabel: string = 'mainLabel';
