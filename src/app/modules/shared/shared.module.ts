@@ -23,6 +23,7 @@ import {
 import {SkeletonLoaderComponent} from "./components/skeleton-loader/skeleton-loader.component";
 import {SkeletonDirective} from "./directives/skeleton.directive";
 import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-primary.component';
+import {AddClassOnActionDirective} from "./directives/add-class-on-action.directive";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-prim
     DialogDecisionPrimaryWrapperComponent,
     SkeletonLoaderComponent,
     SkeletonDirective,
-    NavBarPrimaryComponent
+    NavBarPrimaryComponent,
+    AddClassOnActionDirective
   ],
   exports: [
     ButtonPrimaryComponent,

@@ -18,11 +18,15 @@ body {
   -ms-user-select: none;
   user-select: none;
   z-index: 4;
-  filter: drop-shadow(3px 3px 3px black);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hamRotate.active {
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .hamRotate180.active {
@@ -32,7 +36,7 @@ body {
 .line {
   fill: none;
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke: white;
+  stroke: var(--color-grey-darker-1);
   stroke-width: 5.5;
   stroke-linecap: round;
 }
@@ -66,18 +70,35 @@ body {
   stroke-dashoffset: -83px;
 }
 
+.hamburger-wrapper {
+  width: 4rem;
+  height: 4rem;
+  z-index: 1;
+  background-color: white;
+  border-radius: 50%;
+
+  box-shadow: var(--box-shadow-primary);
+}
+
 .menu {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 4.5rem;
-  height: 4.5rem;
+  right: 0;
+  width: 0;
+  height: 0;
   z-index: 0;
   overflow: hidden;
+
+  &__icon-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
 
   &--expanded {
     width: 100vw;
     height: 100vh;
+    z-index: -1;
   }
 
   &__background {
@@ -85,18 +106,19 @@ body {
     height: 0;
     width: 0;
     top: 0;
-    left: 0;
+    right: 0;
     z-index: -1;
     border-radius: 50%;
     transition: all ease-in-out .3s;
+
+    &--expanded {
+      background-color: var(--main-color-primary--light);
+      width: 10vw;
+      height: 10vh;
+      transform: scale(30);
+    }
   }
 
-  &--expanded &__background {
-    background-color: var(--main-color-primary--light);
-    width: 10vw;
-    height: 10vh;
-    transform: scale(30);
-  }
 
   &__nav {
     height: 100vh;
