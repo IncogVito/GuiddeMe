@@ -2,6 +2,7 @@
      appOffsetFixedActivity
      sourcePosition="top"
      (onChangedFixedActivity)="changeState($event)"
+     [additionalOffset]="-100"
 >
   &nbsp;
 </div>
@@ -9,11 +10,13 @@
 
 <div class="navigation__wrapper"
      [class.navigation__wrapper--fixed]="navigationFixed"
-     >
+>
   <nav class="navigation"
        [class.navigation--fixed]="navigationFixed"
   >
-    <ul class="navigation__list">
+    <ul class="navigation__list"
+        [class.navigation__list--fixed]="navigationFixed"
+    >
       <li class="navigation__item"
           *ngFor="let navItem of navigationList;let index = index;"
           [class.navigation__item--active]="activeIndex === index"

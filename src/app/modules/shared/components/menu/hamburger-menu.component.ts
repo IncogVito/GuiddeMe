@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -6,6 +6,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./hamburger-menu.component.scss']
 })
 export class HamburgerMenuComponent implements OnInit {
+
+  @Output()
+  public menuExpand = new EventEmitter<boolean>();
+
   menuExpanded: boolean = false;
   currentNavList = [];
 
@@ -18,5 +22,6 @@ export class HamburgerMenuComponent implements OnInit {
 
   toggleExpand() {
     this.menuExpanded = !this.menuExpanded;
+    this.menuExpand.emit(this.menuExpanded);
   }
 }

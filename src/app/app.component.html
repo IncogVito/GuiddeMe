@@ -1,4 +1,7 @@
 <guidde-me-navbar-primary
   (back)="goBack()"
 ></guidde-me-navbar-primary>
-<router-outlet></router-outlet>
+
+<div [@routeAnimations]="getRouteAnimationData()">
+  <router-outlet></router-outlet>
+</div>

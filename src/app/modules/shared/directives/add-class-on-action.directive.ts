@@ -33,7 +33,6 @@ export class AddClassOnActionDirective implements OnInit, OnDestroy {
   }
 
   private performAction(): void {
-    console.log('SASA');
     if (this.classOnActionName && !this.actionDisabled) {
       const className = this.classOnActionName!;
       this.renderer.addClass(this.elementRef.nativeElement, className);

@@ -71,6 +71,8 @@ body {
 }
 
 .hamburger-wrapper {
+  margin-top: 1rem;
+  margin-right: 1rem;
   width: 4rem;
   height: 4rem;
   z-index: 1;
@@ -84,21 +86,22 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 0;
-  height: 0;
   z-index: 0;
   overflow: hidden;
+  animation: hideMenu .3s forwards;
 
   &__icon-wrapper {
     height: 100%;
     width: 100%;
     position: relative;
+    transform: scale(.8);
   }
 
   &--expanded {
     width: 100vw;
     height: 100vh;
     z-index: -1;
+    animation: none;
   }
 
   &__background {
@@ -112,7 +115,7 @@ body {
     transition: all ease-in-out .3s;
 
     &--expanded {
-      background-color: var(--main-color-primary--light);
+      background-color: white;
       width: 10vw;
       height: 10vh;
       transform: scale(30);
@@ -153,10 +156,10 @@ body {
     &,
     &:visited {
       display: inline-block;
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: 300;
       padding: .25rem 2rem;
-      color: var(--main-color-primary);
+      color: var(--color-grey-darker-1);
       text-decoration: none;
       background-color: transparent;
       transition: all .4s;
@@ -219,4 +222,22 @@ body {
     transform: rotate(-135deg);
   }
 
+}
+
+
+@keyframes hideMenu {
+  0% {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  80% {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  100% {
+    width: 0;
+    height: 0;
+  }
 }

@@ -1,7 +1,9 @@
 <nav class="navbar-primary">
-  <div class="navbar-primary__back-icon-wrapper">
+  <div class="navbar-primary__back-icon-wrapper"
+       [class.navbar-primary__back-icon-wrapper--hide]="hideGoBack || hideGoBackByExpandedMenu"
+  >
     <mat-icon class="navbar-primary__back-icon material-icons-outlined"
-              (click)="backIconClicked()"
+              (click)="!hideGoBack && !hideGoBackByExpandedMenu && backIconClicked()"
               appAddStyleClassOnAction
               actionType="click"
               classOnActionName="navbar-primary__back-icon--clicked"
@@ -11,7 +13,8 @@
     </mat-icon>
   </div>
 
-
-  <app-hamburger-menu class="navbar-primary__hamburger">
+  <app-hamburger-menu class="navbar-primary__hamburger-menu-wrapper"
+                      (menuExpand)="changeGoBackVisibility($event)"
+  >
   </app-hamburger-menu>
 </nav>

@@ -19,31 +19,33 @@ import {ToursState} from "./modules/tour-guide/stores/tours/tours.state";
 import {TourStopsState} from "./modules/tour-guide/stores/tour-stops/tour-stops.state";
 import {GameState} from "./modules/tour-guide/stores/game/game.state";
 import {SharedModule} from "./modules/shared/shared.module";
+import {UxDetailsState} from "./modules/tour-guide/stores/ux-details/ux-details.state";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        TourGuideModule,
-        RouterOutlet,
-        AppRoutingModule,
-        NgxsModule.forRoot([
-            CategoriesState,
-            ToursState,
-            TourStopsState,
-            GameState
-        ], {developmentMode: !environment.production,}),
-        NgxsReduxDevtoolsPluginModule.forRoot(),
-        NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
-        NgxsRouterPluginModule.forRoot(),
-        AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        SharedModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    TourGuideModule,
+    RouterOutlet,
+    AppRoutingModule,
+    NgxsModule.forRoot([
+      CategoriesState,
+      ToursState,
+      TourStopsState,
+      GameState,
+      UxDetailsState
+    ], {developmentMode: !environment.production,}),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),
+    NgxsRouterPluginModule.forRoot(),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    SharedModule,
+  ],
   providers: [
     {
       provide: FIRESTORE_SETTINGS,
