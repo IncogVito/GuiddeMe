@@ -1,7 +1,7 @@
 .tile-category-primary {
   display: grid;
   grid-template-columns: 1fr max-content;
-  grid-template-rows: min-content 1fr 3.5rem;
+  grid-template-rows: 1fr 3.5rem;
 
   border-radius: var(--border-radius-secondary);
   padding: var(--padding-content-default);
@@ -11,7 +11,13 @@
   background-position: center;
   min-height: 10.5rem;
   height: 100%;
-  clip-path: url(#my-clip-path);
+  clip-path: var(--default-clip-path);
+
+  &__round-wrapper {
+    display: inline-block;
+    width: 100%;
+    filter: url('#goo');
+  }
 
   &:hover {
     filter: brightness(.9);
@@ -34,24 +40,20 @@
     justify-content: center;
   }
 
-  &__button {
+  &__round-wrapper-button {
     grid-row: 3;
     grid-column: 1 / end;
-    font-size: 1.5rem;
-    padding: .25rem;
     margin: 0 1rem;
+  }
+  &__button {
+    font-size: 1.5rem;
+    padding: .5rem;
 
     outline: none;
     background-color: white;
     color: var(--color-grey-darker-1);
     border: none;
-    border-radius: 1rem;
-    clip-path: url(#my-clip-path);
+    border-radius: 2rem;
+    width: 100%;
   }
-}
-
-.svg {
-  position: absolute;
-  width: 0;
-  height: 0;
 }

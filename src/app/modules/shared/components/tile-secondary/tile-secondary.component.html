@@ -1,6 +1,6 @@
 <div class="tile-secondary"
      [class.tile-secondary--expanded]="expanded"
-     (click)="toggle()"
+     (click)=" expanded = !expanded"
 >
   <span class="tile-secondary__main-label">
     {{mainLabel}}
@@ -32,7 +32,7 @@
   <app-button-secondary class="tile-secondary__button"
                       [label]="buttonText"
                       iconName="chevron_right"
-                      (click)="clickButton($event)"
+                      (click)="expanded && clickButton($event)"
   >
 
   </app-button-secondary>

@@ -1,13 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TourStopModel} from "../../../../models/tour-stop.model";
 import {PureGameStopListComponent} from "../pure-game-stop-list/pure-game-stop-list.component";
+import {WindowUtilService} from "../../../../../shared/services/utils/window-util.service";
 
 @Component({
   selector: 'guidde-me-pure-game',
   templateUrl: './pure-game.component.html',
   styleUrls: ['./pure-game.component.scss']
 })
-export class PureGameComponent implements OnInit {
+export class PureGameComponent implements OnInit, AfterViewInit {
 
   @ViewChild(PureGameStopListComponent)
   public pureGameStopListComponent!: PureGameStopListComponent;
@@ -31,6 +32,11 @@ export class PureGameComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  ngAfterViewInit(): void {
+    WindowUtilService.scrollToTheTop();
+  }
+
 
   public emitDoNextStepAction() {
     this.nextStopRequest.emit();

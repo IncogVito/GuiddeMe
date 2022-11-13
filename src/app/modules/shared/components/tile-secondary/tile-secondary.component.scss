@@ -1,16 +1,17 @@
 .tile-secondary {
   display: grid;
-  grid-template-rows: 1.75rem 1rem;
+  grid-template-rows: 1.5rem 1rem 1fr min-content;
   grid-template-columns: repeat(2, 1fr);
   padding: var(--padding-content-default);
   box-shadow: var(--box-shadow-primary);
-  transition: var(--transition-default);
+  transition: var(--transition-cubic-beazier-default);
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
+  height: 2.5rem;
 
   &--expanded {
-    grid-template-rows: 1.5rem 1rem 1fr min-content;
+    height: 16rem;
 
     &:hover {
       transform: translateY(0);
@@ -68,6 +69,14 @@
     transition: all linear .3s;
     opacity: 0;
     border-radius: 1rem;
+
+    & > img {
+      display: flex;
+      width: 100%;
+      max-height: 10rem;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
   }
 
   &--expanded &__expanded-elem {
@@ -129,6 +138,6 @@
     visibility: visible;
     opacity: 1;
     height: unset;
-    transition-delay: .4s;
+    transition-delay: .15s;
   }
 }

@@ -1,23 +1,22 @@
-<svg class="svg">
-  <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M0.163,0.025 C0.275,0.008,0.388,0,0.5,0 C0.612,0,0.725,0.008,0.837,0.025 L0.837,0.025 C0.918,0.036,0.982,0.135,0.991,0.261 C0.997,0.34,1,0.42,1,0.5 C1,0.58,0.997,0.66,0.991,0.739 L0.991,0.739 C0.982,0.865,0.918,0.964,0.837,0.975 C0.725,0.992,0.612,1,0.5,1 C0.388,1,0.275,0.992,0.163,0.975 L0.163,0.975 C0.082,0.964,0.018,0.865,0.009,0.739 C0.003,0.66,0,0.58,0,0.5 C0,0.42,0.003,0.34,0.009,0.261 L0.009,0.261 C0.018,0.135,0.082,0.036,0.163,0.025"></path></clipPath>
-</svg>
-
 <div class="tile-category-primary__wrapper">
-<span class="tile-category-primary__info">
+  <span class="tile-category-primary__info">
     {{rightText}}
-  </span>
+</span>
+  <div class="tile-category-primary__round-wrapper">
 
-  <div *ngIf="!loadingInProgress; else loadingSkeletonTemplate"
-       class="tile-category-primary"
-       [ngStyle]="backgroundStyle"
-  >
-
-    <button class="tile-category-primary__button"
-            (click)="buttonClicked.emit()"
+    <div *ngIf="!loadingInProgress; else loadingSkeletonTemplate"
+         class="tile-category-primary"
+         [ngStyle]="backgroundStyle"
     >
-      {{buttonText}}
-    </button>
 
+      <div class="tile-category-primary__round-wrapper-button">
+        <button class="tile-category-primary__button"
+                (click)="buttonClicked.emit()"
+        >
+          {{buttonText}}
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -28,3 +27,15 @@
 
   </div>
 </ng-template>
+
+
+<svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+     version="1.1">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </defs>
+</svg>

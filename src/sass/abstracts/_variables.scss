@@ -1,5 +1,5 @@
 :root {
-  --main-color-primary: #ec017c;
+  --main-color-primary: #bd0062;
   --main-color-primary--light: #feeff6;
 
   --disabled-color-primary: #b4b4b4;
@@ -22,6 +22,7 @@
 
   --button-primary-border-radius: 2rem;
   --transition-default: all ease-in-out .2s;
+  --transition-cubic-beazier-default: all cubic-bezier(0.7, -0.11, 0.28, 1.04) .4s;
 
   --box-shadow-primary: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow-secondary: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -35,4 +36,6 @@
 
   --color-success: #39d50f;
 
+  --default-clip-path: polygon(0% 50%, 1% 10%, 4% 4%, 10% 1%, 50% 0%, 90% 1%, 96% 4%, 99% 10%, 100% 50%, 99% 90%, 96% 96%, 90% 99%, 50% 100%, 10% 99%, 4% 96%, 1% 90%);
+  --second-clip-path: polygon(50% 5%, 95% 15%, 100% 50%, 95% 85%, 50% 100%, 5% 85%, 0 50%, 5% 15%);
 }
