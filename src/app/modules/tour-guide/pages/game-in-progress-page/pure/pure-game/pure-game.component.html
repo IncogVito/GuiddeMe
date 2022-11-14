@@ -1,5 +1,5 @@
 <div class="game-page">
-  <app-toggle-primary class="align-self-center"
+  <app-toggle-primary class="game-page__toggle"
                       leftLabel="Trasa"
                       rightLabel="Miejsce"
                       [toggled]="currentStopVisible"
@@ -35,7 +35,6 @@
   <ng-template #lastStopFooter>
     <app-footer-primary mainLabel="Meta"
                         buttonLabel="Zakończ!"
-                        class="u-mt-2"
                         (btnClick)="emitDoNextStepAction()"
     >
     </app-footer-primary>

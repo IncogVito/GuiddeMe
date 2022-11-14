@@ -4,7 +4,7 @@
   outline: none;
   border: 1px solid var(--main-color-primary);
   min-width: 7rem;
-  border-radius: var(--button-primary-border-radius);
+  border-radius: .75rem;
   cursor: pointer;
   font-weight: 600;
   transition: var(--transition-default);
@@ -13,7 +13,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 2.3rem;
+  min-height: 2.8rem;
+  font-size: 1.1rem;
 
   &--reversed-color {
     background-color: var(--main-color-primary-oposite);

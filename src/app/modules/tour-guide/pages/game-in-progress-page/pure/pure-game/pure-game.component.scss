@@ -1,16 +1,23 @@
 .game-page {
   padding: var(--padding-page-default);
   display: grid;
-  grid-template-rows: 1fr 8fr 1fr;
-  max-height: 100%;
+  grid-template-rows: 6rem 1fr 3rem;
+  max-height: 100vh;
   justify-items: center;
   box-sizing: border-box;
+  overflow-y: hidden;
+
+  &__toggle {
+    margin-top: auto;
+    margin-bottom: 1rem;
+  }
 
   &__body {
     width: 100%;
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(1, 100%);
+    grid-template-rows: 100%;
   }
 
   &__list {
@@ -40,6 +47,7 @@
       opacity: 1;
       visibility: visible;
       transform: translateX(0);
+      overflow-y: auto;
     }
   }
 }

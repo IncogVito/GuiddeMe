@@ -5,22 +5,22 @@
     margin: 0 calc((-1) * var(--padding-content-default));
     padding: 0;
     width: calc(100% + var(--padding-content-default) * 2);
-    height: 24vh;
+    height: 27vh;
     background-size: cover;
     background-position: center;
-    border-radius: 0 0 2rem 2rem;
+    border-radius: 0 0 3rem 3rem;
     position: relative;
     z-index: -1;
-
   }
 
   &__header {
-    margin-top: -1rem;
     background-color: white;
     border-radius: 2rem;
-    box-shadow: var(--box-shadow-primary);
     width: max-content;
-    padding: .5rem 1rem;
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin-top: .4rem;
+    padding: 0.5rem 1rem;
   }
 
   &__single-item {

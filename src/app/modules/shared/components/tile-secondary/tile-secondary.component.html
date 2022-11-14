@@ -21,18 +21,20 @@
   </div>
 
   <div class="tile-secondary__expanded-elem">
-    <img *ngIf="imageUrl"
-         [src]="imageUrl"
-         alt="tile-image"
-         [class.tile-secondary__missing-image]="missingImage"
-         (error)="handleMissingImage()"
+    <figure *ngIf="imageUrl"
+            class="tile-secondary__image"
+            [ngStyle]="{'background-image': 'url('+imageUrl+')'}"
+            [class.tile-secondary__missing-image]="missingImage"
+            (error)="handleMissingImage()"
     >
+      &nbsp;
+    </figure>
   </div>
 
   <app-button-secondary class="tile-secondary__button"
-                      [label]="buttonText"
-                      iconName="chevron_right"
-                      (click)="expanded && clickButton($event)"
+                        [label]="buttonText"
+                        iconName="chevron_right"
+                        (click)="expanded && clickButton($event)"
   >
 
   </app-button-secondary>

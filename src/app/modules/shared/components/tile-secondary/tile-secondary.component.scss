@@ -79,8 +79,17 @@
     }
   }
 
+  &__image {
+    width: 100%;
+    margin: 0;
+    height: 9.75rem;
+    border-radius: 1rem;
+    background-position: center;
+    background-size: cover;
+  }
+
   &--expanded &__expanded-elem {
-    margin-top: 1rem;
+    margin-top: .75rem;
     visibility: visible;
     height: min-content;
     opacity: 1;

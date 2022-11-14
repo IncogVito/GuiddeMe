@@ -53,5 +53,10 @@
     justify-self: flex-end;
     align-self: center;
     max-width: 9rem;
+
+    &::ng-deep > .button-primary {
+      font-size: .9rem;
+      min-height: 2.5rem;
+    }
   }
 }
