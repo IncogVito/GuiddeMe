@@ -1,0 +1,39 @@
+<div class="modal quiz-page">
+  <figure class="quiz-page__image">
+    <mat-icon class="material-symbols-rounded">
+      question_mark
+    </mat-icon>
+  </figure>
+
+  <div class="quiz-page__question">
+    {{questionText}}
+  </div>
+
+
+  <div class="quiz-page__responses">
+
+    <span class="quiz-page__single-option" *ngFor="let singleOption of availableResponses; let idx = index"
+          [class.quiz-page__single-option--active]="idx === chosenIndex"
+          (click)="chosenIndex = idx"
+    >
+      {{singleOption}}
+    </span>
+
+  </div>
+
+  <div class="quiz-page__actions">
+    <app-button-primary
+      label="Dalej"
+      [disabled]="chosenIndex === undefined || !(chosenIndex >= 0)"
+      (btnClick)="chosenIndex !== undefined && (chosenIndex >= 0) && confirmChoice.emit(chosenIndex)"
+    >
+    </app-button-primary>
+
+    <span class="quiz-page__quit"
+          (click)="exitQuiz.emit()"
+    >
+      Wyłącz quiz
+    </span>
+  </div>
+
+</div>

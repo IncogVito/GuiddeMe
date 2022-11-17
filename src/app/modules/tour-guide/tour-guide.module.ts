@@ -20,6 +20,9 @@ import {
 } from './pages/game-in-progress-page/pure/pure-game-current-stop/pure-game-current-stop.component';
 import {PureGameComponent} from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
 import {GamePageComponent} from './pages/game-in-progress-page/wrapper/game-page.component';
+import { PureQuizComponent } from './pages/quiz/pure-quiz/pure-quiz.component';
+import {MatRadioModule} from "@angular/material/radio";
+import {FormsModule} from "@angular/forms";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -69,13 +72,16 @@ export const tourGuideRoutes: Routes = [
     PureGameStopListComponent,
     PureGameCurrentStopComponent,
     PureGameComponent,
-    GamePageComponent
+    GamePageComponent,
+    PureQuizComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(tourGuideRoutes),
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatRadioModule,
+    FormsModule
   ]
 })
 export class TourGuideModule {

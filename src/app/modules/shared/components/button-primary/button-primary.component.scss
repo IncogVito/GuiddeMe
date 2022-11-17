@@ -21,9 +21,16 @@
     color: var(--main-color-primary);
   }
 
+  &--disabled {
+    background-color: var(--main-color-primary-oposite);
+    color: var(--color-grey-2);
+    border-color: var(--color-grey-2);
+    cursor: default;
+  }
+
   width: 100%;
 
-  &:active {
+  &:not(&--disabled):active {
     transform: scale(1.03);
   }
 

@@ -16,6 +16,9 @@ export class ButtonPrimaryComponent implements OnInit {
   @Input()
   public reversedColor: boolean = false;
 
+  @Input()
+  public disabled: boolean = false;
+
   @Output()
   public btnClick = new EventEmitter();
 
