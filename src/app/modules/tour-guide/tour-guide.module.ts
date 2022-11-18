@@ -23,6 +23,7 @@ import {GamePageComponent} from './pages/game-in-progress-page/wrapper/game-page
 import { PureQuizComponent } from './pages/quiz/pure-quiz/pure-quiz.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
+import { QuizWrapperComponent } from './pages/quiz/wrapper/quiz-wrapper.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -73,7 +74,8 @@ export const tourGuideRoutes: Routes = [
     PureGameCurrentStopComponent,
     PureGameComponent,
     GamePageComponent,
-    PureQuizComponent
+    PureQuizComponent,
+    QuizWrapperComponent
   ],
   imports: [
     CommonModule,

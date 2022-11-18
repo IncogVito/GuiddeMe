@@ -10,17 +10,17 @@
  * on performance if an error is thrown.
  */
 const firebaseConfig = {
-  apiKey: "AIzaSyDqWZ_2QN-_QspJkx1YCJst-6WDNocFvB4",
+  apiKey: "*****",
   authDomain: "guidde-me.firebaseapp.com",
   projectId: "guidde-me",
   storageBucket: "guidde-me.appspot.com",
   messagingSenderId: "496956095874",
-  appId: "1:496956095874:web:b53b369db945c22d0da39b"
+  appId: "*****"
 };
 
 export const environment = {
   production: true,
   firebase: firebaseConfig,
-  emulator: false
+  emulator: true
 };
 

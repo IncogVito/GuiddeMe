@@ -20,6 +20,7 @@ import {TourStopsState} from "./modules/tour-guide/stores/tour-stops/tour-stops.
 import {GameState} from "./modules/tour-guide/stores/game/game.state";
 import {SharedModule} from "./modules/shared/shared.module";
 import {UxDetailsState} from "./modules/tour-guide/stores/ux-details/ux-details.state";
+import {QuestionsState} from "./modules/tour-guide/stores/questions/questions.state";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {UxDetailsState} from "./modules/tour-guide/stores/ux-details/ux-details.
       ToursState,
       TourStopsState,
       GameState,
-      UxDetailsState
+      UxDetailsState,
+      QuestionsState
     ], {developmentMode: !environment.production,}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({disabled: environment.production,}),

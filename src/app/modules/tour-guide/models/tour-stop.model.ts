@@ -9,6 +9,7 @@ export interface TourStopModel {
   imagesUrls: string[];
   address: string;
   orderIndex: number;
+  questionIds: string[];
 }
 
 export interface TourStopSearchParams extends EntitySearchParams {

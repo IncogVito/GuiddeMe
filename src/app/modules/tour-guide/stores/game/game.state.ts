@@ -1,18 +1,14 @@
 import {Action, State, StateContext, Store} from "@ngxs/store";
 import {Injectable} from "@angular/core";
-import {combineLatestWith, EMPTY, filter, map, Observable, switchMap, take, tap} from "rxjs";
+import {combineLatestWith, EMPTY, filter, map, Observable, take} from "rxjs";
 
 import {GameStateModel, getDefaultGameState} from "./game.state-model";
 import {GameActions} from "./game.actions";
-import {TourMapperService} from "../../services/mappers/tour-mapper.service";
-import {ToursActions} from "../tours/tours.actions";
 import {ToursStateModel} from "../tours/tours.state-model";
 import {TourStopsStateModel} from "../tour-stops/tour-stops.state-model";
-import {combineLatest} from "rxjs/internal/operators/combineLatest";
-import {TourModel} from "../../models/tour.model";
-import {TourStopModel} from "../../models/tour-stop.model";
 import {ArrayUtilService} from "../../../shared/services/utils/array-util.service";
 import {SortUtilService} from "../../../shared/services/utils/sort-util.service";
+import {QuestionsActions} from "../questions/questions.actions";
 
 @State<GameStateModel>({
   name: 'game',
@@ -50,7 +46,7 @@ export class GameState {
       map(([tour, tourStops]) => ctx.dispatch(new GameActions.Create({
           tour,
           tourStops,
-          quizEnabled: false
+          quizEnabled: true
         }))
       )
     );
@@ -68,6 +64,9 @@ export class GameState {
       tour: payload.tour,
       finished: false
     })
+    if (payload.tour.quizAvailable) {
+      ctx.dispatch(new QuestionsActions.LoadQuestions({tourId: payload.tour.id}));
+    }
   }
 
   @Action(GameActions.NextStop)

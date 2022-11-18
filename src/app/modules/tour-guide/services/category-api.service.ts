@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {map, Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {CategoryModel, CategoryViewModel} from "../models/category.model";
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
 import {EntitiesResult, EntitySearchParams} from "../../shared/models/firestore.model";
