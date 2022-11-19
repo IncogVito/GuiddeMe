@@ -24,6 +24,7 @@ import {SkeletonLoaderComponent} from "./components/skeleton-loader/skeleton-loa
 import {SkeletonDirective} from "./directives/skeleton.directive";
 import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-primary.component';
 import {AddClassOnActionDirective} from "./directives/add-class-on-action.directive";
+import {RouterLinkWithHref} from "@angular/router";
 
 
 @NgModule({
@@ -65,11 +66,12 @@ import {AddClassOnActionDirective} from "./directives/add-class-on-action.direct
     NavBarPrimaryComponent
   ],
 
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatDialogModule
-  ]
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatDialogModule,
+        RouterLinkWithHref
+    ]
 })
 export class SharedModule {
 }

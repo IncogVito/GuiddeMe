@@ -20,10 +20,11 @@ import {
 } from './pages/game-in-progress-page/pure/pure-game-current-stop/pure-game-current-stop.component';
 import {PureGameComponent} from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
 import {GamePageComponent} from './pages/game-in-progress-page/wrapper/game-page.component';
-import { PureQuizComponent } from './pages/quiz/pure-quiz/pure-quiz.component';
+import {PureQuizComponent} from './pages/quiz/pure-quiz/pure-quiz.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
-import { QuizWrapperComponent } from './pages/quiz/wrapper/quiz-wrapper.component';
+import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component';
+import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
 
 export const tourGuideRoutes: Routes = [
   {
@@ -57,6 +58,11 @@ export const tourGuideRoutes: Routes = [
     canActivate: [],
     component: GamePageComponent,
     data: {animation: 'TourActiveAnimation'}
+  },
+  {
+    title: 'Autorzy',
+    path: 'authors',
+    component: PureAuthorsComponent
   }
 ];
 
@@ -75,7 +81,8 @@ export const tourGuideRoutes: Routes = [
     PureGameComponent,
     GamePageComponent,
     PureQuizComponent,
-    QuizWrapperComponent
+    QuizWrapperComponent,
+    PureAuthorsComponent
   ],
   imports: [
     CommonModule,
