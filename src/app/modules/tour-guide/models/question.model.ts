@@ -15,3 +15,8 @@ export interface QuestionGameResponseModel {
 export interface QuestionSearchParams extends EntitySearchParams {
   questionIds: string[];
 }
+
+export interface QuestionModalResponse {
+  response: string | undefined;
+  disableQuizRequest?: boolean;
+}

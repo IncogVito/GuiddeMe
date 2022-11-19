@@ -8,19 +8,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class PureQuizComponent implements OnInit {
 
   @Input()
-  public availableResponses: string[] = ['Mieszko I', 'Mieszko II'];
+  public availableResponses: string[] = [];
 
   @Input()
   public chosenIndex: number | undefined;
 
   @Input()
-  public questionText: string = 'Kto mieszkał w tej budzie?';
+  public questionText: string = '';
 
   @Output()
   public confirmChoice = new EventEmitter<number>();
 
   @Output()
-  public exitQuiz = new EventEmitter<void>();
+  public disableQuiz = new EventEmitter<void>();
 
   constructor() {
   }

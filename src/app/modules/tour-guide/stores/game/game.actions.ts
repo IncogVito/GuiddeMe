@@ -15,8 +15,29 @@ export namespace GameActions {
     }
   }
 
-  export class NextStop {
-    static readonly type = '[Game] NextStop';
+  export class EnableQuiz {
+    static readonly type = '[Game] EnableQuiz';
+
+    constructor() {
+    }
+  }
+
+  export class DisableQuiz {
+    static readonly type = '[Game] DisableQuiz';
+
+    constructor() {
+    }
+  }
+
+  export class RequestNextStop {
+    static readonly type = '[Game] RequestNextStop';
+
+    constructor() {
+    }
+  }
+
+  export class DoNextStop {
+    static readonly type = '[Game] DoNextStop';
 
     constructor() {
     }

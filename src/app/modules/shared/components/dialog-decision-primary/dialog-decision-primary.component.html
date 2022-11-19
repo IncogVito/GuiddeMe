@@ -15,11 +15,13 @@
                         class="u-full-width u-mr-025"
                         [reversedColor]="true"
                         [label]="rejectButtonLabel"
+                        (btnClick)="reject()"
     >
     </app-button-primary>
 
     <app-button-primary class="u-full-width u-ml-025"
                         [label]="acceptButtonLabel"
+                        (btnClick)="accept()"
     >
     </app-button-primary>
   </div>

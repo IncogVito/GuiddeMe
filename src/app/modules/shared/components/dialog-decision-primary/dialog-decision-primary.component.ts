@@ -1,10 +1,11 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {DecisionDialogResult, DecisionEnum} from "../../models/decision.model";
 
 export interface DialogDecisionData {
   headerTitle: string;
   htmlText: string;
-  rejectButtonLabel: string;
+  rejectButtonLabel?: string;
   acceptButtonLabel: string;
 }
 
@@ -22,13 +23,13 @@ export class DialogDecisionPrimaryComponent implements OnInit {
   public htmlText: string = '';
 
   @Input()
-  public rejectButtonLabel: string = '';
+  public rejectButtonLabel: string | undefined = '';
 
   @Input()
   public acceptButtonLabel: string = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: DialogDecisionData,
-              public readonly dialogRef: MatDialogRef<DialogDecisionData>) {
+              public readonly dialogRef: MatDialogRef<DialogDecisionData, DecisionDialogResult>) {
   }
 
   ngOnInit(): void {
@@ -45,5 +46,13 @@ export class DialogDecisionPrimaryComponent implements OnInit {
     this.htmlText = data.htmlText;
     this.acceptButtonLabel = data.acceptButtonLabel;
     this.rejectButtonLabel = data.rejectButtonLabel;
+  }
+
+  public reject() {
+    this.dialogRef.close({decision: DecisionEnum.NO});
+  }
+
+  public accept() {
+    this.dialogRef.close({decision: DecisionEnum.YES});
   }
 }

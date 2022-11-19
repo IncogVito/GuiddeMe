@@ -1,12 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatestWith, distinctUntilChanged, EMPTY, filter, Observable, Subject, takeUntil} from "rxjs";
-import {GameState} from "../../../stores/game/game.state";
-import {GameStateModel} from "../../../stores/game/game.state-model";
-import {MatDialog} from "@angular/material/dialog";
-import {QuestionsState} from "../../../stores/questions/questions.state";
-import {QuestionsStateModel} from "../../../stores/questions/questions.state-model";
-import {QuestionModel} from "../../../models/question.model";
-import {PureQuizComponent} from "../pure-quiz/pure-quiz.component";
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Subject, take} from "rxjs";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {QuestionModalResponse, QuestionModel} from "../../../models/question.model";
+import {
+  DialogDecisionData,
+  DialogDecisionPrimaryComponent
+} from "../../../../shared/components/dialog-decision-primary/dialog-decision-primary.component";
+import {DecisionDialogResult, DecisionEnum} from "../../../../shared/models/decision.model";
+import {DISABLE_QUIZ_CONFIRMATION} from "../../../commons/modal.commons";
 
 @Component({
   selector: 'guidde-me-quiz-wrapper',
@@ -15,20 +16,22 @@ import {PureQuizComponent} from "../pure-quiz/pure-quiz.component";
 })
 export class QuizWrapperComponent implements OnInit, OnDestroy {
 
-  public gameState$: Observable<GameStateModel> = EMPTY;
-  public questionsState$: Observable<QuestionsStateModel> = EMPTY;
+  public availableResponses: string[] = [];
+  public questionText: string = '';
 
   private ngDestroy$ = new Subject<void>();
 
-  constructor(private readonly gameState: GameState,
-              private readonly questionsState: QuestionsState,
-              private readonly dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: QuestionModel,
+              public readonly dialogRef: MatDialogRef<QuestionModel, QuestionModalResponse>,
+              private readonly matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.gameState$ = this.gameState.gameState$;
-    this.questionsState$ = this.questionsState.questionState$;
-    this.listenOnStepChanged();
+    if (!this.data) {
+      console.error("No data found for Dialog Decision Primary. Closing modal data.");
+      this.dialogRef.close();
+    }
+    this.readDialogData(this.data);
   }
 
   ngOnDestroy(): void {
@@ -36,26 +39,33 @@ export class QuizWrapperComponent implements OnInit, OnDestroy {
     this.ngDestroy$.complete();
   }
 
-
-  private listenOnStepChanged() {
-    this.gameState$.pipe(
-      filter(state => state.started),
-      distinctUntilChanged((prevState, currState) => prevState.currentStopIndex === currState.currentStopIndex),
-      takeUntil(this.ngDestroy$),
-      filter(currState => !currState.finished && currState.quizEnabled),
-      combineLatestWith(this.questionsState$),
-      filter(([_, questionState]) => questionState.fetched),
-      filter(([gameState, questionState]) => gameState.tour.id === questionState.tourId)
-    )
-      .subscribe(([gameState, questionState]) => {
-        const currentStop = gameState.stops[gameState.currentStopIndex - 1];
-        if (currentStop.questionIds) {
-          const tourQuestions = questionState.questions
-            .filter(singleQuestion => currentStop.questionIds.includes(singleQuestion.id));
-          const singleQuestion: QuestionModel = tourQuestions[0];
-          this.dialog.open(PureQuizComponent);
-        }
-      })
+  makeAnAnswer(answerIndex: number) {
+    const answer = this.availableResponses[answerIndex];
+    this.dialogRef.close({
+      response: answer
+    })
   }
 
+  disableQuiz() {
+    this.matDialog.open<any, DialogDecisionData, DecisionDialogResult>(DialogDecisionPrimaryComponent, {
+      data: DISABLE_QUIZ_CONFIRMATION,
+      disableClose: true
+    })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe(result => {
+          if (result && DecisionEnum.YES === result.decision) {
+            this.dialogRef.close({
+              response: undefined,
+              disableQuizRequest: true
+            })
+          }
+        }
+      );
+  }
+
+  private readDialogData(data: QuestionModel) {
+    this.questionText = data.content;
+    this.availableResponses = data.answers;
+  }
 }

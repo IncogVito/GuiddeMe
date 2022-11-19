@@ -9,7 +9,6 @@
     {{questionText}}
   </div>
 
-
   <div class="quiz-page__responses">
 
     <span class="quiz-page__single-option" *ngFor="let singleOption of availableResponses; let idx = index"
@@ -30,7 +29,7 @@
     </app-button-primary>
 
     <span class="quiz-page__quit"
-          (click)="exitQuiz.emit()"
+          (click)="disableQuiz.emit()"
     >
       Wyłącz quiz
     </span>

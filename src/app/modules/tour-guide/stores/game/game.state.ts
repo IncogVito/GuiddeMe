@@ -45,8 +45,7 @@ export class GameState {
       combineLatestWith(tourStops$),
       map(([tour, tourStops]) => ctx.dispatch(new GameActions.Create({
           tour,
-          tourStops,
-          quizEnabled: true
+          tourStops
         }))
       )
     );
@@ -58,24 +57,45 @@ export class GameState {
     ctx.setState({
       currentStopIndex: 1,
       quizAvailable: payload.tour.quizAvailable,
-      quizEnabled: payload.quizEnabled,
+      quizEnabled: false,
       started: true,
       stops: SortUtilService.sortByNumberField(payload.tourStops, 'orderIndex', 'ASC'),
       tour: payload.tour,
-      finished: false
+      finished: false,
+      currentStopQuizRequested: false
     })
     if (payload.tour.quizAvailable) {
       ctx.dispatch(new QuestionsActions.LoadQuestions({tourId: payload.tour.id}));
     }
   }
 
-  @Action(GameActions.NextStop)
-  nextStop(ctx: StateContext<GameStateModel>, _: GameActions.NextStop) {
+  @Action(GameActions.EnableQuiz)
+  enableQuiz(ctx: StateContext<GameStateModel>, _: GameActions.EnableQuiz) {
+    ctx.patchState({quizEnabled: true})
+  }
+
+  @Action(GameActions.DisableQuiz)
+  disableQuiz(ctx: StateContext<GameStateModel>, _: GameActions.DisableQuiz) {
+    ctx.patchState({quizEnabled: false})
+  }
+
+  @Action(GameActions.RequestNextStop)
+  requestNextStop(ctx: StateContext<GameStateModel>, _: GameActions.RequestNextStop) {
+    if (!ctx.getState().quizEnabled) {
+      ctx.dispatch(new GameActions.DoNextStop())
+    } else {
+      ctx.patchState({currentStopQuizRequested: true})
+    }
+  }
+
+  @Action(GameActions.DoNextStop)
+  doNextStop(ctx: StateContext<GameStateModel>, _: GameActions.DoNextStop) {
     if (ctx.getState().currentStopIndex >= ctx.getState().stops.length) {
-      ctx.patchState({finished: true})
+      ctx.patchState({finished: true, started: false, currentStopQuizRequested: false})
     } else {
       ctx.patchState({
-        currentStopIndex: ctx.getState().currentStopIndex + 1
+        currentStopIndex: ctx.getState().currentStopIndex + 1,
+        currentStopQuizRequested: false
       })
     }
   }

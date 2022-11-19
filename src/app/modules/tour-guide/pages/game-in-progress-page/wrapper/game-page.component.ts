@@ -7,15 +7,14 @@ import {Store} from "@ngxs/store";
 import {GameActions} from "../../../stores/game/game.actions";
 import {PureGameComponent} from "../pure/pure-game/pure-game.component";
 import {MatDialog} from "@angular/material/dialog";
-import {
-  DialogDecisionPrimaryComponent
-} from "../../../../shared/components/dialog-decision-primary/dialog-decision-primary.component";
 import {ArrayUtilService} from "../../../../shared/services/utils/array-util.service";
+import {GameModalHelperService} from "../../../services/helper/game-modal-helper.service";
 
 @Component({
   selector: 'guidde-me-wrapper',
   templateUrl: './game-page.component.html',
-  styleUrls: ['./game-page.component.scss']
+  styleUrls: ['./game-page.component.scss'],
+  providers: [GameModalHelperService]
 })
 export class GamePageComponent implements OnInit, OnDestroy {
 
@@ -34,7 +33,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
 
   constructor(private readonly store: Store,
               private readonly gameState: GameState,
-              private readonly dialog: MatDialog) {
+              private readonly gameModalHelperService: GameModalHelperService,) {
   }
 
   ngOnInit(): void {
@@ -46,7 +45,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       .subscribe(stateVal => this.initializeGameView(stateVal));
 
     this.listenOnStepChanged();
-    this.listenOnGameFinished();
+    this.gameModalHelperService.ngOnInit();
   }
 
   ngOnDestroy(): void {
@@ -62,7 +61,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   nextStopRequested() {
-    this.store.dispatch(new GameActions.NextStop());
+    this.store.dispatch(new GameActions.RequestNextStop());
   }
 
   private listenOnStepChanged() {
@@ -79,23 +78,5 @@ export class GamePageComponent implements OnInit, OnDestroy {
           this.pureGameComponent.doNextStep();
         }
       });
-  }
-
-  private listenOnGameFinished() {
-    this.gameState$.pipe(
-      filter(state => state.started),
-      filter(state => state.finished),
-      takeUntil(this.ngDestroy$),
-      take(1)
-    ).subscribe((finishedState) => {
-      // TODO statyki
-      this.dialog.open(DialogDecisionPrimaryComponent, {
-        data: {
-          headerTitle: 'Meta!',
-          htmlText: `Brawo, zakończyłeś trasę ${finishedState.tour.title}`,
-          acceptButtonLabel: 'Do Menu'
-        }
-      });
-    })
   }
 }
