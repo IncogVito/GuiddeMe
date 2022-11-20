@@ -3,7 +3,7 @@
   grid-template-columns: 1fr max-content;
   grid-template-rows: 1fr 3.5rem;
 
-  border-radius: var(--border-radius-secondary);
+  border-radius: 2rem;
   padding: var(--padding-content-default);
   border: 1px solid var(--border-primary-color);
   background-image: url("../../../../../assets/main-photo.jpg");
@@ -11,12 +11,14 @@
   background-position: center;
   min-height: 10.5rem;
   height: 100%;
-  clip-path: var(--default-clip-path);
+
+  &__wrapper {
+    position: relative;
+  }
 
   &__round-wrapper {
     display: inline-block;
     width: 100%;
-    filter: url('#goo');
   }
 
   &:hover {
@@ -30,7 +32,8 @@
     color: var(--main-color-primary-oposite);
     border-radius: 50%;
     padding: 0.25rem;
-    right: 1rem;
+    top: -0.75rem;
+    right: -0.75rem;
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.5rem;
@@ -38,6 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--box-shadow-secondary);
   }
 
   &__round-wrapper-button {

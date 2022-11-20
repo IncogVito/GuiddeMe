@@ -9,4 +9,6 @@ export const tourGuideRouteAnimations =
     transition('TourPreviewAnimation => ToursPageAnimation', rightToLeftAnimationSteps),
     transition('TourPreviewAnimation => TourActiveAnimation', leftToRightAnimationSteps),
     transition('TourActiveAnimation => TourPreviewAnimation', rightToLeftAnimationSteps),
+    transition('MainPageAnimation => AuthorsAnimation', leftToRightAnimationSteps),
+    transition('AuthorsAnimation => MainPageAnimation', rightToLeftAnimationSteps),
   ]);

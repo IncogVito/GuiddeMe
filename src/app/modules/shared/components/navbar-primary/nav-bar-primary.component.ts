@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core'
 import {ActivationEnd, Router} from "@angular/router";
 import {filter, map, Subject, takeUntil} from "rxjs";
 import {ObjectUtilService} from "../../services/utils/object-utils.service";
+import {Store} from "@ngxs/store";
+import {Navigate} from "@ngxs/router-plugin";
 
 @Component({
   selector: 'guidde-me-navbar-primary',
@@ -18,7 +20,8 @@ export class NavBarPrimaryComponent implements OnInit, OnDestroy {
 
   private ngDestroy$ = new Subject<void>();
 
-  constructor(private readonly router: Router) {
+  constructor(private readonly store: Store,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -51,5 +54,9 @@ export class NavBarPrimaryComponent implements OnInit, OnDestroy {
 
   public changeGoBackVisibility(menuExpanded: boolean) {
     this.hideGoBackByExpandedMenu = menuExpanded;
+  }
+
+  navigateTo(path: string[]) {
+    this.store.dispatch(new Navigate(path));
   }
 }

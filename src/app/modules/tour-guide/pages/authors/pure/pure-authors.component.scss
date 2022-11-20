@@ -37,8 +37,8 @@
   }
 
   &__image-figure {
-    height: 15rem;
-    width: 12rem;
+    height: 13rem;
+    width: 10rem;
     position: relative;
     border: 1px solid #bc6190;
     animation: 15s border-radius-animation-1 infinite linear;
@@ -51,10 +51,13 @@
   }
 
   &__image-wrapper {
-    height: 15rem;
+    height: 13rem;
     width: 12rem;
     position: relative;
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:after, &:before {
       content: "";
@@ -72,6 +75,9 @@
     &:before {
       height: 17.5rem;
       width: 17.5rem;
+      border-width: 2px;
+      animation: 5s linear spherical-move-border infinite;
+      z-index: 1;
     }
   }
 
@@ -84,9 +90,22 @@
     color: var(--main-color-primary);
   }
 
-  &__city {
+  &__e-mail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: .8rem;
     color: var(--color-grey-darker-1);
+
+    & > mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      margin-right: .5rem;
+      display: flex;
+      align-items: center;
+      color: var(--main-color-primary);
+    }
   }
 
 }
@@ -99,16 +118,16 @@
   }
 
   25% {
-    border-radius: 30% 70% 18% 82% / 25% 55% 45% 75%;
+    border-radius: 26% 74% 53% 47% / 34% 45% 55% 66%
   }
 
   50% {
-    border-radius: 78% 22% 59% 41% / 25% 40% 60% 75%;
+    border-radius: 59% 41% 40% 60% / 43% 59% 41% 57%;
     transform: rotate(180deg);
   }
 
   75% {
-    border-radius: 78% 22% 76% 24% / 75% 86% 14% 25%;
+    border-radius: 43% 57% 51% 49% / 43% 43% 57% 57%;
   }
 
   100% {
@@ -127,5 +146,18 @@
 
   100% {
     transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spherical-move-border {
+  0% {
+    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 180deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 360deg);
   }
 }

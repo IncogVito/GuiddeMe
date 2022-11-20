@@ -10,6 +10,9 @@ export class HamburgerMenuComponent implements OnInit {
   @Output()
   public menuExpand = new EventEmitter<boolean>();
 
+  @Output()
+  public navigate = new EventEmitter<string[]>();
+
   menuExpanded: boolean = false;
   currentNavList = [];
 
@@ -23,5 +26,13 @@ export class HamburgerMenuComponent implements OnInit {
   toggleExpand() {
     this.menuExpanded = !this.menuExpanded;
     this.menuExpand.emit(this.menuExpanded);
+  }
+
+  navigateDelayed(strings: string[]) {
+    setTimeout(() => {
+      this.navigate.emit(strings);
+      this.menuExpand.emit(false);
+      this.menuExpanded = false;
+    }, 300);
   }
 }

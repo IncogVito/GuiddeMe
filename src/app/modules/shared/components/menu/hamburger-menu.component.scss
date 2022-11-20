@@ -166,8 +166,30 @@ body {
 
       border: none;
       cursor: pointer;
-      //text-shadow: 8px 6px 6px rgb(0 0 0);;
+      position: relative;
+      overflow: hidden;
     }
+    &::after {
+      clip-path: polygon(5% 0, 100% 0, 100% 100%, 0% 100%);
+      content: "";
+      height: 3rem;
+      width: 20rem;
+      background-color: var(--main-color-primary);
+      transform: translateX(20rem);
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: var(--transition-default);
+      z-index: -1;
+    }
+    &--active {
+      color: white;
+    }
+    &--active::after {
+      transform: translateX(0rem);
+    }
+
 
     span {
       margin-right: 1.5rem;

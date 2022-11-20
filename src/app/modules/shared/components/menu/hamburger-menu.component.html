@@ -39,18 +39,32 @@
   <nav class="menu__nav">
     <ul class="menu__list">
       <li class="menu__item">
-        <a class="menu__link">
+        <a class="menu__link"
+           appAddStyleClassOnAction
+           actionType="click"
+           [removeTimeOutMs]="300"
+           classOnActionName="menu__link--active"
+           (click)="navigateDelayed(['introduction'])">
           Miejsca
         </a>
       </li>
       <li class="menu__item">
-        <a class="menu__link">
+        <a class="menu__link"
+           appAddStyleClassOnAction
+           actionType="click"
+           [removeTimeOutMs]="300"
+           classOnActionName="menu__link--active"
+           (click)="navigateDelayed(['about-guidde-me'])">
           Guidde-Me
         </a>
       </li>
       <li class="menu__item">
         <a class="menu__link"
-           routerLink="/authors"
+           appAddStyleClassOnAction
+           actionType="click"
+           [removeTimeOutMs]="300"
+           classOnActionName="menu__link--active"
+           (click)="navigateDelayed(['authors'])"
         >
           Autorzy
         </a>

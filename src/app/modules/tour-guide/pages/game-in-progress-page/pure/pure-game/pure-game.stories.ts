@@ -57,7 +57,8 @@ const stopList: TourStopModel[] = [{
   mainImageUrl: 'assets/main-photo.jpg',
   imagesUrls: ['assets/main-photo.jpg', 'mapa.jpg'],
   address: 'ul. Rynek 19',
-  orderIndex: 1
+  orderIndex: 1,
+  questionIds: []
 }, {
   id: '2',
   tourId: '2',
@@ -66,7 +67,8 @@ const stopList: TourStopModel[] = [{
   mainImageUrl: 'assets/main-photo.jpg',
   imagesUrls: ['assets/main-photo.jpg', 'mapa.jpg'],
   address: 'ul. Rynek 88',
-  orderIndex: 2
+  orderIndex: 2,
+  questionIds: []
 }, {
   id: '3',
   tourId: '3',
@@ -75,7 +77,8 @@ const stopList: TourStopModel[] = [{
   mainImageUrl: 'assets/main-photo.jpg',
   imagesUrls: ['assets/main-photo.jpg', 'mapa.jpg'],
   address: 'ul. Podzamcze 18',
-  orderIndex: 3
+  orderIndex: 3,
+  questionIds: []
 }
 ];
 

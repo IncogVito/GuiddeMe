@@ -62,7 +62,8 @@ export const tourGuideRoutes: Routes = [
   {
     title: 'Autorzy',
     path: 'authors',
-    component: PureAuthorsComponent
+    component: PureAuthorsComponent,
+    data: {animation: 'AuthorsAnimation'}
   }
 ];
 
