@@ -24,14 +24,14 @@ export class IntroductionPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.firstTimeInApplication) {
-      WindowUtilService.scrollToElementOfId('introduction-top-element');
-    } else {
-      setTimeout(
-        () => WindowUtilService.scrollToElementOfId('category-section-id', 'start'),
-        500
-      );
-    }
+    // if (this.firstTimeInApplication) {
+    //   WindowUtilService.scrollToElementOfId('introduction-top-element');
+    // } else {
+    //   setTimeout(
+    //     () => WindowUtilService.scrollToElementOfId('category-section-id', 'start'),
+    //     500
+    //   );
+    // }
   }
 
   swipeDown() {

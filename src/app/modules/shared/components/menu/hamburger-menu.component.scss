@@ -75,32 +75,40 @@ body {
   margin-right: 1rem;
   width: 4rem;
   height: 4rem;
-  z-index: 1;
   background-color: white;
   border-radius: 50%;
+  position: relative;
 
   box-shadow: var(--box-shadow-primary);
+  transition: var(--transition-cubic-beazier-default);
+  transition-duration: .3s;
+  transform: translateY(0);
+
+  &--action {
+    transform: translateY(-.35rem);
+    box-shadow: var(--box-shadow-secondary);
+  }
 }
 
 .menu {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 0;
   overflow: hidden;
-  animation: hideMenu .3s forwards;
+  animation: hideMenu 1s forwards;
+  z-index: -1;
 
   &__icon-wrapper {
     height: 100%;
     width: 100%;
     position: relative;
     transform: scale(.8);
+    z-index: 1;
   }
 
   &--expanded {
     width: 100vw;
     height: 100vh;
-    z-index: -1;
     animation: none;
   }
 
@@ -112,13 +120,14 @@ body {
     right: 0;
     z-index: -1;
     border-radius: 50%;
-    transition: all ease-in-out .3s;
+    transition: all ease-in-out .5s;
 
     &--expanded {
       background-color: white;
       width: 10vw;
       height: 10vh;
       transform: scale(30);
+      transition-duration: .5s;
     }
   }
 

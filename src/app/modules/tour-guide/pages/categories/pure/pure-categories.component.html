@@ -1,7 +1,7 @@
 <app-tile-primary class="single-category" *ngFor="let singleCategory of categories"
                   [buttonText]="singleCategory.name"
                   [rightText]="singleCategory.toursCount + ''"
-                  (buttonClicked)="chooseCategory.emit(singleCategory.id)"
+                  (click)="chooseCategory.emit(singleCategory.id)"
 >
 </app-tile-primary>
 

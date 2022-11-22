@@ -14,6 +14,7 @@ export class HamburgerMenuComponent implements OnInit {
   public navigate = new EventEmitter<string[]>();
 
   menuExpanded: boolean = false;
+  backgroundExpanded: boolean = false;
   currentNavList = [];
 
   constructor() {
@@ -24,15 +25,43 @@ export class HamburgerMenuComponent implements OnInit {
 
 
   toggleExpand() {
-    this.menuExpanded = !this.menuExpanded;
-    this.menuExpand.emit(this.menuExpanded);
+    if (this.menuExpanded) {
+      this.hideMenu();
+    } else {
+      this.expandMenu();
+    }
+  }
+
+  public expandMenu() {
+    this.backgroundExpanded = true;
+    this.menuExpand.emit(true);
+    setTimeout(() => {
+      this.menuExpanded = true;
+    }, 300);
+  }
+
+  public hideMenu() {
+    this.menuExpanded = false;
+    this.menuExpand.emit(false);
+    setTimeout(() => {
+      this.backgroundExpanded = false;
+    }, 500);
   }
 
   navigateDelayed(strings: string[]) {
     setTimeout(() => {
-      this.navigate.emit(strings);
       this.menuExpand.emit(false);
       this.menuExpanded = false;
     }, 300);
+
+    setTimeout(() => {
+      this.backgroundExpanded = false;
+    }, 700);
+
+    setTimeout(() =>
+        this.navigate.emit(strings),
+      1100
+    )
+
   }
 }

@@ -24,7 +24,6 @@ export class AddClassOnActionDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('Działam');
     this.dispose = this.renderer.listen(this.elementRef.nativeElement, this.actionType, e => this.performAction());
   }
 

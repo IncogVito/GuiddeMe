@@ -22,7 +22,12 @@
 </ng-template>
 
 
-<div class="hamburger-wrapper">
+<div class="hamburger-wrapper"
+     appAddStyleClassOnAction
+     classOnActionName="hamburger-wrapper--action"
+     actionType="click"
+     [removeTimeOutMs]="300"
+>
   <ng-container [ngTemplateOutlet]="menuHamburger"
   >
   </ng-container>
@@ -32,7 +37,7 @@
          [class.menu--expanded]="menuExpanded"
 >
   <div class="menu__background"
-       [class.menu__background--expanded]="menuExpanded"
+       [class.menu__background--expanded]="backgroundExpanded"
   >
     &nbsp;
   </div>

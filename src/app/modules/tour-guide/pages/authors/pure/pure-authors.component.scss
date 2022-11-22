@@ -1,9 +1,16 @@
-:host section {
-  padding: 2rem;
+:host {
+  height: 100vh;
+  overflow: hidden;
   display: block;
-  margin-top: 3rem;
 }
 
+.author-section {
+  padding: 4rem 2rem 2rem;
+  display: block;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: auto;
+}
 
 .author {
   width: 100%;

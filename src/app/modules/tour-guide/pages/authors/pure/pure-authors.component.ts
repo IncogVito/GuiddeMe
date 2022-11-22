@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {WindowUtilService} from "../../../../shared/services/utils/window-util.service";
 
 @Component({
   selector: 'guidde-me-pure-authors',
@@ -11,7 +10,6 @@ export class PureAuthorsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    WindowUtilService.scrollToTheTop();
   }
 
 }
