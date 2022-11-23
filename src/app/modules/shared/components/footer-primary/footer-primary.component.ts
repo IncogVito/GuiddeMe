@@ -11,10 +11,13 @@ export class FooterPrimaryComponent implements OnInit {
   public additionalLabel: string = '';
 
   @Input()
-  public mainLabel: string = 'mainLabel';
+  public mainLabel: string = '';
 
   @Input()
-  public buttonLabel: string = 'buttonLabel';
+  public buttonLabel: string = '';
+
+  @Input()
+  public buttonFillFullSpace: boolean = false;
 
   @Output()
   public btnClick = new EventEmitter<void>();

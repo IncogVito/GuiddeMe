@@ -25,6 +25,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
 import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component';
 import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
+import {CanDeactivateGame} from "./resolvers/can-deactivate/can-deactivate-game.service";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -53,11 +54,12 @@ export const tourGuideRoutes: Routes = [
     data: {animation: 'TourPreviewAnimation'}
   },
   {
-    title: 'Aktywna trasa',
+    title: 'Aktywna gra',
     path: 'tour-active',
     canActivate: [],
     component: GamePageComponent,
-    data: {animation: 'TourActiveAnimation'}
+    data: {animation: 'TourActiveAnimation'},
+    canDeactivate: [CanDeactivateGame]
   },
   {
     title: 'Autorzy',

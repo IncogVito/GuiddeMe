@@ -13,8 +13,9 @@
 
   </app-navbar-scroll>
 
-  <app-button-primary class="single-tour__start-button"
-                      label="Rozpocznij!"
+  <app-footer-primary buttonLabel="Rozpocznij"
+                      [buttonFillFullSpace]="true"
                       (btnClick)="startGame.emit()"
-  ></app-button-primary>
+  >
+  </app-footer-primary>
 </div>
