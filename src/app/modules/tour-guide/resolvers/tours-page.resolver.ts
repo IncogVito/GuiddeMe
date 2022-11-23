@@ -25,9 +25,7 @@ export class ToursPageResolver implements Resolve<boolean> {
       return EMPTY;
     }
 
-    return of(true)
-      .pipe(
-        tap(() => this.store.dispatch(new ToursActions.LoadByCategory({categoryId})))
-      )
+    setTimeout(() => this.store.dispatch(new ToursActions.LoadByCategory({categoryId})), 0);
+    return of(true);
   }
 }

@@ -36,7 +36,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
   }
 
   public chooseCategory(categoryId: string) {
-    this.store.dispatch(new Navigate(['tours'], {categoryId: categoryId}));
+    setTimeout(() => this.store.dispatch(new Navigate(['tours'], {categoryId: categoryId})), 0);
   }
 
   ngOnDestroy(): void {
