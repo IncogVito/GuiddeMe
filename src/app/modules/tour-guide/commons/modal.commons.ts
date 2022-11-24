@@ -20,16 +20,7 @@ export const DISABLE_QUIZ_CONFIRMATION: DialogDecisionData = {
   htmlText: DISABLE_QUIZ_QUESTION_MESSAGE,
   rejectButtonLabel: NO_MESSAGE,
   acceptButtonLabel: YES_MESSAGE
-}
 
-export const QUIT_GAME_TITLE = 'Wyjście z gry';
-export const QUIT_GAME_QUESTION_MESSAGE = '<p>Czy na pewno chcesz przerwać grę?</p>';
-
-export const QUIT_GAME_CONFIRMATION: DialogDecisionData = {
-  headerTitle: QUIT_GAME_TITLE,
-  htmlText: QUIT_GAME_QUESTION_MESSAGE,
-  rejectButtonLabel: NO_MESSAGE,
-  acceptButtonLabel: YES_MESSAGE
 }
 
 export const META_MODAL_TITLE = 'Meta!';
