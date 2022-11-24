@@ -19,8 +19,8 @@ export class IntroductionPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.readFirstTimeInIntroductionFlag();
-    this.dispatchIntroductionReadAction();
+    // this.readFirstTimeInIntroductionFlag();
+    // this.dispatchIntroductionReadAction();
   }
 
   ngAfterViewInit(): void {
