@@ -83,13 +83,13 @@
       height: 17.5rem;
       width: 17.5rem;
       border-width: 2px;
-      animation: 5s linear spherical-move-border infinite;
       z-index: 1;
     }
   }
 
   &__name {
     font-size: 1.2rem;
+    margin-top: .7rem;
   }
 
   &__profession {
@@ -161,10 +161,10 @@
     transform: translate(-50%, -50%) rotate3d(1, 1, 1, 0deg);
   }
   50% {
-    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 180deg);
+    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 360deg);
   }
 
   100% {
-    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 360deg);
+    transform: translate(-50%, -50%) rotate3d(1, 1, 1, 720deg);
   }
 }

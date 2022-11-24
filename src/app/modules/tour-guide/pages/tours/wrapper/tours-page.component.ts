@@ -32,7 +32,6 @@ export class ToursPageComponent implements OnInit {
     this.resolveBackgroundStyle();
   }
 
-
   navigateToTour(tourId: string) {
     this.store.dispatch(new Navigate(['tour-preview'], {tourId: tourId}));
   }

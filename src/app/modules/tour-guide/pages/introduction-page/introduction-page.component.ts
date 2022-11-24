@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {WindowUtilService} from "../../../shared/services/utils/window-util.service";
 import {Store} from "@ngxs/store";
 import {UxDetailsActions} from "../../stores/ux-details/ux-details.actions";
@@ -8,7 +8,8 @@ import {take} from "rxjs";
 @Component({
   selector: 'app-introduction-page',
   templateUrl: './introduction-page.component.html',
-  styleUrls: ['./introduction-page.component.scss']
+  styleUrls: ['./introduction-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IntroductionPageComponent implements OnInit, AfterViewInit {
 
@@ -24,14 +25,14 @@ export class IntroductionPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // if (this.firstTimeInApplication) {
-    //   WindowUtilService.scrollToElementOfId('introduction-top-element');
-    // } else {
-    //   setTimeout(
-    //     () => WindowUtilService.scrollToElementOfId('category-section-id', 'start'),
-    //     500
-    //   );
-    // }
+    if (this.firstTimeInApplication) {
+      WindowUtilService.scrollToElementOfId('introduction-top-element');
+    } else {
+      setTimeout(
+        () => WindowUtilService.scrollToElementOfId('category-section-id', 'start'),
+        500
+      );
+    }
   }
 
   swipeDown() {

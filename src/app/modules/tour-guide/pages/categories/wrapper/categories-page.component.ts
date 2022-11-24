@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EMPTY, Observable, of, Subject, takeUntil, tap} from "rxjs";
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject} from "rxjs";
 import {CategoryViewModel} from "../../../models/category.model";
-import {Actions, ofActionCompleted, ofActionDispatched, Store} from "@ngxs/store";
+import {Actions, Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
 import {CategoriesState, Category} from "../../../stores/categories/categories.state";
 import {CategoriesStateModel} from "../../../stores/categories/categories.state-model";
@@ -10,7 +10,8 @@ import {ActionHandlerService} from "../../../../shared/services/utils/action-han
 @Component({
   selector: 'app-categories-wrapper',
   templateUrl: './categories-page.component.html',
-  styleUrls: ['./categories-page.component.scss']
+  styleUrls: ['./categories-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesPageComponent implements OnInit, OnDestroy {
 
@@ -36,7 +37,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
   }
 
   public chooseCategory(categoryId: string) {
-    setTimeout(() => this.store.dispatch(new Navigate(['tours'], {categoryId: categoryId})), 0);
+    this.store.dispatch(new Navigate(['tours'], {categoryId: categoryId}));
   }
 
   ngOnDestroy(): void {

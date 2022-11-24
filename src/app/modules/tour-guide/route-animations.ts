@@ -1,5 +1,8 @@
 import {transition, trigger} from "@angular/animations";
-import {leftToRightAnimationSteps, rightToLeftAnimationSteps} from "../shared/animations/route-change-animation";
+import {
+  leftToRightAnimationSteps,
+  rightToLeftAnimationSteps,
+} from "../shared/animations/route-change-animation";
 
 export const tourGuideRouteAnimations =
   trigger('routeAnimations', [

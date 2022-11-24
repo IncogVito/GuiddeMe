@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryViewModel} from "../../../models/category.model";
 
 @Component({
   selector: 'app-pure-categories',
   templateUrl: './pure-categories.component.html',
-  styleUrls: ['./pure-categories.component.scss']
+  styleUrls: ['./pure-categories.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PureCategoriesComponent implements OnInit {
 
