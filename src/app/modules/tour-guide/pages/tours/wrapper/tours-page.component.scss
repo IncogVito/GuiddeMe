@@ -21,6 +21,11 @@
 
   &__background-photo-wrapper {
     height: 27vh;
+    clip-path: url(#shapeMaskBackgroundWave);
+    object-fit: cover;
+    margin-right: auto;
+    width: 105vw;
+    margin-left: -4vw;
   }
 
   &__header {
@@ -29,7 +34,7 @@
     width: max-content;
     font-weight: 400;
     font-size: 1.7rem;
-    margin-top: .4rem;
+    margin-top: -0.4rem;
     padding: 0.5rem 1rem;
   }
 

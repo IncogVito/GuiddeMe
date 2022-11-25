@@ -25,6 +25,7 @@ import {SkeletonDirective} from "./directives/skeleton.directive";
 import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-primary.component';
 import {AddClassOnActionDirective} from "./directives/add-class-on-action.directive";
 import {RouterLinkWithHref} from "@angular/router";
+import { SvgShapePrimaryComponent } from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
 
 
 @NgModule({
@@ -48,23 +49,25 @@ import {RouterLinkWithHref} from "@angular/router";
     SkeletonLoaderComponent,
     SkeletonDirective,
     NavBarPrimaryComponent,
-    AddClassOnActionDirective
+    AddClassOnActionDirective,
+    SvgShapePrimaryComponent
   ],
-  exports: [
-    ButtonPrimaryComponent,
-    ButtonSecondaryComponent,
-    TilePrimaryComponent,
-    TileSecondaryComponent,
-    CardPrimaryComponent,
-    NavbarScrollComponent,
-    SkeletonDirective,
-    TogglePrimaryComponent,
-    TaskListComponent,
-    FooterPrimaryComponent,
-    ImageCarouselPrimaryComponent,
-    HeaderTextPrimaryComponent,
-    NavBarPrimaryComponent
-  ],
+    exports: [
+        ButtonPrimaryComponent,
+        ButtonSecondaryComponent,
+        TilePrimaryComponent,
+        TileSecondaryComponent,
+        CardPrimaryComponent,
+        NavbarScrollComponent,
+        SkeletonDirective,
+        TogglePrimaryComponent,
+        TaskListComponent,
+        FooterPrimaryComponent,
+        ImageCarouselPrimaryComponent,
+        HeaderTextPrimaryComponent,
+        NavBarPrimaryComponent,
+        SvgShapePrimaryComponent
+    ],
 
     imports: [
         CommonModule,

@@ -3,6 +3,7 @@
     Kategorie
   </label>
 
+
   <ng-container *ngIf="categoriesState$ | async as categoriesState">
 
     <app-pure-categories *ngIf="categoriesState.fetched; else loadingCategoriesTemplate"

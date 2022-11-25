@@ -12,6 +12,11 @@
   min-height: 10.5rem;
   height: 100%;
 
+  clip-path: url(#shapeMaskPrimary);
+  object-fit: cover;
+  margin-right: auto;
+  margin-left: auto;
+
   &__wrapper {
     position: relative;
   }
