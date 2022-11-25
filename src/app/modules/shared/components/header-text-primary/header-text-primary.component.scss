@@ -12,7 +12,9 @@
     justify-self: center;
 
     border-radius: 50%;
-    border: 2px solid var(--color-grey-1);
+    background-color: var(--main-color-primary);
+    color: white;
+    font-weight: 600;
 
     display: flex;
     justify-content: center;

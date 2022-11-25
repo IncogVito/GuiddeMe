@@ -13,6 +13,7 @@
 .task-item {
   display: grid;
   grid-template-columns: 3rem 1fr;
+  grid-column-gap: .5rem;
   grid-template-rows: 4rem;
   align-items: center;
   position: relative;
@@ -25,25 +26,23 @@
     box-shadow: var(--box-shadow-primary);
     background-color: var(--color-grey-2);
     color: white;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
     margin: auto;
     transition: var(--transition-default);
 
     &--done {
-      background-color: var(--color-success);
-      color: white;
+      background-color: var(--main-color-secondary);
+      color: var(--color-grey-darker-1);
     }
 
     &--current {
       background-color: var(--main-color-primary);
-      width: 2rem;
-      height: 2rem;
     }
 
 
     & > mat-icon {
-      font-size: 1.3rem;
+      font-size: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -56,12 +55,12 @@
 
   &:not(:first-child):after {
     content: "";
-    width: .1rem;
-    height: calc((80% / 2));
+    width: 1px;
+    height: calc((40% / 2));
     background-color: transparent;
-    border-right: dashed 1px grey;
+    border-right: solid 1px var(--color-grey-2);
     position: absolute;
-    top: calc((80% / 4) * (-1));
-    left: 1.15rem;
+    top: calc((40% / 4) * (-1));
+    left: 1.43rem;
   }
 }

@@ -52,8 +52,8 @@ export class TourDescriptionUtilService {
         mainTextTitle: 'Lista stopów',
         content: tourStopModels.map(singleStop => {
           return {
-            subtitle: `${singleStop.orderIndex}. ${singleStop.name}`,
-            text: singleStop.descriptionHtml
+            text:
+            `<span class="align-start">${singleStop.orderIndex} </span> ${singleStop.descriptionHtml}`
           }
         })
       }

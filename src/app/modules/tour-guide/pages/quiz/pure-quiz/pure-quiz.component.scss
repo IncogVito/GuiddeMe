@@ -4,6 +4,7 @@
 
   &__image {
     display: flex;
+    position: relative;
 
     & mat-icon {
       font-size: 5rem;
@@ -12,6 +13,36 @@
       color: var(--main-color-primary);
       margin: auto;
       font-weight: 100;
+
+      filter: drop-shadow(4px 4px 1px rgba(var(--main-color-primary-rgb), .2));
+    }
+
+    &-pointer {
+      background-color: var(--main-color-secondary);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+
+      &--first {
+        width: .75rem;
+        height: .75rem;
+        animation: roundAroundOrbit1 7s linear infinite;
+      }
+
+      &--second {
+        width: 1.5rem;
+        height: 1.5rem;
+        animation: roundAroundOrbit2 6s linear infinite;
+      }
+
+      &--third {
+        width: .5rem;
+        height: .5rem;
+        animation: roundAroundOrbit1 5s linear infinite;
+      }
     }
   }
 
@@ -67,5 +98,26 @@
       cursor: pointer;
       margin: .5rem auto auto;
     }
+  }
+}
+
+
+@keyframes roundAroundOrbit1 {
+  from {
+    transform: rotate(0deg) translateX(3rem) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(3rem) rotate(-360deg);
+  }
+}
+
+@keyframes roundAroundOrbit2 {
+  from {
+    transform: rotate(120deg) translateX(3rem) rotate(120deg);
+  }
+
+  to {
+    transform: rotate(480deg) translateX(3rem) rotate(-480deg);
   }
 }
