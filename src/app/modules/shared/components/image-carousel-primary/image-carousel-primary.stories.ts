@@ -7,6 +7,7 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {ImageCarouselPrimaryComponent} from "./image-carousel-primary.component";
+import {SwipeRecogniseDirective} from "../../directives/swipe-recognise.directive";
 
 
 export default {
@@ -19,7 +20,9 @@ export default {
         BrowserModule,
         BrowserAnimationsModule,
         MatIconModule
-      ],
+      ], declarations: [
+        SwipeRecogniseDirective
+      ]
     }),
   ],
 

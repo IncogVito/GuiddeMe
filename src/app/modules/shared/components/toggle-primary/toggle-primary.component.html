@@ -1,4 +1,8 @@
-<div class="toggle">
+<div class="toggle"
+     guiddeMeSwipeRecognise
+     (swipedRight)="!toggled && doToggleAction()"
+     (swipedLeft)="toggled && doToggleAction()"
+>
   <a class="toggle__active-background"
           [class.toggle__active-background--toggled]="toggled"
   >

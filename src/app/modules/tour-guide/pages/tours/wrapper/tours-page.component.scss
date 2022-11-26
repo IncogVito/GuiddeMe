@@ -11,7 +11,7 @@
     margin: 0 calc((-1) * var(--padding-content-default));
     padding: 0;
     width: calc(100% + var(--padding-content-default) * 2);
-    height: 27vh;
+    height: 35vh;
     background-size: cover;
     background-position: center;
     border-radius: 0 0 3rem 3rem;
@@ -20,7 +20,7 @@
   }
 
   &__background-photo-wrapper {
-    height: 27vh;
+    height: 35vh;
     clip-path: url(#shapeMaskBackgroundWave);
     object-fit: cover;
     margin-right: auto;
@@ -34,7 +34,7 @@
     width: max-content;
     font-weight: 400;
     font-size: 1.7rem;
-    margin-top: -0.4rem;
+    margin-top: -1.6rem;
     padding: 0.5rem 1rem;
   }
 

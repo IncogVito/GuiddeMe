@@ -1,13 +1,12 @@
 import {Meta, moduleMetadata, Story} from '@storybook/angular';
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatIconModule} from "@angular/material/icon";
 import {
   SbConventionHighestDivision,
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
-import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
 import {TogglePrimaryComponent} from "./toggle-primary.component";
+import {SwipeRecogniseDirective} from "../../directives/swipe-recognise.directive";
 
 
 export default {
@@ -20,6 +19,7 @@ export default {
         BrowserModule,
         BrowserAnimationsModule
       ],
+      declarations: [SwipeRecogniseDirective]
     }),
   ],
 

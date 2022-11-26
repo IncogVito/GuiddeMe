@@ -6,7 +6,6 @@ import {TourStopModel} from "../../../models/tour-stop.model";
 import {Store} from "@ngxs/store";
 import {GameActions} from "../../../stores/game/game.actions";
 import {PureGameComponent} from "../pure/pure-game/pure-game.component";
-import {MatDialog} from "@angular/material/dialog";
 import {ArrayUtilService} from "../../../../shared/services/utils/array-util.service";
 import {GameModalHelperService} from "../../../services/helper/game-modal-helper.service";
 

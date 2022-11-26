@@ -1,7 +1,11 @@
 <div class="carousel__wrapper">
   <div class="carousel">
 
-    <div class="carousel__clickable">
+    <div class="carousel__clickable" guiddeMeSwipeRecognise
+         (swipedLeft)="nextElementWithCheck()"
+         (swipedRight)="previousElementWithCheck()"
+         [minOffset]="20"
+    >
       <span (click)="previousElementWithCheck()">
         &nbsp;
       </span>

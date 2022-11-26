@@ -26,6 +26,7 @@ import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-prim
 import {AddClassOnActionDirective} from "./directives/add-class-on-action.directive";
 import {RouterLinkWithHref} from "@angular/router";
 import { SvgShapePrimaryComponent } from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
+import { SwipeRecogniseDirective } from './directives/swipe-recognise.directive';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SvgShapePrimaryComponent } from './svg-shapes/svg-shape-primary/svg-sha
     SkeletonDirective,
     NavBarPrimaryComponent,
     AddClassOnActionDirective,
-    SvgShapePrimaryComponent
+    SvgShapePrimaryComponent,
+    SwipeRecogniseDirective
   ],
     exports: [
         ButtonPrimaryComponent,
