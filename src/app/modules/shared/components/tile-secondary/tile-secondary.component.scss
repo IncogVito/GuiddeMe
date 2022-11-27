@@ -11,7 +11,7 @@
   height: 2.5rem;
 
   &--expanded {
-    height: 16rem;
+    height: 18.5rem;
 
     &:hover {
       transform: translateY(0);
@@ -68,7 +68,6 @@
     visibility: hidden;
     transition: all linear .3s;
     opacity: 0;
-    border-radius: 1rem;
 
     & > img {
       display: flex;
@@ -76,6 +75,53 @@
       max-height: 10rem;
       object-fit: cover;
       border-radius: 1rem;
+    }
+  }
+
+  &__extra-details {
+    display: grid;
+    grid-column: 1 / end;
+    grid-row: 2;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: stretch;
+    padding: .5rem 0;
+  }
+
+  &__single-extra-detail {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: .8rem;
+    color: var(--color-grey-3);
+    font-weight: 500;
+
+    &--second {
+      justify-content: flex-end;
+    }
+
+    & mat-icon {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min-content;
+      margin-right: .25rem;
+      position: relative;
+    }
+
+    &--highlighted {
+
+      & > mat-icon::after {
+        position: absolute;
+        content: "";
+        width: 80%;
+        height: 80%;
+        background-color: currentColor;
+        opacity: 0.25;
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(4px);
+      }
     }
   }
 
@@ -93,10 +139,13 @@
     visibility: visible;
     height: min-content;
     opacity: 1;
-    display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content 3rem;
 
     & > img {
       display: flex;
@@ -133,7 +182,7 @@
 
   &__button {
     grid-column: 1 / end;
-    grid-row: 4;
+    grid-row: 3;
     transition: inherit;
     transition-delay: 0s;
 
@@ -143,7 +192,6 @@
   }
 
   &--expanded &__button {
-    margin-top: .5rem;
     visibility: visible;
     opacity: 1;
     height: unset;

@@ -1,4 +1,5 @@
 import {EntitySearchParams} from "../../shared/models/firestore.model";
+import {CardSingleDetailModel} from "../../shared/models/card-single-detail.model";
 
 export interface TourViewModel {
   id: string;
@@ -6,6 +7,7 @@ export interface TourViewModel {
   time: number;
   imageUrl: string;
   expanded: boolean;
+  tourDetails: CardSingleDetailModel[];
 }
 
 export interface TourModel {

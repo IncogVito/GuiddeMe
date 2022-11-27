@@ -29,13 +29,30 @@
     >
       &nbsp;
     </figure>
-  </div>
 
-  <app-button-secondary class="tile-secondary__button"
+    <div class="tile-secondary__extra-details">
+      <div class="tile-secondary__single-extra-detail"
+           *ngFor="let singleDetail of details;let odd = odd"
+           [class.tile-secondary__single-extra-detail--highlighted]="singleDetail.colorStyle"
+           [class.tile-secondary__single-extra-detail--second]="odd"
+           [ngStyle]="{color: singleDetail.colorStyle}"
+      >
+        <mat-icon *ngIf="singleDetail.icon">
+          {{singleDetail.icon}}
+        </mat-icon>
+
+        <span>
+      {{singleDetail.text}}
+    </span>
+      </div>
+    </div>
+
+    <app-button-primary class="tile-secondary__button"
                         [label]="buttonText"
                         iconName="chevron_right"
                         (click)="expanded && clickButton($event)"
-  >
+    >
 
-  </app-button-secondary>
+    </app-button-primary>
+  </div>
 </div>

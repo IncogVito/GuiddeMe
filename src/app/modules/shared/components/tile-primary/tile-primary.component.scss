@@ -5,7 +5,6 @@
 
   border-radius: 2rem;
   padding: var(--padding-content-default);
-  border: 1px solid var(--border-primary-color);
   background-image: url("../../../../../assets/main-photo.jpg");
   background-size: cover;
   background-position: center;
@@ -37,8 +36,8 @@
     color: var(--main-color-primary-oposite);
     border-radius: 50%;
     padding: 0.25rem;
-    top: -0.75rem;
-    right: -0.75rem;
+    top: -0.25rem;
+    right: -0.25rem;
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.5rem;
@@ -53,16 +52,18 @@
     grid-row: 3;
     grid-column: 1 / end;
     margin: 0 1rem;
+    display: flex;
+    justify-content: center;
   }
   &__button {
     font-size: 1.5rem;
-    padding: .5rem;
+    padding: 0.25rem 0.5rem;
 
     outline: none;
-    background-color: white;
-    color: var(--color-grey-darker-1);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
     border: none;
     border-radius: 2rem;
-    width: 100%;
+    width: 80%;
   }
 }

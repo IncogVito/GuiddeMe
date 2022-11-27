@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CardSingleDetailModel} from "../../models/card-single-detail.model";
 
 @Component({
   selector: 'app-tile-secondary',
@@ -33,6 +34,9 @@ export class TileSecondaryComponent implements OnInit {
 
   @Input()
   public imageUrl: string = '';
+
+  @Input()
+  public details: CardSingleDetailModel[] = [];
 
   missingImage: boolean = false;
 

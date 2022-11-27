@@ -10,6 +10,8 @@ import {
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {TileSecondaryComponent} from "./tile-secondary.component";
 import {ButtonSecondaryComponent} from "../button-secondary/button-secondary.component";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
+import {CardSingleDetailModel} from "../../models/card-single-detail.model";
 
 
 export default {
@@ -18,7 +20,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
-      declarations: [ButtonSecondaryComponent],
+      declarations: [ButtonPrimaryComponent, ButtonSecondaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -53,10 +55,21 @@ Default.args = {
   expanded: false
 };
 
+const singleDetails: CardSingleDetailModel[] = [
+  {
+    icon: 'map',
+    text: '7 punktów',
+  }, {
+    icon: 'sports_esports',
+    text: 'Quiz dostępny',
+    colorStyle: 'orange'
+  }]
+
 export const Expanded = Template.bind({});
 Expanded.args = {
   ...Default.args,
-  expanded: true
+  expanded: true,
+  details: singleDetails
 };
 
 export const MissingImage = Template.bind({});
