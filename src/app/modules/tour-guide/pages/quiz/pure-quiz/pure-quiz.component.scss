@@ -13,6 +13,7 @@
       color: var(--main-color-primary);
       margin: auto;
       font-weight: 100;
+      z-index: 1;
 
       filter: drop-shadow(4px 4px 1px rgba(var(--main-color-primary-rgb), .2));
     }
@@ -24,7 +25,6 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: -1;
 
       &--first {
         width: .75rem;

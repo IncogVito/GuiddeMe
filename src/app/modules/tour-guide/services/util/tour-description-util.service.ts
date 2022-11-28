@@ -2,6 +2,7 @@ import {TourModel} from "../../models/tour.model";
 import {TourStopModel} from "../../models/tour-stop.model";
 import {NavItemModel} from "../../../shared/models/nav-item.model";
 import {CardSingleDetailModel} from "../../../shared/models/card-single-detail.model";
+import {createHeaderText} from "../../../shared/commons/functions/html-creator.common";
 
 export class TourDescriptionUtilService {
   constructor() {
@@ -51,10 +52,7 @@ export class TourDescriptionUtilService {
         navTitle: 'Lista stopów',
         mainTextTitle: 'Lista stopów',
         content: tourStopModels.map(singleStop => {
-          return {
-            text:
-            `<span class="align-start">${singleStop.orderIndex} </span> ${singleStop.descriptionHtml}`
-          }
+          return {text: createHeaderText(`${singleStop.orderIndex}`, singleStop.name)}
         })
       }
     ];

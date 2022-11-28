@@ -21,6 +21,37 @@
     top: 0;
     left: 0;
     z-index: -1;
+
+    clip-path: url(#shapeMaskBackgroundMainPage);
+    object-fit: cover;
+  }
+
+  &__additional-elems {
+    position: absolute;
+    border-bottom: 0;
+    width: 30vh;
+    height: 30vh;
+    border-bottom: 0;
+    right: 0;
+    z-index: -2;
+
+    opacity: 0;
+    animation: .4s fadeIn linear forwards;
+    animation-delay: .4s;
+
+    &--first {
+      background-color: var(--main-color-primary);
+      border-bottom: 0;
+      border-top-left-radius: 30vh;
+      top: 50vh;
+    }
+
+    &--second {
+      top: 80vh;
+      background-color: var(--main-color-tertiary);
+      border-bottom: 0;
+      border-bottom-left-radius: 30vh;
+    }
   }
 
   &__text {
@@ -51,5 +82,17 @@
 
     color: white;
     animation: moveDownTwice 2s ease-in-out infinite;
+  }
+
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
