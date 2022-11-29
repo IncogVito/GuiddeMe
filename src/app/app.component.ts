@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {Location} from "@angular/common";
 import {ChildrenOutletContexts} from "@angular/router";
 import {tourGuideRouteAnimations} from "./modules/tour-guide/route-animations";
@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   goBack() {
-    setTimeout(() => this.location.back(), 0);
+    setTimeout(() => this.location.back(), 150);
   }
 
   getRouteAnimationData() {

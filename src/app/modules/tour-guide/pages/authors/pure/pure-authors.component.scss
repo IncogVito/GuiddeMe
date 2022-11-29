@@ -30,7 +30,6 @@
     transform: translate(-50%, -50%) rotate(-20deg);
     margin: 0;
     animation: 15s rotate-animation-1--reversed infinite linear;
-    filter: grayscale(70%);
     filter: url(#cherry-ice-cream);
 
     &--first {
@@ -65,26 +64,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &:after, &:before {
-      content: "";
-      height: 17rem;
-      width: 17rem;
-      border-radius: 50%;
-      border: 1px solid var(--main-color-primary);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: .2;
-    }
-
-    &:before {
-      height: 17.5rem;
-      width: 17.5rem;
-      border-width: 2px;
-      z-index: 1;
-    }
   }
 
   &__name {

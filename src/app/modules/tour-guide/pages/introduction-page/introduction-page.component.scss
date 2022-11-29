@@ -4,13 +4,15 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
 
   &__header {
   }
 
   &__image {
     height: 100vh;
-    width: 100%;
+    width: calc(100% + 1px);
     background-image: url("../../../../../assets/main-photo.jpg");
     margin: auto;
     background-size: cover;
@@ -19,7 +21,7 @@
     border-radius: 0 0 3rem 0;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -1px;
     z-index: -1;
 
     clip-path: url(#shapeMaskBackgroundMainPage);
