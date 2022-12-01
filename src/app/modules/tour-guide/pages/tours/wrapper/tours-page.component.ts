@@ -3,7 +3,6 @@ import {EMPTY, Observable} from "rxjs";
 import {ToursStateModel} from "../../../stores/tours/tours.state-model";
 import {ToursState} from "../../../stores/tours/tours.state";
 import {Store} from "@ngxs/store";
-import {ToursActions} from "../../../stores/tours/tours.actions";
 import {Navigate} from "@ngxs/router-plugin";
 
 @Component({

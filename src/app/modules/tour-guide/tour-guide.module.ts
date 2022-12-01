@@ -26,6 +26,7 @@ import {FormsModule} from "@angular/forms";
 import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component';
 import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
 import {CanDeactivateGame} from "./resolvers/can-deactivate/can-deactivate-game.service";
+import {RequiredTourPreviewDataLoadedGuard} from "./guards/required-tour-preview-data-loaded-guard.service";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -48,15 +49,15 @@ export const tourGuideRoutes: Routes = [
   {
     title: 'Trasa',
     path: 'tour-preview',
-    canActivate: [],
+    canActivate: [RequiredTourPreviewDataLoadedGuard],
     component: SingleTourPageComponent,
     resolve: {tourWithStops: TourPreviewResolver},
-    data: {animation: 'TourPreviewAnimation'}
+    data: {animation: 'TourPreviewAnimation'},
   },
   {
     title: 'Aktywna gra',
     path: 'tour-active',
-    canActivate: [],
+    canActivate: [RequiredTourPreviewDataLoadedGuard],
     component: GamePageComponent,
     data: {animation: 'TourActiveAnimation'},
     canDeactivate: [CanDeactivateGame]

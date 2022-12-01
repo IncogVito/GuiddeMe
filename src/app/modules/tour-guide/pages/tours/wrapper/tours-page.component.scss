@@ -6,6 +6,8 @@
 
 .tours {
   padding: 0 var(--padding-content-default);
+  height: 100vh;
+  overflow: auto;
 
   &__background-photo {
     margin: 0 calc((-1) * var(--padding-content-default));
@@ -36,10 +38,5 @@
     font-size: 1.7rem;
     margin-top: -1.6rem;
     padding: 0.5rem 1rem;
-  }
-
-  &__single-item {
-    display: block;
-    margin-top: 1rem;
   }
 }
