@@ -52,6 +52,7 @@ Default.args = {
   descriptionText: '120 min',
   buttonText: 'See more',
   imageUrl: '/assets/mapa.jpg',
+  mapImageUrl: '/assets/mapa.jpg',
   expanded: false
 };
 
@@ -86,5 +87,6 @@ OverflowingText.args = {
     'Praesent vitae orci vitae augue lacinia feugiat. Pellentesque tellus ipsum,' +
     ' lacinia in lorem ac',
   expanded: true,
-  imageUrl: 'notExisting'
+  imageUrl: 'notExisting',
+  mapImageUrl: 'notExisting'
 };

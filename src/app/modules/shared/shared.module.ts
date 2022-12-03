@@ -22,11 +22,14 @@ import {
 } from "./components/dialog-decision-primary/dialog-decision-primary-wrapper.component";
 import {SkeletonLoaderComponent} from "./components/skeleton-loader/skeleton-loader.component";
 import {SkeletonDirective} from "./directives/skeleton.directive";
-import { NavBarPrimaryComponent } from './components/navbar-primary/nav-bar-primary.component';
+import {NavBarPrimaryComponent} from './components/navbar-primary/nav-bar-primary.component';
 import {AddClassOnActionDirective} from "./directives/add-class-on-action.directive";
 import {RouterLinkWithHref} from "@angular/router";
-import { SvgShapePrimaryComponent } from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
-import { SwipeRecogniseDirective } from './directives/swipe-recognise.directive';
+import {SvgShapePrimaryComponent} from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
+import {SwipeRecogniseDirective} from './directives/swipe-recognise.directive';
+import {GoogleMapReadOnlyComponent} from "./components/maps/google-map-read-only/google-map-read-only.component";
+import {AgmOverlays} from "agm-overlays";
+import {AgmCoreModule} from "@agm/core";
 
 
 @NgModule({
@@ -52,31 +55,34 @@ import { SwipeRecogniseDirective } from './directives/swipe-recognise.directive'
     NavBarPrimaryComponent,
     AddClassOnActionDirective,
     SvgShapePrimaryComponent,
-    SwipeRecogniseDirective
+    SwipeRecogniseDirective,
+    GoogleMapReadOnlyComponent
   ],
-    exports: [
-        ButtonPrimaryComponent,
-        ButtonSecondaryComponent,
-        TilePrimaryComponent,
-        TileSecondaryComponent,
-        CardPrimaryComponent,
-        NavbarScrollComponent,
-        SkeletonDirective,
-        TogglePrimaryComponent,
-        TaskListComponent,
-        FooterPrimaryComponent,
-        ImageCarouselPrimaryComponent,
-        HeaderTextPrimaryComponent,
-        NavBarPrimaryComponent,
-        SvgShapePrimaryComponent
-    ],
+  exports: [
+    ButtonPrimaryComponent,
+    ButtonSecondaryComponent,
+    TilePrimaryComponent,
+    TileSecondaryComponent,
+    CardPrimaryComponent,
+    NavbarScrollComponent,
+    SkeletonDirective,
+    TogglePrimaryComponent,
+    TaskListComponent,
+    FooterPrimaryComponent,
+    ImageCarouselPrimaryComponent,
+    HeaderTextPrimaryComponent,
+    NavBarPrimaryComponent,
+    SvgShapePrimaryComponent
+  ],
 
-    imports: [
-        CommonModule,
-        MatIconModule,
-        MatDialogModule,
-        RouterLinkWithHref
-    ]
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatDialogModule,
+    RouterLinkWithHref,
+    AgmOverlays,
+    AgmCoreModule
+  ]
 })
 export class SharedModule {
 }

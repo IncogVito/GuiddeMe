@@ -8,7 +8,8 @@
                       (buttonClicked)="chooseTour.emit(singleTour.id)"
                       [mainLabel]="singleTour.title"
                       [descriptionText]="singleTour.time + ' minut'"
-                      [imageUrl]="singleTour.imageUrl"
+                      [imageUrl]="singleTour.previewImageUrl"
+                      [mapImageUrl]="singleTour.mapImageUrl"
                       [expanded]="singleTour.expanded"
                       [details]="singleTour.tourDetails"
   >

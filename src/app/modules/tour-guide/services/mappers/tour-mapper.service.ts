@@ -13,6 +13,8 @@ export class TourMapperService {
       id: tourModel.id,
       expanded: false,
       imageUrl: tourModel.mainImageUrl,
+      mapImageUrl: tourModel.mapImageUrl,
+      previewImageUrl: tourModel.previewImageUrl,
       time: tourModel.time,
       title: tourModel.title,
       tourDetails: this.mapTourDetails(tourModel)

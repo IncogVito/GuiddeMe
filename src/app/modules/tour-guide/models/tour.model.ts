@@ -6,6 +6,8 @@ export interface TourViewModel {
   title: string;
   time: number;
   imageUrl: string;
+  mapImageUrl: string;
+  previewImageUrl: string;
   expanded: boolean;
   tourDetails: CardSingleDetailModel[];
 }
@@ -14,12 +16,13 @@ export interface TourModel {
   id: string;
   title: string;
   time: number;
-  mainImageUrl: string;
   allImages: string[];
   categoryId: string;
   stopsCount: number;
   descriptionHtml: string;
   mapImageUrl: string;
+  mainImageUrl: string;
+  previewImageUrl: string;
   quizAvailable: boolean;
 }
 

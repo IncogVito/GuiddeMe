@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
     "@angular/animations": "^14.2.0",
     "@angular/cdk": "^14.2.3",
     "@angular/common": "^14.2.0",
@@ -53,7 +54,9 @@
     "@storybook/builder-webpack5": "^6.5.12",
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
+    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~4.0.0",
+    "agm-overlays": "^2.0.0",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.10.1",
     "jasmine-core": "~4.3.0",

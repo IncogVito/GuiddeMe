@@ -36,6 +36,9 @@ export class TileSecondaryComponent implements OnInit {
   public imageUrl: string = '';
 
   @Input()
+  public mapImageUrl: string = '';
+
+  @Input()
   public details: CardSingleDetailModel[] = [];
 
   missingImage: boolean = false;

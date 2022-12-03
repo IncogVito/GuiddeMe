@@ -6,6 +6,11 @@
     {{mainLabel}}
   </span>
 
+  <img class="tile-secondary__main-image"
+       [src]="imageUrl"
+       alt="Main image"
+  />
+
   <mat-icon class="tile-secondary__right-icon">
     {{topRightIcon}}
   </mat-icon>
@@ -21,9 +26,9 @@
   </div>
 
   <div class="tile-secondary__expanded-elem">
-    <figure *ngIf="imageUrl"
+    <figure *ngIf="mapImageUrl"
             class="tile-secondary__image"
-            [ngStyle]="{'background-image': 'url('+imageUrl+')'}"
+            [ngStyle]="{'background-image': 'url('+mapImageUrl+')'}"
             [class.tile-secondary__missing-image]="missingImage"
             (error)="handleMissingImage()"
     >

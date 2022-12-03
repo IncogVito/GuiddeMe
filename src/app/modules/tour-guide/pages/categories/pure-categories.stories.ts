@@ -37,12 +37,14 @@ const categories: CategoryViewModel[] = [
   {
     id: '21',
     name: 'Turystyka',
-    toursCount: 14
+    toursCount: 14,
+    imageUrl: '/assets/mapa.jpg'
   },
   {
     id: '12',
     name: 'Coffee places',
-    toursCount: 22
+    toursCount: 22,
+    imageUrl: '/assets/main-photo.jpg'
   },
 ]
 
