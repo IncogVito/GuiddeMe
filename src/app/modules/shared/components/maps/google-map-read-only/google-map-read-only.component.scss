@@ -10,6 +10,13 @@ agm-map {
   transition: var(--transition-default);
 }
 
+.map-wrapper {
+  width: 100%;
+  height: min-content;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
 .map-toggle-icon {
   position: absolute;
   z-index: 10;

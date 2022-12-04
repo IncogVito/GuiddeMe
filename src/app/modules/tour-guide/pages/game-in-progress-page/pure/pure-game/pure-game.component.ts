@@ -2,6 +2,7 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild
 import {TourStopModel} from "../../../../models/tour-stop.model";
 import {PureGameStopListComponent} from "../pure-game-stop-list/pure-game-stop-list.component";
 import {WindowUtilService} from "../../../../../shared/services/utils/window-util.service";
+import {GameStateModel} from "../../../../stores/game/game.state-model";
 
 @Component({
   selector: 'guidde-me-pure-game',
@@ -16,6 +17,9 @@ export class PureGameComponent implements OnInit, AfterViewInit {
   @Output()
   public nextStopRequest = new EventEmitter();
 
+  @Output()
+  public toggleQuizState = new EventEmitter<boolean>();
+
   @Input()
   public stopsList: TourStopModel[] = [];
 
@@ -24,6 +28,10 @@ export class PureGameComponent implements OnInit, AfterViewInit {
 
   @Input()
   public nextStop: TourStopModel | undefined;
+
+  @Input()
+  public gameModel: GameStateModel | undefined;
+
 
   public currentStopVisible: boolean = false;
 

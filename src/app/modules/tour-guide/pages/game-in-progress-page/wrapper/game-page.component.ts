@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {GameState} from "../../../stores/game/game.state";
-import {distinctUntilChanged, EMPTY, filter, Observable, Subject, take, takeUntil} from "rxjs";
+import {distinctUntilChanged, EMPTY, filter, map, Observable, Subject, take, takeUntil} from "rxjs";
 import {GameStateModel} from "../../../stores/game/game.state-model";
 import {TourStopModel} from "../../../models/tour-stop.model";
 import {Store} from "@ngxs/store";
@@ -44,6 +44,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       .subscribe(stateVal => this.initializeGameView(stateVal));
 
     this.listenOnStepChanged();
+    this.listenOnQuizStateToggled();
     this.gameModalHelperService.ngOnInit();
   }
 
@@ -77,5 +78,22 @@ export class GamePageComponent implements OnInit, OnDestroy {
           this.pureGameComponent.doNextStep();
         }
       });
+  }
+
+  toggleQuizState(targetQuizState: boolean) {
+    if (targetQuizState) {
+      this.store.dispatch(new GameActions.EnableQuiz());
+    } else {
+      this.store.dispatch(new GameActions.DisableQuiz());
+    }
+  }
+
+  private listenOnQuizStateToggled() {
+    this.gameState$.pipe(
+      filter(state => state.started),
+      distinctUntilChanged((prevState, currState) => prevState.quizEnabled === currState.quizEnabled),
+      takeUntil(this.ngDestroy$)
+    )
+      .subscribe(stateVal => this.gameStateModel = stateVal);
   }
 }

@@ -1,41 +1,43 @@
-<mat-icon class="map-toggle-icon" (click)="toggleMapHeight()">
-  unfold_more
-</mat-icon>
+<div class="map-wrapper">
+  <mat-icon class="map-toggle-icon" (click)="toggleMapHeight()">
+    unfold_more
+  </mat-icon>
 
-<agm-map [ngStyle]="{'height.vh': mapHeightVh}"
-  [latitude]=mapGeneralPosition.position.latitude
-  [longitude]=mapGeneralPosition.position.longitude
-  [zoom]="mapGeneralPosition.zoom"
-  [styles]="styles"
-  (zoomChange)="zoomChanged($event)"
-  (centerChange)="mapDragged($event)"
-  (mapReady)="onMapReady()"
->
-
-  <agm-overlay *ngFor="let singlePing of mapPins"
-               [latitude]="singlePing.latitude"
-               [longitude]="singlePing.longitude"
+  <agm-map [ngStyle]="{'height.vh': mapHeightVh}"
+           [latitude]=mapGeneralPosition.position.latitude
+           [longitude]=mapGeneralPosition.position.longitude
+           [zoom]="mapGeneralPosition.zoom"
+           [styles]="styles"
+           (zoomChange)="zoomChanged($event)"
+           (centerChange)="mapDragged($event)"
+           (mapReady)="onMapReady()"
   >
-    <div class="pin-wrapper">
-      <div class='pin'
-           (mouseenter)="mouseOver(singlePing.index)"
-           (mouseleave)="leave(singlePing.index)"
-           [ngClass]=""
-      >
-        <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-        <span>{{singlePing.index}}</span>
-      </div>
-      <div id="pulse-{{singlePing.index}}" class='pulse'></div>
 
-      <div id="pin-{{singlePing.index}}" class="pin-label-box">
-        <label class="pin-label">{{'Nazwa'}}</label>
-        <label class="pin-label pin-label--details">Kliknij, aby zobaczyć szczegóły</label>
-      </div>
-    </div>
-  </agm-overlay>
+    <agm-overlay *ngFor="let singlePing of mapPins"
+                 [latitude]="singlePing.latitude"
+                 [longitude]="singlePing.longitude"
+    >
+      <div class="pin-wrapper">
+        <div class='pin'
+             (mouseenter)="mouseOver(singlePing.index)"
+             (mouseleave)="leave(singlePing.index)"
+             [ngClass]=""
+        >
+          <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
+          <span>{{singlePing.index}}</span>
+        </div>
+        <div id="pulse-{{singlePing.index}}" class='pulse'></div>
 
-  <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->
-  <!--  >-->
-  <!--  </agm-marker>-->
-</agm-map>
+        <div id="pin-{{singlePing.index}}" class="pin-label-box">
+          <label class="pin-label">{{'Nazwa'}}</label>
+          <label class="pin-label pin-label--details">Kliknij, aby zobaczyć szczegóły</label>
+        </div>
+      </div>
+    </agm-overlay>
+
+    <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->
+    <!--  >-->
+    <!--  </agm-marker>-->
+  </agm-map>
+</div>
 

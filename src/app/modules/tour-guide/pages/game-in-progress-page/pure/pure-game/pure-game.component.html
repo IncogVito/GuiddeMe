@@ -1,4 +1,4 @@
-<div class="game-page">
+<div class="game-page" *ngIf="gameModel">
   <app-toggle-primary class="game-page__toggle"
                       leftLabel="Trasa"
                       rightLabel="Miejsce"
@@ -11,7 +11,10 @@
   <div class="game-page__body">
     <guidde-me-pure-game-stop-list class="game-page__list"
                                    [stopList]="stopsList"
+                                   [quizAvailable]="gameModel.quizAvailable"
+                                   [quizEnabled]="gameModel.quizEnabled"
                                    [class.game-page__list--active]="!currentStopVisible"
+                                   (toggleQuizState)="toggleQuizState.emit($event)"
     >
     </guidde-me-pure-game-stop-list>
 

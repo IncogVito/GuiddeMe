@@ -31,7 +31,7 @@
     height: 17rem;
     width: 20rem;
     transition: var(--transition-default);
-
+    transition-duration: .3s;
 
     &--first {
       position: absolute;

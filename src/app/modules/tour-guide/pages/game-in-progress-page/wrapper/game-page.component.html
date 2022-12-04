@@ -2,7 +2,9 @@
                      [stopsList]="tourStops"
                      [currentStop]="currentStop"
                      [nextStop]="nextStop"
+                     [gameModel]="gameStateModel"
                      (nextStopRequest)="nextStopRequested()"
+                     (toggleQuizState)="toggleQuizState($event)"
 >
 
 </guidde-me-pure-game>
