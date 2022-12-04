@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TourStopModel} from "../../../../models/tour-stop.model";
 import {TaskListComponent} from "../../../../../shared/components/task-list/task-list.component";
 import {TourStopUtilService} from "../../../../services/util/tour-stop.util.service";
+import {MapElement} from "../../../../../shared/models/map.model";
 
 @Component({
   selector: 'guidde-me-pure-game-stop-list',
@@ -17,11 +18,13 @@ export class PureGameStopListComponent implements OnInit {
   public stopList: TourStopModel[] = [];
 
   public stopNameList: string[] = [];
+  public mapPins: MapElement[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
     this.stopNameList = TourStopUtilService.extractFileNames(this.stopList);
+    this.mapPins = TourStopUtilService.extractMapPins(this.stopList);
   }
 
   public doNextStep() {

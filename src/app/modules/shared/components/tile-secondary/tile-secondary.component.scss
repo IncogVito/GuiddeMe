@@ -6,12 +6,12 @@
   box-shadow: var(--box-shadow-primary);
   transition: var(--transition-cubic-beazier-default);
   border-radius: 1.5rem;
-  overflow: hidden;
+  overflow-y: hidden;
   cursor: pointer;
   height: 3.5rem;
 
   &--expanded {
-    height: 18rem;
+    height: 19.5rem;
 
     &:hover {
       transform: translateY(0);
@@ -156,7 +156,6 @@
     opacity: 1;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 
     display: grid;
     grid-template-columns: 1fr;

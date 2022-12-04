@@ -58,22 +58,23 @@ import {AgmCoreModule} from "@agm/core";
     SwipeRecogniseDirective,
     GoogleMapReadOnlyComponent
   ],
-  exports: [
-    ButtonPrimaryComponent,
-    ButtonSecondaryComponent,
-    TilePrimaryComponent,
-    TileSecondaryComponent,
-    CardPrimaryComponent,
-    NavbarScrollComponent,
-    SkeletonDirective,
-    TogglePrimaryComponent,
-    TaskListComponent,
-    FooterPrimaryComponent,
-    ImageCarouselPrimaryComponent,
-    HeaderTextPrimaryComponent,
-    NavBarPrimaryComponent,
-    SvgShapePrimaryComponent
-  ],
+    exports: [
+        ButtonPrimaryComponent,
+        ButtonSecondaryComponent,
+        TilePrimaryComponent,
+        TileSecondaryComponent,
+        CardPrimaryComponent,
+        NavbarScrollComponent,
+        SkeletonDirective,
+        TogglePrimaryComponent,
+        TaskListComponent,
+        FooterPrimaryComponent,
+        ImageCarouselPrimaryComponent,
+        HeaderTextPrimaryComponent,
+        NavBarPrimaryComponent,
+        SvgShapePrimaryComponent,
+        GoogleMapReadOnlyComponent
+    ],
 
   imports: [
     CommonModule,

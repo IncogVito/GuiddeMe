@@ -44,18 +44,6 @@ const Template: Story = args => ({
   },
 });
 
-export const Default = Template.bind({});
-Default.args = {
-  mainLabel: 'Category first',
-  topRightIcon: 'expand_less',
-  descriptionIcon: 'schedule',
-  descriptionText: '120 min',
-  buttonText: 'See more',
-  imageUrl: '/assets/mapa.jpg',
-  mapImageUrl: '/assets/mapa.jpg',
-  expanded: false
-};
-
 const singleDetails: CardSingleDetailModel[] = [
   {
     icon: 'map',
@@ -65,6 +53,19 @@ const singleDetails: CardSingleDetailModel[] = [
     text: 'Quiz dostępny',
     colorStyle: 'orange'
   }]
+
+export const Default = Template.bind({});
+Default.args = {
+  mainLabel: 'Category first',
+  topRightIcon: 'expand_less',
+  descriptionIcon: 'schedule',
+  descriptionText: '120 min',
+  buttonText: 'See more',
+  imageUrl: '/assets/mapa.jpg',
+  mapImageUrl: '/assets/mapa.jpg',
+  expanded: false,
+  details: singleDetails
+};
 
 export const Expanded = Template.bind({});
 Expanded.args = {
@@ -77,7 +78,8 @@ export const MissingImage = Template.bind({});
 MissingImage.args = {
   ...Default.args,
   expanded: true,
-  imageUrl: 'notExisting'
+  imageUrl: 'notExisting',
+  details: singleDetails
 };
 
 export const OverflowingText = Template.bind({});
@@ -88,5 +90,6 @@ OverflowingText.args = {
     ' lacinia in lorem ac',
   expanded: true,
   imageUrl: 'notExisting',
-  mapImageUrl: 'notExisting'
+  mapImageUrl: 'notExisting',
+  details: singleDetails
 };

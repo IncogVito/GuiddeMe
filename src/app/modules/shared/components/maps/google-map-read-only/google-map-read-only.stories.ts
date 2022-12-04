@@ -55,5 +55,7 @@ const mapGeneralPosition: MapGeneralPosition = {
 export const Default = Template.bind({});
 Default.args = {
   mapPins: mapPins,
-  mapGeneralPosition
+  mapGeneralPosition,
+  defaultHeightVh: 30,
+  expandedHeightVh: 60
 };

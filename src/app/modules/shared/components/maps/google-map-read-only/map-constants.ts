@@ -11,7 +11,7 @@ export const MAP_DEFAULT_GENERAL_POSITION: MapGeneralPosition = {
     latitude: 50.0618212,
     longitude: 19.938209
   },
-  zoom: 10
+  zoom: 13
 }
 
 export const SendEventBoundConstants = new Map<number, PositionBound>([

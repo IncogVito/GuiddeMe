@@ -27,6 +27,7 @@ import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component'
 import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
 import {CanDeactivateGame} from "./resolvers/can-deactivate/can-deactivate-game.service";
 import {RequiredTourPreviewDataLoadedGuard} from "./guards/required-tour-preview-data-loaded-guard.service";
+import {AgmCoreModule} from "@agm/core";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -94,7 +95,10 @@ export const tourGuideRoutes: Routes = [
     MatIconModule,
     SharedModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      libraries: ['places', 'drawing', 'geometry']
+    }),
   ]
 })
 export class TourGuideModule {

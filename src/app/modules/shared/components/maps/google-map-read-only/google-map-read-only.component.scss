@@ -1,11 +1,38 @@
 :host {
-  display: block;
-  height: 60vh;
   width: 100%;
+  position: relative;
 }
 
 agm-map {
-  height: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: block;
+  transition: var(--transition-default);
+}
+
+.map-toggle-icon {
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 1rem;
+  top: 1rem;
+  box-shadow: var(--box-shadow-secondary);
+  transition: var(--transition-default);
+  transition-duration: .2s;
+
+  &:active {
+    width: 2.5rem;
+    height: 2.5rem;
+    right: .75rem;
+    top: .75rem;
+    font-size: 1.9rem;
+  }
 }
 
 .pin-wrapper {

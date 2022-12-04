@@ -40,6 +40,8 @@ const tours: TourViewModel[] = [
     title: 'Smok wawelski',
     time: 120,
     imageUrl: '/assets/mapa.jpg',
+    mapImageUrl: '/assets/mapa.jpg',
+    previewImageUrl: '/assets/mapa.jpg',
     expanded: false,
     tourDetails: []
   },
@@ -48,6 +50,8 @@ const tours: TourViewModel[] = [
     title: 'Tajemnice zamku królewskiego',
     time: 180,
     imageUrl: '',
+    mapImageUrl: 'xxxxx',
+    previewImageUrl: 'xxxxx',
     expanded: false,
     tourDetails: []
   },
@@ -56,6 +60,8 @@ const tours: TourViewModel[] = [
     title: 'Kawiarniany szlak',
     time: 90,
     imageUrl: 'xxxxx',
+    mapImageUrl: 'xxxxx',
+    previewImageUrl: 'xxxxx',
     expanded: false,
     tourDetails: []
   },

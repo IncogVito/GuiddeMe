@@ -1,6 +1,10 @@
 <div class="game-stops">
-  <figure class="game-stops__map">
-  </figure>
+  <app-google-map-read-only
+    [defaultHeightVh]="30"
+    [expandedHeightVh]="60"
+    [mapPins]="mapPins"
+  >
+  </app-google-map-read-only>
 
   <app-task-list class="game-stops__list"
                  [taskNames]="stopNameList">

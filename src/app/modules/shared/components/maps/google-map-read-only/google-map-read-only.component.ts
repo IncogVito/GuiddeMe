@@ -14,13 +14,24 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   antiqueChosen = new EventEmitter<any>();
 
   @Output()
-  loadAntiqueEvent = new EventEmitter<MapCoordinates>();
+  toggleMapExpansionTriggered = new EventEmitter<void>();
 
   @Input()
   public mapPins: MapElement[] = [];
 
   @Input()
   public mapGeneralPosition: MapGeneralPosition = MAP_DEFAULT_GENERAL_POSITION;
+
+  @Input()
+  public defaultHeightVh: number = 30;
+
+  @Input()
+  public expandedHeightVh: number = 60;
+
+  @Input()
+  public expanded: boolean = false;
+
+  public mapHeightVh: number = 0;
 
   lat = MapConstants.lat;
   lng = MapConstants.lng;
@@ -49,6 +60,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.currentLongitude = this.lng;
     this.currentZoom = this.zoom;
     this.assignCurrentPositionToObject();
+    this.mapHeightVh = this.defaultHeightVh;
   }
 
   mouseOver(id: number) {
@@ -146,6 +158,17 @@ export class GoogleMapReadOnlyComponent implements OnInit {
       longitude: this.currentLongitude
     } as MapCoordinates;
 
-    this.loadAntiqueEvent.emit(mapPosition);
+  }
+
+  public toggleMapHeight() {
+    this.expanded = !this.expanded;
+    console.log('Toggleuje');
+    if (this.expanded) {
+      console.log('Expanded', this.expandedHeightVh);
+      this.mapHeightVh = this.expandedHeightVh;
+    } else {
+      console.log('NonExpanded', this.defaultHeightVh);
+      this.mapHeightVh = this.defaultHeightVh;
+    }
   }
 }

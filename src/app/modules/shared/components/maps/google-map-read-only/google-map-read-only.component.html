@@ -1,4 +1,8 @@
-<agm-map
+<mat-icon class="map-toggle-icon" (click)="toggleMapHeight()">
+  unfold_more
+</mat-icon>
+
+<agm-map [ngStyle]="{'height.vh': mapHeightVh}"
   [latitude]=mapGeneralPosition.position.latitude
   [longitude]=mapGeneralPosition.position.longitude
   [zoom]="mapGeneralPosition.zoom"

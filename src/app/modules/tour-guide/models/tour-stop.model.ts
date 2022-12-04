@@ -10,6 +10,8 @@ export interface TourStopModel {
   address: string;
   orderIndex: number;
   questionIds: string[];
+  coordinateLng: number;
+  coordinateLat: number;
 }
 
 export interface TourStopSearchParams extends EntitySearchParams {
