@@ -1,0 +1,21 @@
+<div class="single-tour">
+  <app-card-primary class="single-tour__card"
+                    [title]="title"
+                    [imageUrl]="mainUrlImage"
+                    [details]="singleDetails"
+  >
+
+  </app-card-primary>
+
+  <app-navbar-scroll [navigationList]="navigationList"
+                     class="single-tour__nav-scroll"
+  >
+
+  </app-navbar-scroll>
+
+  <app-footer-primary buttonLabel="Rozpocznij"
+                      [buttonFillFullSpace]="true"
+                      (btnClick)="startGame.emit()"
+  >
+  </app-footer-primary>
+</div>

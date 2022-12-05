@@ -1,11 +1,47 @@
 :root {
-  --main-color-primary: #af1c47;
+  --main-color-primary: #bd0062;
+  --main-color-primary-rgb: 189, 0, 98;
+  --main-color-primary--light: #feeff6;
+
+  --main-color-secondary: #d4ebfa;
+  --main-color-tertiary: #fbe2db;
+  --main-color-tertiary-rgb: 251, 226, 219;
+
+  --disabled-color-primary: #b4b4b4;
+  --disabled-color-primary--light: rgba(180, 180, 180, 0.2);
+
+  --font-color-primary: black;
+  --font-color-secondary: #6b6b6b;
+
   --main-color-primary-oposite: white;
+
+  --background-color: #f5ebd0;
 
   --border-primary-color: #e8e8e8;
   --border-radius-primary: .25rem;
+  --border-radius-secondary: 1rem;
 
 
-  --padding-content-default: .5rem;
+  --padding-content-default: .75rem;
+  --padding-page-default: 1.5rem .75rem;
 
+  --button-primary-border-radius: 2rem;
+  --transition-default: all ease-in-out .2s;
+  --transition-cubic-beazier-default: all cubic-bezier(0.7, -0.11, 0.28, 1.04) .4s;
+
+  --box-shadow-primary: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  --box-shadow-secondary: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  --missing-image-background-color: #d9d9d9;
+
+
+  --color-grey-1: #ebebeb;
+  --color-grey-2: #a8a8a8;
+  --color-grey-3: #848383;
+  --color-grey-darker-1: #282c1c;
+
+  --color-success: #39d50f;
+
+  --default-clip-path: polygon(0% 50%, 1% 10%, 4% 4%, 10% 1%, 50% 0%, 90% 1%, 96% 4%, 99% 10%, 100% 50%, 99% 90%, 96% 96%, 90% 99%, 50% 100%, 10% 99%, 4% 96%, 1% 90%);
+  --second-clip-path: polygon(50% 5%, 95% 15%, 100% 50%, 95% 85%, 50% 100%, 5% 85%, 0 50%, 5% 15%);
 }

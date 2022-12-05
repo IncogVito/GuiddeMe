@@ -1,0 +1,24 @@
+<div class="toggle"
+     guiddeMeSwipeRecognise
+     (swipedRight)="!toggled && doToggleAction()"
+     (swipedLeft)="toggled && doToggleAction()"
+>
+  <a class="toggle__active-background"
+          [class.toggle__active-background--toggled]="toggled"
+  >
+
+  </a>
+
+  <span class="toggle__item"
+        [class.toggle__item--active]="!toggled"
+        (click)="toggled && doToggleAction()"
+  >
+    {{leftLabel}}
+  </span>
+
+  <span class="toggle__item"
+        [class.toggle__item--active]="toggled"
+        (click)="!toggled && doToggleAction()">
+    {{rightLabel}}
+  </span>
+</div>

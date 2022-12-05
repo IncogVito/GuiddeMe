@@ -9,6 +9,9 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../.storybook/storybook-naming-convention";
 import {TileSecondaryComponent} from "./tile-secondary.component";
+import {ButtonSecondaryComponent} from "../button-secondary/button-secondary.component";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
+import {CardSingleDetailModel} from "../../models/card-single-detail.model";
 
 
 export default {
@@ -17,6 +20,7 @@ export default {
   excludeStories: /.*Data$/,
   decorators: [
     moduleMetadata({
+      declarations: [ButtonPrimaryComponent, ButtonSecondaryComponent],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -28,26 +32,64 @@ export default {
 } as Meta;
 
 export const actionsData = {
-  onExpand: action('onExpand')
+  onToggle: action('onToggle'),
+  buttonClicked: action('buttonClicked')
 };
 
 const Template: Story = args => ({
   props: {
     ...args,
-    onExpand: actionsData.onExpand
+    onToggle: actionsData.onToggle,
+    buttonClicked: actionsData.buttonClicked,
   },
 });
 
+const singleDetails: CardSingleDetailModel[] = [
+  {
+    icon: 'map',
+    text: '7 punktów',
+  }, {
+    icon: 'sports_esports',
+    text: 'Quiz dostępny',
+    colorStyle: 'orange'
+  }]
+
 export const Default = Template.bind({});
 Default.args = {
-  leftLabel: 'Category first',
-  rightLabel: '4h',
-  contentText: 'Good trip',
-  expanded: false
+  mainLabel: 'Category first',
+  topRightIcon: 'expand_less',
+  descriptionIcon: 'schedule',
+  descriptionText: '120 min',
+  buttonText: 'See more',
+  imageUrl: '/assets/mapa.jpg',
+  mapImageUrl: '/assets/mapa.jpg',
+  expanded: false,
+  details: singleDetails
 };
 
 export const Expanded = Template.bind({});
 Expanded.args = {
   ...Default.args,
-  expanded: true
+  expanded: true,
+  details: singleDetails
+};
+
+export const MissingImage = Template.bind({});
+MissingImage.args = {
+  ...Default.args,
+  expanded: true,
+  imageUrl: 'notExisting',
+  details: singleDetails
+};
+
+export const OverflowingText = Template.bind({});
+OverflowingText.args = {
+  ...Default.args,
+  mainLabel: 'Duis ornare metus vitae est euismod mattis. ' +
+    'Praesent vitae orci vitae augue lacinia feugiat. Pellentesque tellus ipsum,' +
+    ' lacinia in lorem ac',
+  expanded: true,
+  imageUrl: 'notExisting',
+  mapImageUrl: 'notExisting',
+  details: singleDetails
 };

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-tile-primary',
@@ -8,15 +8,34 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TilePrimaryComponent implements OnInit {
 
   @Input()
-  public text: string = '';
+  public buttonText: string = '';
 
   @Input()
-  public iconName: string = '';
+  public rightText: string = '';
+
+  @Input()
+  public imageUrl: string = '';
+
+  @Input()
+  public loadingInProgress: boolean = false;
+
+  @Output()
+  public buttonClicked = new EventEmitter<void>();
+
+  public backgroundStyle: any = {};
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.resolveBackgroundStyle();
   }
 
+  private resolveBackgroundStyle() {
+    if (this.imageUrl) {
+      this.backgroundStyle = {
+        'background-image': `url('${this.imageUrl}')`
+      }
+    }
+  }
 }

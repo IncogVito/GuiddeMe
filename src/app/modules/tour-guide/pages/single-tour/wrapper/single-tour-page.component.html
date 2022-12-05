@@ -1,0 +1,10 @@
+<ng-container *ngIf="tour">
+  <guidde-me-pure-single-tour
+    [title]="tour.title"
+    [mainUrlImage]="tour.mainImageUrl"
+    [singleDetails]="extractedTourDetails"
+    [navigationList]="tourInformationList"
+    (startGame)="startGame()"
+  >
+  </guidde-me-pure-single-tour>
+</ng-container>

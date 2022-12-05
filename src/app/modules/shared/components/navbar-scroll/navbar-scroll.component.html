@@ -1,0 +1,68 @@
+<div class="u-invisible navigation__blank"
+     appOffsetFixedActivity
+     sourcePosition="top"
+     (onChangedFixedActivity)="changeState($event)"
+     [additionalOffset]="-100"
+>
+  &nbsp;
+</div>
+
+
+<div class="navigation__wrapper"
+     [class.navigation__wrapper--fixed]="navigationFixed"
+>
+  <nav class="navigation"
+       [class.navigation--fixed]="navigationFixed"
+  >
+    <ul class="navigation__list"
+        [class.navigation__list--fixed]="navigationFixed"
+    >
+      <li class="navigation__item"
+          *ngFor="let navItem of navigationList;let index = index;"
+          [class.navigation__item--active]="activeIndex === index"
+          (click)="scrollInto(navItem)"
+      >
+        <a class="navigation__link">
+          {{navItem.navTitle}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="single-content" *ngFor="let navItem of navigationList; let index = index;"
+     [id]="navItem.mainTextTitle"
+     visible
+     sourcePosition="top"
+     [additionalOffset]="250"
+     [range]="120"
+     (onVisible)="changeActivity(index)"
+>
+
+  <h3 class="single-content__header">
+    {{navItem.mainTextTitle}}
+  </h3>
+
+  <div class="single-content__section" *ngFor="let singleContent of navItem.content">
+    <h5 *ngIf="singleContent.subtitle"
+        class="single-content__section-header header-tertiary"
+    >
+      {{singleContent.subtitle}}
+    </h5>
+
+    <img *ngIf="singleContent.imageUrl"
+         class="single-content__image"
+         [src]="singleContent.imageUrl"
+         [alt]=""
+    >
+    <!-- TODO - alt image-->
+
+    <p *ngIf="singleContent.text"
+       class="single-content__text"
+       [innerHTML]="singleContent.text"
+    >
+    </p>
+
+  </div>
+
+</div>

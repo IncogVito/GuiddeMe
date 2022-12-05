@@ -1,5 +1,8 @@
-<div class="mock-screen">
-  <h2>GuiddeMe</h2>
-  <h3>Development under progress</h3>
-  <span>Stay tuned!</span>
+<guidde-me-navbar-primary
+  (back)="goBack()"
+></guidde-me-navbar-primary>
+<guidde-me-svg-shape-primary></guidde-me-svg-shape-primary>
+
+<div [@routeAnimations]="getRouteAnimationData()">
+  <router-outlet></router-outlet>
 </div>

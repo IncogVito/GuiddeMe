@@ -34,5 +34,14 @@ const Template: Story = args => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  label: 'Button secondary'
+  label: 'Button secondary',
+  iconName: 'chevron_right',
+  disabled: false
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: 'Button secondary',
+  iconName: 'chevron_right',
+  disabled: true
 };

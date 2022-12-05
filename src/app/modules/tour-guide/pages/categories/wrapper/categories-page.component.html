@@ -1,0 +1,23 @@
+<section class="categories" id="category-section-id">
+  <label class="categories__label">
+    Kategorie
+  </label>
+
+
+  <ng-container *ngIf="categoriesState$ | async as categoriesState">
+
+    <app-pure-categories *ngIf="categoriesState.fetched; else loadingCategoriesTemplate"
+                         [categories]="categoriesState.categories"
+                         (chooseCategory)="chooseCategory($event)"
+    >
+
+    </app-pure-categories>
+  </ng-container>
+
+  <ng-template #loadingCategoriesTemplate>
+    <div *skeleton="true; repeat: 3;  height: '9rem'; width: '100%' ">
+
+    </div>
+  </ng-template>
+
+</section>

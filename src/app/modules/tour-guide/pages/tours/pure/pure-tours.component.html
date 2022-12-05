@@ -1,0 +1,18 @@
+<div class="tours-list">
+  <app-tile-secondary *ngFor="let singleTour of tours"
+                      class="tours__single-item"
+                      topRightIcon="expand_more"
+                      descriptionIcon="schedule"
+                      buttonText="Zobacz"
+                      (onToggle)="toggleTour(singleTour)"
+                      (buttonClicked)="chooseTour.emit(singleTour.id)"
+                      [mainLabel]="singleTour.title"
+                      [descriptionText]="singleTour.time + ' minut'"
+                      [imageUrl]="singleTour.previewImageUrl"
+                      [mapImageUrl]="singleTour.mapImageUrl"
+                      [expanded]="singleTour.expanded"
+                      [details]="singleTour.tourDetails"
+  >
+    <!-- TODO directive for converting inflections -->
+  </app-tile-secondary>
+</div>

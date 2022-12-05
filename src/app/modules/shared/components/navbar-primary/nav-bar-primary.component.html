@@ -1,0 +1,21 @@
+<nav class="navbar-primary">
+  <div class="navbar-primary__back-icon-wrapper"
+       [class.navbar-primary__back-icon-wrapper--hide]="hideGoBack || hideGoBackByExpandedMenu"
+  >
+    <mat-icon class="navbar-primary__back-icon material-icons-outlined"
+              (click)="!hideGoBack && !hideGoBackByExpandedMenu && backIconClicked()"
+              appAddStyleClassOnAction
+              actionType="click"
+              classOnActionName="navbar-primary__back-icon--clicked"
+              [removeTimeOutMs]="500"
+    >
+      arrow_back
+    </mat-icon>
+  </div>
+
+  <app-hamburger-menu class="navbar-primary__hamburger-menu-wrapper"
+                      (menuExpand)="changeGoBackVisibility($event)"
+                      (navigate)="navigateTo($event)"
+  >
+  </app-hamburger-menu>
+</nav>

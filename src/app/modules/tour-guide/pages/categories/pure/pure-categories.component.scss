@@ -1,0 +1,9 @@
+:host {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(9rem, max-content));
+  grid-row-gap: 1rem;
+}
+
+.single-category {
+  height: min-content;
+}

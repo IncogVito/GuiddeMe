@@ -1,3 +1,7 @@
 body {
   animation: all ease-in-out .3s;
 }
+
+body > * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

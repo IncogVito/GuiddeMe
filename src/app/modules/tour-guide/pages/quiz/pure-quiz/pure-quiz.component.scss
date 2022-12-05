@@ -1,0 +1,123 @@
+.quiz-page {
+  min-height: 80vh;
+  grid-template-rows: 1fr min-content 1fr 5rem;
+
+  &__image {
+    display: flex;
+    position: relative;
+
+    & mat-icon {
+      font-size: 5rem;
+      height: 5rem;
+      width: 5rem;
+      color: var(--main-color-primary);
+      margin: auto;
+      font-weight: 100;
+      z-index: 1;
+
+      filter: drop-shadow(4px 4px 1px rgba(var(--main-color-primary-rgb), .2));
+    }
+
+    &-pointer {
+      background-color: var(--main-color-secondary);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &--first {
+        width: .75rem;
+        height: .75rem;
+        animation: roundAroundOrbit1 7s linear infinite;
+      }
+
+      &--second {
+        width: 1.5rem;
+        height: 1.5rem;
+        animation: roundAroundOrbit2 6s linear infinite;
+      }
+
+      &--third {
+        width: .5rem;
+        height: .5rem;
+        animation: roundAroundOrbit1 5s linear infinite;
+      }
+    }
+  }
+
+  &__question {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  &__responses {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(3rem, max-content));
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: .5rem;
+    width: 100%;
+    margin: auto;
+    padding: 1rem 0;
+    box-sizing: border-box;
+  }
+
+  &__single-option {
+    border: 1px solid var(--color-grey-1);
+    color: var(--color-grey-darker-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    word-break: break-word;
+    padding: 0.25rem;
+    border-radius: .25rem;
+    transition: var(--transition-default);
+    min-height: 2.5rem;
+    text-align: center;
+
+    &--active {
+      font-weight: 500;
+      color: var(--main-color-primary);
+      border-color: var(--main-color-primary);
+    }
+  }
+
+  &__actions {
+    & app-button-primary {
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .quiz-page__quit {
+      width: max-content;
+      display: block;
+      font-weight: 500;
+      color: var(--main-color-primary);
+      cursor: pointer;
+      margin: .5rem auto auto;
+    }
+  }
+}
+
+
+@keyframes roundAroundOrbit1 {
+  from {
+    transform: rotate(0deg) translateX(3rem) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(3rem) rotate(-360deg);
+  }
+}
+
+@keyframes roundAroundOrbit2 {
+  from {
+    transform: rotate(120deg) translateX(3rem) rotate(120deg);
+  }
+
+  to {
+    transform: rotate(480deg) translateX(3rem) rotate(-480deg);
+  }
+}

@@ -1,0 +1,23 @@
+.game-stops {
+
+  &__map {
+    background-image: url("/assets/mapa.jpg");
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 30vh;
+  }
+
+  &__quiz-trigger {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    color: var(--main-color-primary);
+    font-weight: 500;
+  }
+}

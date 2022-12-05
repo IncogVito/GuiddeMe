@@ -1,0 +1,12 @@
+.categories {
+  min-height: 100vh;
+  grid-row-gap: 1rem;
+  padding: 1rem;
+
+  &__label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}

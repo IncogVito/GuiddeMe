@@ -1,0 +1,20 @@
+<div class="game-stops">
+  <app-google-map-read-only
+    [defaultHeightVh]="30"
+    [expandedHeightVh]="60"
+    [mapPins]="mapPins"
+  >
+  </app-google-map-read-only>
+
+  <app-task-list class="game-stops__list"
+                 [taskNames]="stopNameList">
+  </app-task-list>
+
+  <ng-container *ngIf="quizAvailable">
+    <div class="game-stops__quiz-trigger">
+      <span (click)="toggleQuizState.emit(!quizEnabled)">
+        {{quizEnabled ? 'Wyłącz quiz' : 'Włącz quiz'}}
+      </span>
+    </div>
+  </ng-container>
+</div>

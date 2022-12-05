@@ -4,11 +4,46 @@
   outline: none;
   border: 1px solid var(--main-color-primary);
   min-width: 7rem;
-  padding: var(--padding-content-default);
-  border-radius: var(--border-radius-primary);
+  border-radius: .75rem;
   cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-default);
+  padding: .5rem .75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 2.8rem;
+  font-size: 1.1rem;
 
-  &:active {
-    filter: brightness(1.15);
+  &--reversed-color {
+    background-color: var(--main-color-primary-oposite);
+    color: var(--main-color-primary);
+  }
+
+  &--disabled {
+    background-color: var(--main-color-primary-oposite);
+    color: var(--color-grey-2);
+    border-color: var(--color-grey-2);
+    cursor: default;
+  }
+
+  width: 100%;
+
+  &:not(&--disabled):active {
+    transform: scale(1.03);
+  }
+
+  &__icon {
+    position: absolute;
+    right: .5rem;
+  }
+
+  &__label {
+    margin: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
   }
 }

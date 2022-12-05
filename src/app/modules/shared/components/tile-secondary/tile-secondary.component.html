@@ -1,20 +1,63 @@
 <div class="tile-secondary"
      [class.tile-secondary--expanded]="expanded"
-     (click)="onToggle()"
+     (click)=" expanded = !expanded"
 >
-  <span class="tile-secondary__left-label">
-    {{leftLabel}}
+  <span class="tile-secondary__main-label">
+    {{mainLabel}}
   </span>
 
-  <span class="tile-secondary__right-label">
-    {{rightLabel}}
-  </span>
+  <img class="tile-secondary__main-image"
+       [src]="imageUrl"
+       alt="Main image"
+  />
 
-  <div class="tile-secondary__expanded-elem">
-    <span>MAP</span>
+  <mat-icon class="tile-secondary__right-icon">
+    {{topRightIcon}}
+  </mat-icon>
+
+  <div class="tile-secondary__description">
+    <mat-icon class="tile-secondary__description-icon" *ngIf="descriptionIcon">
+      {{descriptionIcon}}
+    </mat-icon>
+
+    <span class="tile-secondary__description-text">
+      {{descriptionText}}
+    </span>
   </div>
 
-  <p class="tile-secondary__content-text">
-    {{contentText}}
-  </p>
+  <div class="tile-secondary__expanded-elem">
+    <figure *ngIf="mapImageUrl"
+            class="tile-secondary__image"
+            [ngStyle]="{'background-image': 'url('+mapImageUrl+')'}"
+            [class.tile-secondary__missing-image]="missingImage"
+            (error)="handleMissingImage()"
+    >
+      &nbsp;
+    </figure>
+
+    <div class="tile-secondary__extra-details">
+      <div class="tile-secondary__single-extra-detail"
+           *ngFor="let singleDetail of details;let odd = odd"
+           [class.tile-secondary__single-extra-detail--highlighted]="singleDetail.colorStyle"
+           [class.tile-secondary__single-extra-detail--second]="odd"
+           [ngStyle]="{color: singleDetail.colorStyle}"
+      >
+        <mat-icon *ngIf="singleDetail.icon">
+          {{singleDetail.icon}}
+        </mat-icon>
+
+        <span>
+      {{singleDetail.text}}
+    </span>
+      </div>
+    </div>
+
+    <app-button-primary class="tile-secondary__button"
+                        [label]="buttonText"
+                        iconName="chevron_right"
+                        (click)="expanded && clickButton($event)"
+    >
+
+    </app-button-primary>
+  </div>
 </div>

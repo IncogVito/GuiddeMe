@@ -1,0 +1,38 @@
+<div class="carousel__wrapper">
+  <div class="carousel">
+
+    <div class="carousel__clickable" guiddeMeSwipeRecognise
+         (swipedLeft)="nextElementWithCheck()"
+         (swipedRight)="previousElementWithCheck()"
+         [minOffset]="20"
+    >
+      <span (click)="previousElementWithCheck()">
+        &nbsp;
+      </span>
+      <span (click)="nextElementWithCheck()">
+        &nbsp;
+      </span>
+    </div>
+    <ng-container *ngFor="let element of carouselElements">
+      <img *ngIf="element.visible"
+           [src]="element.url"
+           alt="image"
+           class="carousel__item"
+           [class.carousel__item--first]="element.displayIndex === 0"
+           [class.carousel__item--second]="element.displayIndex === 1"
+           [class.carousel__item--third]="element.displayIndex === 2"
+           (click)="swipeElement(element)"
+      >
+    </ng-container>
+  </div>
+
+  <div class="carousel__counter">
+    <span class="carousel__counter-item"
+          *ngFor="let item of carouselElements"
+          [class.carousel__counter-item--active]="item.displayIndex === 1"
+    >
+      &nbsp;
+    </span>
+  </div>
+
+</div>

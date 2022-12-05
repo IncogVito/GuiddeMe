@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button-primary',
@@ -10,6 +10,18 @@ export class ButtonPrimaryComponent implements OnInit {
   @Input()
   public label = '';
 
+  @Input()
+  public iconName = '';
+
+  @Input()
+  public reversedColor: boolean = false;
+
+  @Input()
+  public disabled: boolean = false;
+
+  @Output()
+  public btnClick = new EventEmitter();
+
   constructor() {
   }
 
@@ -17,6 +29,6 @@ export class ButtonPrimaryComponent implements OnInit {
   }
 
   buttonClicked() {
-
+    this.btnClick.emit();
   }
 }

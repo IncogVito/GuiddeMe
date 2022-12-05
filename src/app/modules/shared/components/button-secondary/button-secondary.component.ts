@@ -10,6 +10,12 @@ export class ButtonSecondaryComponent implements OnInit {
   @Input()
   public label = '';
 
+  @Input()
+  public iconName = '';
+
+  @Input()
+  public disabled: boolean = false;
+
   constructor() {
   }
 

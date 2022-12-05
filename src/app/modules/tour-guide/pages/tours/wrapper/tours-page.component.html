@@ -1,0 +1,41 @@
+<section class="tours">
+
+  <div class="tours__background-photo-wrapper">
+    <figure class="tours__background-photo"
+            [ngStyle]="backgroundImageStyle"
+    >
+
+    </figure>
+  </div>
+
+  <ng-container *ngIf="toursState$ | async as tourState">
+
+    <ng-container *ngIf="tourState.fetched; else loadingToursTemplate">
+      <h2 class="header-secondary tours__header">
+        {{tourState.categoryName}}
+      </h2>
+
+      <app-pure-tours [tours]="tourState.toursViewModel"
+                      (chooseTour)="navigateToTour($event)"
+      >
+      </app-pure-tours>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #loadingToursTemplate>
+    <div *skeleton="true; repeat: 3;  height: '6rem'; width: '100%' ">
+    </div>
+  </ng-template>
+</section>
+
+<svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+     version="1.1">
+  <defs>
+    <filter id="roundCorners">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="roundCorners"/>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </defs>
+</svg>

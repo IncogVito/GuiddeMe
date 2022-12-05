@@ -1,0 +1,23 @@
+<div class="card-primary">
+  <div class="card-primary__image">
+  </div>
+
+  <span class="card-primary__title">
+      {{title}}
+    </span>
+
+  <div class="card-primary__single-detail"
+       [class.card-primary__single-detail--highlighted]="singleDetail.colorStyle"
+       [ngStyle]="{color: singleDetail.colorStyle}"
+       *ngFor="let singleDetail of details"
+  >
+    <mat-icon *ngIf="singleDetail.icon">
+      {{singleDetail.icon}}
+    </mat-icon>
+
+    <span>
+      {{singleDetail.text}}
+    </span>
+  </div>
+
+</div>

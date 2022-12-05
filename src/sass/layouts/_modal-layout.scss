@@ -1,0 +1,67 @@
+
+.modal {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  padding: .5rem;
+  box-sizing: border-box;
+  max-height: 90vh;
+
+  &--big-content {
+    grid-template-rows: 8% 84% 8%;
+  }
+
+  &--one-row {
+    display: block;
+    overflow: auto;
+  }
+
+  &__header {
+    position: relative;
+  }
+
+  &__header &__exit-button {
+    right: 0;
+    top: 0;
+    position: absolute;
+  }
+
+  &__body {
+
+  }
+
+  &__footer {
+
+    &--right-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    &--middle-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    &--left-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+
+    & > button:not(:last-child) {
+      margin-right: .25rem;
+    }
+  }
+
+  &--no-footer {
+    grid-template-rows: 15% 85%;
+  }
+}
+
+mat-dialog-container.mat-dialog-container {
+  padding: .5rem;
+  border-radius: 1rem;
+}

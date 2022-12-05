@@ -14,7 +14,7 @@ const firebaseConfig = {
   authDomain: "guidde-me.firebaseapp.com",
   projectId: "guidde-me",
   storageBucket: "guidde-me.appspot.com",
-  messagingSenderId: "*****",
+  messagingSenderId: "496956095874",
   appId: "*****"
 };
 

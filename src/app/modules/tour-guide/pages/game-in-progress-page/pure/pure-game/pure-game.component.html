@@ -1,0 +1,46 @@
+<div class="game-page" *ngIf="gameModel">
+  <app-toggle-primary class="game-page__toggle"
+                      leftLabel="Trasa"
+                      rightLabel="Miejsce"
+                      [toggled]="currentStopVisible"
+                      (toggle)="currentStopVisible = !currentStopVisible"
+
+  >
+  </app-toggle-primary>
+
+  <div class="game-page__body">
+    <guidde-me-pure-game-stop-list class="game-page__list"
+                                   [stopList]="stopsList"
+                                   [quizAvailable]="gameModel.quizAvailable"
+                                   [quizEnabled]="gameModel.quizEnabled"
+                                   [class.game-page__list--active]="!currentStopVisible"
+                                   (toggleQuizState)="toggleQuizState.emit($event)"
+    >
+    </guidde-me-pure-game-stop-list>
+
+    <guidde-me-pure-game-current-stop class="game-page__current-stop"
+                                      [tourStop]="currentStop"
+                                      [class.game-page__current-stop--active]="currentStopVisible"
+
+    >
+    </guidde-me-pure-game-current-stop>
+  </div>
+
+  <app-footer-primary *ngIf="nextStop; else lastStopFooter"
+                      additionalLabel="Następny przystanek"
+                      [mainLabel]="nextStop.name"
+                      buttonLabel="Przejdź dalej"
+                      class="u-mt-2"
+                      (btnClick)="emitDoNextStepAction()"
+  >
+  </app-footer-primary>
+
+  <ng-template #lastStopFooter>
+    <app-footer-primary mainLabel="Meta"
+                        buttonLabel="Zakończ!"
+                        (btnClick)="emitDoNextStepAction()"
+    >
+    </app-footer-primary>
+  </ng-template>
+
+</div>
