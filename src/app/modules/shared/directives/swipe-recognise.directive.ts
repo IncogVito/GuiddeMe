@@ -25,7 +25,6 @@ export class SwipeRecogniseDirective implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log('Działam');
     this.disposeTouchStart = this.renderer.listen(this.elementRef.nativeElement, 'touchstart', e => {
       this.touchstartX = e.changedTouches[0].screenX
     });

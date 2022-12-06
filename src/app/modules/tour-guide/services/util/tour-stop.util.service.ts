@@ -10,14 +10,40 @@ export class TourStopUtilService {
       .map(singleTour => singleTour.name);
   }
 
-  static extractMapPins(stopList: TourStopModel[]): MapElement[] {
+  static extractMapPins(stopList: TourStopModel[], activeIndex?: number): MapElement[] {
+    const defaultIndex = NumberUtilService.convertToNumber(activeIndex, -1);
+
     return ArrayUtilService.emptyIfNull(stopList)
-      .map(singleTour => {
+      .slice()
+      .map((singleTour, index) => {
         return {
           latitude: NumberUtilService.convertToNumber(singleTour.coordinateLat),
           longitude: NumberUtilService.convertToNumber(singleTour.coordinateLng),
-          index: singleTour.orderIndex
+          index: singleTour.orderIndex,
+          highlighted: index === activeIndex,
+          inactive: index < defaultIndex
         }
-      });
+      })
+      .map(elem => {
+        console.log(elem.index === (defaultIndex + 1));
+        return elem;
+      })
+      .sort((a1, a2) => a1.index === (defaultIndex + 1) ? 1 : -1);
+  }
+
+  static extractRoutePins(stopList: TourStopModel[], previousIndex: number, nextIndex: number): [MapElement, MapElement] {
+    const previousStop = stopList[previousIndex];
+    const nextStop = stopList[nextIndex];
+
+    return [{
+      latitude: previousStop.coordinateLat,
+      longitude: previousStop.coordinateLng,
+      index: previousStop.orderIndex
+    }, {
+      latitude: nextStop.coordinateLat,
+      longitude: nextStop.coordinateLng,
+      index: nextStop.orderIndex
+    }
+    ]
   }
 }

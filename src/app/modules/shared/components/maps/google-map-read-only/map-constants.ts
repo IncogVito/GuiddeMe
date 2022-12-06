@@ -14,6 +14,11 @@ export const MAP_DEFAULT_GENERAL_POSITION: MapGeneralPosition = {
   zoom: 13
 }
 
+export const mapTempDirectionOrigin = {
+  lat: 50.0618212,
+  lng: 19.938209
+}
+
 export const SendEventBoundConstants = new Map<number, PositionBound>([
   [15, {latBound: 0.0052, lngBound: 0.012}],
   [16, {latBound: 0.0018, lngBound: 0.008}],

@@ -33,6 +33,7 @@
     "@ngxs/logger-plugin": "^3.7.5",
     "@ngxs/router-plugin": "^3.7.5",
     "@ngxs/store": "^3.7.5",
+    "agm-direction": "^0.8.10",
     "firebase": "^9.12.1",
     "firebase-tools": "^11.10.0",
     "rxjs": "~7.5.0",

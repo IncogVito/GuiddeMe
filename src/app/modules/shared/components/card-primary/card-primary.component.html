@@ -1,5 +1,7 @@
 <div class="card-primary">
-  <div class="card-primary__image">
+  <div class="card-primary__image"
+       [ngStyle]="imageUrl ? {'background-image': 'url('+imageUrl+')'} : {}"
+  >
   </div>
 
   <span class="card-primary__title">

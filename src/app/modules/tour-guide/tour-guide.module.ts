@@ -28,6 +28,7 @@ import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component'
 import {CanDeactivateGame} from "./resolvers/can-deactivate/can-deactivate-game.service";
 import {RequiredTourPreviewDataLoadedGuard} from "./guards/required-tour-preview-data-loaded-guard.service";
 import {AgmCoreModule} from "@agm/core";
+import {environment} from "../../../environments/environment";
 
 export const tourGuideRoutes: Routes = [
   {
@@ -97,7 +98,8 @@ export const tourGuideRoutes: Routes = [
     MatRadioModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      libraries: ['places', 'drawing', 'geometry']
+      apiKey: environment.googleMapsApiKey,
+      libraries: []
     }),
   ]
 })
