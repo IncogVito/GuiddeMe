@@ -30,6 +30,7 @@ import {SwipeRecogniseDirective} from './directives/swipe-recognise.directive';
 import {GoogleMapReadOnlyComponent} from "./components/maps/google-map-read-only/google-map-read-only.component";
 import {AgmOverlays} from "agm-overlays";
 import {AgmCoreModule} from "@agm/core";
+import {AgmDirectionModule} from "agm-direction";
 
 
 @NgModule({
@@ -82,7 +83,12 @@ import {AgmCoreModule} from "@agm/core";
     MatDialogModule,
     RouterLinkWithHref,
     AgmOverlays,
-    AgmCoreModule
+    AgmCoreModule,
+    AgmDirectionModule,
+    AgmDirectionModule,
+    AgmDirectionModule,
+    AgmDirectionModule,
+    AgmDirectionModule
   ]
 })
 export class SharedModule {

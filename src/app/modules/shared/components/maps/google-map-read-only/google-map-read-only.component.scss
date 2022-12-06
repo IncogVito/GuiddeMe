@@ -15,6 +15,7 @@ agm-map {
   height: min-content;
   border-radius: 1.5rem;
   position: relative;
+  overflow: hidden;
 }
 
 .map-toggle-icon {
@@ -92,7 +93,8 @@ agm-map {
   height: 5vh;
   border-radius: 50% 50% 50% 0;
   position: absolute;
-  background: var(--main-color-primary);
+  background: var(--main-color-tertiary);
+  border: 1px solid var(--color-grey-2);
   left: 50%;
   top: 50%;
   margin: -3.33vh 0 0 -1.5vh;
@@ -104,6 +106,22 @@ agm-map {
 
   z-index: 1;
 
+  &--highlighted {
+    width: 6.5vh;
+    height: 6.5vh;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    background: var(--main-color-primary);
+    left: 50%;
+    top: 50%;
+    margin: -3.33vh 0 0 -1.5vh;
+    border-color: transparent;
+  }
+
+  &--faded {
+    filter: grayscale(100%)
+  }
+
   img {
     content: '';
     width: 4vh;
@@ -114,8 +132,13 @@ agm-map {
     background-size: cover;
     position: absolute;
     border-radius: 50%;
-
     z-index: 2;
+  }
+
+  &--highlighted img {
+    width: 5.5vh;
+    height: 5.5vh;
+    margin: 0.45vh 0 0 0.45vh;
   }
 
   span {
@@ -137,35 +160,6 @@ agm-map {
     border-radius: 50%;
 
     transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-
-  &:hover {
-    width: 9vh;
-    height: 9vh;
-
-    margin-top: -8vh;
-    margin-left: -3.5vh;
-
-    transition: all ease-in-out .2s;
-
-    z-index: 3;
-
-    img {
-      width: 8vh;
-      height: 8vh;
-
-      transition: all ease-in-out .2s;
-
-      z-index: 4;
-    }
-
-    &:after {
-      width: 8vh;
-      height: 8vh;
-
-      transition: all ease-in-out .2s;
-    }
   }
 
   &:after {

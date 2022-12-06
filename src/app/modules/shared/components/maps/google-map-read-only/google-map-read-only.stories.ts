@@ -10,6 +10,7 @@ import {GoogleMapReadOnlyComponent} from "./google-map-read-only.component";
 import {AgmCoreModule} from "@agm/core";
 import {AgmOverlays} from "agm-overlays";
 import {MapElement, MapGeneralPosition} from "../../../models/map.model";
+import {AgmDirection, AgmDirectionModule} from "agm-direction";
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
         AgmCoreModule.forRoot({
           libraries: ['places', 'drawing', 'geometry']
         }),
-        AgmOverlays
+        AgmOverlays,
+        AgmDirectionModule
       ],
     }),
   ],

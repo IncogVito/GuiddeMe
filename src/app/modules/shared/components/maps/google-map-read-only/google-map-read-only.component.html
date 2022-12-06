@@ -8,32 +8,41 @@
            [longitude]=mapGeneralPosition.position.longitude
            [zoom]="mapGeneralPosition.zoom"
            [styles]="styles"
+           [clickableIcons]="false"
            (zoomChange)="zoomChanged($event)"
            (centerChange)="mapDragged($event)"
            (mapReady)="onMapReady()"
   >
 
-    <agm-overlay *ngFor="let singlePing of mapPins"
-                 [latitude]="singlePing.latitude"
-                 [longitude]="singlePing.longitude"
+    <agm-overlay *ngFor="let singlePin of mapPins"
+                 [latitude]="singlePin.latitude"
+                 [longitude]="singlePin.longitude"
     >
       <div class="pin-wrapper">
         <div class='pin'
-             (mouseenter)="mouseOver(singlePing.index)"
-             (mouseleave)="leave(singlePing.index)"
-             [ngClass]=""
+             [class.pin--highlighted]="singlePin.highlighted"
+             [class.pin--faded]="singlePin.inactive"
         >
           <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-          <span>{{singlePing.index}}</span>
+          <span>{{singlePin.index}}</span>
         </div>
-        <div id="pulse-{{singlePing.index}}" class='pulse'></div>
+        <div id="pulse-{{singlePin.index}}" class='pulse'></div>
 
-        <div id="pin-{{singlePing.index}}" class="pin-label-box">
+        <div id="pin-{{singlePin.index}}" class="pin-label-box">
           <label class="pin-label">{{'Nazwa'}}</label>
           <label class="pin-label pin-label--details">Kliknij, aby zobaczyć szczegóły</label>
         </div>
       </div>
     </agm-overlay>
+
+    <agm-direction *ngIf="convertedDirOrigin && convertedDirDestination"
+                   [origin]="convertedDirOrigin"
+                   [destination]="convertedDirDestination"
+                   [renderOptions]="directionRenderOptions"
+                   [travelMode]="travelMode"
+    >
+
+    </agm-direction>
 
     <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->
     <!--  >-->

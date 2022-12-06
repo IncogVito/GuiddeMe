@@ -12,4 +12,7 @@ export interface MapElement {
   latitude: number;
   longitude: number;
   index: number;
+
+  highlighted?: boolean;
+  inactive?: boolean;
 }

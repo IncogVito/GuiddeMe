@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
-import {MapElement, MapCoordinates, MapGeneralPosition} from "../../../models/map.model";
+import {MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
 
 @Component({
   selector: 'app-google-map-read-only',
@@ -9,9 +9,6 @@ import {MapElement, MapCoordinates, MapGeneralPosition} from "../../../models/ma
   styleUrls: ['./google-map-read-only.component.scss']
 })
 export class GoogleMapReadOnlyComponent implements OnInit {
-
-  @Output()
-  antiqueChosen = new EventEmitter<any>();
 
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
@@ -32,6 +29,18 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public expanded: boolean = false;
 
   public mapHeightVh: number = 0;
+  public travelMode = 'WALKING' as any;
+
+  public directionOrigin: MapElement | undefined;
+  public directionDestination: MapElement | undefined;
+
+  public convertedDirOrigin: { lat: number, lng: number } | undefined;
+  public convertedDirDestination: { lat: number, lng: number } | undefined;
+
+  public directionRenderOptions = {
+    polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
+    suppressMarkers: true
+  };
 
   lat = MapConstants.lat;
   lng = MapConstants.lng;
@@ -56,11 +65,11 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentLatitude = this.lat;
-    this.currentLongitude = this.lng;
     this.currentZoom = this.zoom;
     this.assignCurrentPositionToObject();
     this.mapHeightVh = this.defaultHeightVh;
+
+    this.convertDirections();
   }
 
   mouseOver(id: number) {
@@ -81,8 +90,6 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
     this.removeCurrentMarker();
     this.addNewCurrentMarker(antique.antiqueId);
-
-    this.antiqueChosen.emit(antique);
   }
 
   zoomChanged(zoom: number) {
@@ -162,13 +169,32 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
   public toggleMapHeight() {
     this.expanded = !this.expanded;
-    console.log('Toggleuje');
     if (this.expanded) {
-      console.log('Expanded', this.expandedHeightVh);
       this.mapHeightVh = this.expandedHeightVh;
     } else {
-      console.log('NonExpanded', this.defaultHeightVh);
       this.mapHeightVh = this.defaultHeightVh;
+    }
+  }
+
+  public renderNextRoute(origin: MapElement, destination: MapElement) {
+    this.directionOrigin = origin;
+    this.directionDestination = destination;
+    this.convertDirections();
+  }
+
+  private convertDirections() {
+    if (this.directionDestination && this.directionOrigin) {
+      this.convertedDirDestination = {
+        lat: this.directionDestination.latitude,
+        lng: this.directionDestination.longitude
+      }
+      this.convertedDirOrigin = {
+        lat: this.directionOrigin.latitude,
+        lng: this.directionOrigin.longitude
+      }
+
+      console.log(this.convertedDirDestination);
+      console.log(this.convertedDirOrigin);
     }
   }
 }
