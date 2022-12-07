@@ -18,8 +18,6 @@ export class RequiredTourPreviewDataLoadedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    this.toursState.toursState$.pipe(take(1))
-      .subscribe(val => console.log(val));
 
     return this.toursState.toursState$
       .pipe(
