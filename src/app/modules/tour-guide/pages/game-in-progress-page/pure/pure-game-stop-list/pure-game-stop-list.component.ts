@@ -57,7 +57,6 @@ export class PureGameStopListComponent implements OnInit {
 
   private extractMapPins() {
     this.mapPins = TourStopUtilService.extractMapPins(this.stopList, this.currentActiveIndex);
-    console.log(this.mapPins);
   }
 
   private renderNextRoute() {

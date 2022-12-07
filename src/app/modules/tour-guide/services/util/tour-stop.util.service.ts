@@ -25,7 +25,6 @@ export class TourStopUtilService {
         }
       })
       .map(elem => {
-        console.log(elem.index === (defaultIndex + 1));
         return elem;
       })
       .sort((a1, a2) => a1.index === (defaultIndex + 1) ? 1 : -1);

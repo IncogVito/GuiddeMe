@@ -1,5 +1,9 @@
 <div class="map-wrapper">
-  <mat-icon class="map-toggle-icon" (click)="toggleMapHeight()">
+  <mat-icon class="map-icon map-change-center-icon" (click)="toggleMapCenter()">
+    {{centralisedOnCurrentPosition ? 'location_on' : 'my_location'}}
+  </mat-icon>
+
+  <mat-icon class="map-icon map-toggle-icon" (click)="toggleMapHeight()">
     unfold_more
   </mat-icon>
 
@@ -12,6 +16,7 @@
            (zoomChange)="zoomChanged($event)"
            (centerChange)="mapDragged($event)"
            (mapReady)="onMapReady()"
+           [usePanning]="true"
   >
 
     <agm-overlay *ngFor="let singlePin of mapPins"
@@ -28,10 +33,20 @@
         </div>
         <div id="pulse-{{singlePin.index}}" class='pulse'></div>
 
-        <div id="pin-{{singlePin.index}}" class="pin-label-box">
-          <label class="pin-label">{{'Nazwa'}}</label>
-          <label class="pin-label pin-label--details">Kliknij, aby zobaczyć szczegóły</label>
-        </div>
+      </div>
+    </agm-overlay>
+
+    <agm-overlay *ngIf="currentLivePosition"
+                 [latitude]="currentLivePosition.latitude"
+                 [longitude]="currentLivePosition.longitude"
+    >
+      <div class="live-location-pin-wrapper">
+        <span class="live-location-pin">
+          &nbsp;
+        </span>
+        <span class="live-location-pin__middle">
+          &nbsp;
+        </span>
       </div>
     </agm-overlay>
 
@@ -42,6 +57,14 @@
                    [travelMode]="travelMode"
     >
 
+      <div class="pin-wrapper">
+        <div class='pin'
+        >
+          <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
+          <span>{{0}}</span>
+        </div>
+
+      </div>
     </agm-direction>
 
     <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->

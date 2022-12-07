@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
 import {MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
+import {AgmMap} from "@agm/core";
+import {NumberUtilService} from "../../../services/utils/number-util.service";
+import {ArrayUtilService} from "../../../services/utils/array-util.service";
 
 @Component({
   selector: 'app-google-map-read-only',
@@ -9,6 +12,9 @@ import {MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/ma
   styleUrls: ['./google-map-read-only.component.scss']
 })
 export class GoogleMapReadOnlyComponent implements OnInit {
+
+  @ViewChild(AgmMap)
+  public agmMap!: AgmMap
 
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
@@ -28,11 +34,17 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   @Input()
   public expanded: boolean = false;
 
+  @Input()
+  public liveLocationEnabled: boolean = false;
+
   public mapHeightVh: number = 0;
   public travelMode = 'WALKING' as any;
 
   public directionOrigin: MapElement | undefined;
   public directionDestination: MapElement | undefined;
+
+  public currentLivePosition: MapElement | undefined;
+  public centralisedOnCurrentPosition: boolean = false;
 
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
   public convertedDirDestination: { lat: number, lng: number } | undefined;
@@ -70,6 +82,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.mapHeightVh = this.defaultHeightVh;
 
     this.convertDirections();
+    this.subscribeLiveLocation();
   }
 
   mouseOver(id: number) {
@@ -167,6 +180,30 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
   }
 
+  private subscribeLiveLocation() {
+    if (navigator.geolocation && this.liveLocationEnabled) {
+      navigator.geolocation.watchPosition(
+        (position: GeolocationPosition) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          this.currentLivePosition = {
+            latitude: pos.lat,
+            longitude: pos.lng,
+            index: 0
+          }
+        },
+        () => {
+          // handleLocationError(true, infoWindow, map.getCenter()!);
+        }
+      )
+    } else {
+      console.log("NO NAV");
+    }
+  }
+
   public toggleMapHeight() {
     this.expanded = !this.expanded;
     if (this.expanded) {
@@ -192,9 +229,26 @@ export class GoogleMapReadOnlyComponent implements OnInit {
         lat: this.directionOrigin.latitude,
         lng: this.directionOrigin.longitude
       }
+    }
+  }
 
-      console.log(this.convertedDirDestination);
-      console.log(this.convertedDirOrigin);
+  toggleMapCenter() {
+    this.centralisedOnCurrentPosition = !this.centralisedOnCurrentPosition;
+
+    if (this.currentLivePosition && this.centralisedOnCurrentPosition) {
+      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(this.currentLivePosition?.latitude) + (0.0000000000100 * Math.random());
+      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(this.currentLivePosition?.longitude) + (0.0000000000100 * Math.random());
+    }
+
+    if (!this.centralisedOnCurrentPosition) {
+      const activeMapElement = this.mapPins.filter(singlePin => singlePin.highlighted);
+
+      if (ArrayUtilService.isEmpty(activeMapElement)) {
+        return;
+      }
+      const singleActiveMapElement = ArrayUtilService.getFirstRequired(activeMapElement);
+      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(singleActiveMapElement.latitude) + (0.0000000000100 * Math.random());
+      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(singleActiveMapElement.longitude) + (0.0000000000100 * Math.random());
     }
   }
 }
