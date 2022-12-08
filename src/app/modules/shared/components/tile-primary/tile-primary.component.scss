@@ -1,7 +1,7 @@
 .tile-category-primary {
   display: grid;
   grid-template-columns: 1fr max-content;
-  grid-template-rows: 1fr 3.5rem;
+  grid-template-rows: 1fr 3rem;
 
   border-radius: 2rem;
   padding: var(--padding-content-default);
@@ -52,7 +52,7 @@
   }
 
   &__round-wrapper-button {
-    grid-row: 3;
+    grid-row: 2;
     grid-column: 1 / end;
     margin: 0 1rem;
     display: flex;
@@ -68,5 +68,6 @@
     border: none;
     border-radius: 2rem;
     width: 80%;
+    clip-path: url(#shapeMaskPrimaryLabel);
   }
 }
