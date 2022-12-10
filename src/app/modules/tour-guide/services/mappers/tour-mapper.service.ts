@@ -1,6 +1,7 @@
 import {TourModel, TourViewModel} from "../../models/tour.model";
 import {ArrayUtilService} from "../../../shared/services/utils/array-util.service";
 import {CardSingleDetailModel} from "../../../shared/models/card-single-detail.model";
+import {TourStopUtilService} from "../util/tour-stop.util.service";
 
 
 export class TourMapperService {
@@ -17,7 +18,8 @@ export class TourMapperService {
       previewImageUrl: tourModel.previewImageUrl,
       time: tourModel.time,
       title: tourModel.title,
-      tourDetails: this.mapTourDetails(tourModel)
+      tourDetails: this.mapTourDetails(tourModel),
+      tourStops: TourStopUtilService.convertCoordinatesToMapPins(tourModel.tourStopsCoordinates)
     }
   }
 

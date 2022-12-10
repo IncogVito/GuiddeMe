@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CardSingleDetailModel} from "../../models/card-single-detail.model";
+import {MapElement} from "../../models/map.model";
 
 @Component({
   selector: 'app-tile-secondary',
@@ -37,6 +38,12 @@ export class TileSecondaryComponent implements OnInit {
 
   @Input()
   public mapImageUrl: string = '';
+
+  @Input()
+  public displayAgmMap: boolean = false;
+
+  @Input()
+  public mapWayPoints: MapElement[] = [];
 
   @Input()
   public details: CardSingleDetailModel[] = [];

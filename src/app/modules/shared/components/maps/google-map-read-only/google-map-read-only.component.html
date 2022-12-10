@@ -1,9 +1,12 @@
 <div class="map-wrapper">
-  <mat-icon class="map-icon map-change-center-icon" (click)="toggleMapCenter()">
+  <mat-icon class="map-icon map-change-center-icon" (click)="toggleMapCenter()"
+            *ngIf="!readonly"
+  >
     {{centralisedOnCurrentPosition ? 'location_on' : 'my_location'}}
   </mat-icon>
 
-  <mat-icon class="map-icon map-toggle-icon" (click)="toggleMapHeight()">
+  <mat-icon class="map-icon map-toggle-icon" (click)="toggleMapHeight()"
+            *ngIf="!readonly">
     unfold_more
   </mat-icon>
 
@@ -17,24 +20,29 @@
            (centerChange)="mapDragged($event)"
            (mapReady)="onMapReady()"
            [usePanning]="true"
+           [streetViewControl]="false"
+           [gestureHandling]="gestureHandling"
+           [zoomControl]="false"
   >
 
-    <agm-overlay *ngFor="let singlePin of mapPins"
-                 [latitude]="singlePin.latitude"
-                 [longitude]="singlePin.longitude"
-    >
-      <div class="pin-wrapper">
-        <div class='pin'
-             [class.pin--highlighted]="singlePin.highlighted"
-             [class.pin--faded]="singlePin.inactive"
-        >
-          <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-          <span>{{singlePin.index}}</span>
-        </div>
-        <div id="pulse-{{singlePin.index}}" class='pulse'></div>
+    <ng-container *ngIf="!hidePins">
+      <agm-overlay *ngFor="let singlePin of mapPins"
+                   [latitude]="singlePin.latitude"
+                   [longitude]="singlePin.longitude"
+      >
+        <div class="pin-wrapper">
+          <div class='pin'
+               [class.pin--highlighted]="singlePin.highlighted"
+               [class.pin--faded]="singlePin.inactive"
+          >
+            <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
+            <span>{{singlePin.index}}</span>
+          </div>
+          <div id="pulse-{{singlePin.index}}" class='pulse'></div>
 
-      </div>
-    </agm-overlay>
+        </div>
+      </agm-overlay>
+    </ng-container>
 
     <agm-overlay *ngIf="currentLivePosition"
                  [latitude]="currentLivePosition.latitude"
@@ -54,6 +62,7 @@
                    [origin]="convertedDirOrigin"
                    [destination]="convertedDirDestination"
                    [renderOptions]="directionRenderOptions"
+                   [waypoints]="routeWaypoints"
                    [travelMode]="travelMode"
     >
 

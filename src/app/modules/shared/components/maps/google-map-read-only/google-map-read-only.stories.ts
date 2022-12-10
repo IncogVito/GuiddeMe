@@ -47,7 +47,7 @@ const mapPins: MapElement[] = [{
 }]
 
 const mapGeneralPosition: MapGeneralPosition = {
-  zoom: 15,
+  zoom: 10,
   position: {
     latitude: 50.0618212,
     longitude: 19.938209

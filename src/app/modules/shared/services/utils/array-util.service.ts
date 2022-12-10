@@ -60,6 +60,13 @@ export class ArrayUtilService {
     return elements[elements.length - 1];
   }
 
+  public static getLastRequired<T>(elements: T[]): T {
+    if (this.isEmpty(elements)) {
+      throw new Error('Empty input array for getLastRequired method');
+    }
+    return elements[elements.length - 1];
+  }
+
   public static getFirstRequired<T>(elements: T[]): T {
     if (this.isEmpty(elements)) {
       throw new Error('Empty input array for getFirstRequired method');

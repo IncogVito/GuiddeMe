@@ -9,9 +9,10 @@
                       [mainLabel]="singleTour.title"
                       [descriptionText]="singleTour.time + ' minut'"
                       [imageUrl]="singleTour.previewImageUrl"
-                      [mapImageUrl]="singleTour.mapImageUrl"
                       [expanded]="singleTour.expanded"
                       [details]="singleTour.tourDetails"
+                      [displayAgmMap]="true"
+                      [mapWayPoints]="singleTour.tourStops"
   >
     <!-- TODO directive for converting inflections -->
   </app-tile-secondary>

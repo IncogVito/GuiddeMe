@@ -5,6 +5,8 @@ import {MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/ma
 import {AgmMap} from "@agm/core";
 import {NumberUtilService} from "../../../services/utils/number-util.service";
 import {ArrayUtilService} from "../../../services/utils/array-util.service";
+import DirectionsWaypoint = google.maps.DirectionsWaypoint;
+import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-stop.util.service";
 
 @Component({
   selector: 'app-google-map-read-only',
@@ -23,6 +25,9 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public mapPins: MapElement[] = [];
 
   @Input()
+  public hidePins: boolean = false;
+
+  @Input()
   public mapGeneralPosition: MapGeneralPosition = MAP_DEFAULT_GENERAL_POSITION;
 
   @Input()
@@ -37,6 +42,15 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   @Input()
   public liveLocationEnabled: boolean = false;
 
+  @Input()
+  public readonly: boolean = false;
+
+  @Input()
+  public gestureHandling: 'cooperative' | 'greedy' | 'none' | 'auto' = 'auto';
+
+  @Input()
+  public displayFullRoute: boolean = false;
+
   public mapHeightVh: number = 0;
   public travelMode = 'WALKING' as any;
 
@@ -48,6 +62,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
   public convertedDirDestination: { lat: number, lng: number } | undefined;
+  public routeWaypoints: DirectionsWaypoint[] = [];
 
   public directionRenderOptions = {
     polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
@@ -83,6 +98,8 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
     this.convertDirections();
     this.subscribeLiveLocation();
+
+    this.renderFullRoute();
   }
 
   mouseOver(id: number) {
@@ -200,7 +217,6 @@ export class GoogleMapReadOnlyComponent implements OnInit {
         }
       )
     } else {
-      console.log("NO NAV");
     }
   }
 
@@ -250,5 +266,17 @@ export class GoogleMapReadOnlyComponent implements OnInit {
       this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(singleActiveMapElement.latitude) + (0.0000000000100 * Math.random());
       this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(singleActiveMapElement.longitude) + (0.0000000000100 * Math.random());
     }
+  }
+
+  private renderFullRoute() {
+    if (ArrayUtilService.lengthOf(this.mapPins) < 2) {
+      return;
+    }
+    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins);
+    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins);
+    this.renderNextRoute(firstMapPins, lastMapPins);
+
+    const elementsBetween = this.mapPins.slice(1, this.mapPins.length);
+    this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
   }
 }

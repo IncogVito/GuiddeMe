@@ -1,5 +1,7 @@
 import {EntitySearchParams} from "../../shared/models/firestore.model";
 import {CardSingleDetailModel} from "../../shared/models/card-single-detail.model";
+import {GeoPoint} from "@firebase/firestore-types";
+import {MapElement} from "../../shared/models/map.model";
 
 export interface TourViewModel {
   id: string;
@@ -10,6 +12,7 @@ export interface TourViewModel {
   previewImageUrl: string;
   expanded: boolean;
   tourDetails: CardSingleDetailModel[];
+  tourStops: MapElement[];
 }
 
 export interface TourModel {
@@ -24,6 +27,7 @@ export interface TourModel {
   mainImageUrl: string;
   previewImageUrl: string;
   quizAvailable: boolean;
+  tourStopsCoordinates: Map<string, GeoPoint>;
 }
 
 export interface TourSearchParams extends EntitySearchParams {
