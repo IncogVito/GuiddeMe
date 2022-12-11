@@ -1,10 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
-import {MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
+import {LatLngBoundsLiteralCustom, MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
 import {AgmMap} from "@agm/core";
 import {NumberUtilService} from "../../../services/utils/number-util.service";
 import {ArrayUtilService} from "../../../services/utils/array-util.service";
+import DirectionsWaypoint = google.maps.DirectionsWaypoint;
+import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-stop.util.service";
+import {take} from "rxjs";
+import LatLngBounds = google.maps.LatLngBounds;
 
 @Component({
   selector: 'app-google-map-read-only',
@@ -23,13 +27,16 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public mapPins: MapElement[] = [];
 
   @Input()
+  public hidePins: boolean = false;
+
+  @Input()
   public mapGeneralPosition: MapGeneralPosition = MAP_DEFAULT_GENERAL_POSITION;
 
   @Input()
-  public defaultHeightVh: number = 30;
+  public defaultHeight: string = '30vh';
 
   @Input()
-  public expandedHeightVh: number = 60;
+  public expandedHeight: string = '60vh';
 
   @Input()
   public expanded: boolean = false;
@@ -37,7 +44,19 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   @Input()
   public liveLocationEnabled: boolean = false;
 
-  public mapHeightVh: number = 0;
+  @Input()
+  public readonly: boolean = false;
+
+  @Input()
+  public gestureHandling: 'cooperative' | 'greedy' | 'none' | 'auto' = 'auto';
+
+  @Input()
+  public displayFullRoute: boolean = false;
+
+  @Input()
+  public latLngBounds: LatLngBoundsLiteralCustom | boolean = true;
+
+  public mapHeight: string = '0';
   public travelMode = 'WALKING' as any;
 
   public directionOrigin: MapElement | undefined;
@@ -48,11 +67,15 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
   public convertedDirDestination: { lat: number, lng: number } | undefined;
+  public routeWaypoints: DirectionsWaypoint[] = [];
 
   public directionRenderOptions = {
     polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
-    suppressMarkers: true
+    suppressMarkers: true,
+    preserveViewport: true
   };
+
+  private mapInstance: google.maps.Map | undefined;
 
   lat = MapConstants.lat;
   lng = MapConstants.lng;
@@ -79,10 +102,26 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   ngOnInit(): void {
     this.currentZoom = this.zoom;
     this.assignCurrentPositionToObject();
-    this.mapHeightVh = this.defaultHeightVh;
+    this.mapHeight = this.defaultHeight;
 
     this.convertDirections();
     this.subscribeLiveLocation();
+
+    if (this.displayFullRoute) {
+      this.renderFullRoute();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.agmMap.mapReady
+      .pipe(take(1))
+      .subscribe(map => {
+        this.mapInstance = map;
+
+        if (this.displayFullRoute) {
+          this.extendMapToRouteBounds(this.mapPins);
+        }
+      });
   }
 
   mouseOver(id: number) {
@@ -106,7 +145,6 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   zoomChanged(zoom: number) {
-
     this.currentZoom = zoom;
     this.lastSentLongitude = this.currentLongitude;
     this.lastSentLatitude = this.currentLatitude;
@@ -200,16 +238,15 @@ export class GoogleMapReadOnlyComponent implements OnInit {
         }
       )
     } else {
-      console.log("NO NAV");
     }
   }
 
   public toggleMapHeight() {
     this.expanded = !this.expanded;
     if (this.expanded) {
-      this.mapHeightVh = this.expandedHeightVh;
+      this.mapHeight = this.expandedHeight;
     } else {
-      this.mapHeightVh = this.defaultHeightVh;
+      this.mapHeight = this.defaultHeight;
     }
   }
 
@@ -250,5 +287,30 @@ export class GoogleMapReadOnlyComponent implements OnInit {
       this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(singleActiveMapElement.latitude) + (0.0000000000100 * Math.random());
       this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(singleActiveMapElement.longitude) + (0.0000000000100 * Math.random());
     }
+  }
+
+  private renderFullRoute() {
+    if (ArrayUtilService.lengthOf(this.mapPins) < 2) {
+      return;
+    }
+    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins);
+    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins);
+    this.renderNextRoute(firstMapPins, lastMapPins);
+
+    const elementsBetween = this.mapPins.slice(1, this.mapPins.length);
+    this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
+  }
+
+  private extendMapToRouteBounds(mapPins: MapElement[]) {
+    const minLatitude = Math.min(...mapPins.map(singleItem => singleItem.latitude));
+    const maxLatitude = Math.max(...mapPins.map(singleItem => singleItem.latitude));
+    const minLongitude = Math.min(...mapPins.map(singleItem => singleItem.longitude));
+    const maxLongitude = Math.max(...mapPins.map(singleItem => singleItem.longitude));
+
+    const bounds: LatLngBounds = new google.maps.LatLngBounds();
+
+    bounds.extend(new google.maps.LatLng(minLatitude, minLongitude));
+    bounds.extend(new google.maps.LatLng(maxLatitude, maxLongitude));
+    this.mapInstance?.fitBounds(bounds, 5);
   }
 }

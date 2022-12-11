@@ -35,6 +35,17 @@
       &nbsp;
     </figure>
 
+    <app-google-map-read-only *ngIf="displayAgmMap"
+                              [readonly]="true"
+                              [displayFullRoute]="true"
+                              [mapPins]="mapWayPoints"
+                              [hidePins]="true"
+                              gestureHandling="none"
+                              defaultHeight="10rem"
+    >
+
+    </app-google-map-read-only>
+
     <div class="tile-secondary__extra-details">
       <div class="tile-secondary__single-extra-detail"
            *ngFor="let singleDetail of details;let odd = odd"

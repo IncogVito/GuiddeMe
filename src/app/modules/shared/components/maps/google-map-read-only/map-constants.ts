@@ -3,7 +3,7 @@ import {MapGeneralPosition} from "../../../models/map.model";
 export const MapConstants = {
   lat: 52.230757,
   lng: 20.996398,
-  zoom: 13
+  zoom: 16
 };
 
 export const MAP_DEFAULT_GENERAL_POSITION: MapGeneralPosition = {
@@ -11,7 +11,7 @@ export const MAP_DEFAULT_GENERAL_POSITION: MapGeneralPosition = {
     latitude: 50.0618212,
     longitude: 19.938209
   },
-  zoom: 13
+  zoom: 15
 }
 
 export const mapTempDirectionOrigin = {

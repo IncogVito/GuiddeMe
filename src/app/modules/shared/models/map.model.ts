@@ -16,3 +16,10 @@ export interface MapElement {
   highlighted?: boolean;
   inactive?: boolean;
 }
+
+export interface LatLngBoundsLiteralCustom {
+  east: number;
+  north: number;
+  south: number;
+  west: number;
+}

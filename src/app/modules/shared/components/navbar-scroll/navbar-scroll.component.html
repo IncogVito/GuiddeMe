@@ -57,6 +57,17 @@
     >
     <!-- TODO - alt image-->
 
+    <app-google-map-read-only *ngIf="singleContent.mapElements"
+                              [readonly]="true"
+                              [displayFullRoute]="true"
+                              [mapPins]="singleContent.mapElements"
+                              gestureHandling="greedy"
+                              defaultHeight="35vh"
+                              class="u-mb-3"
+    >
+    </app-google-map-read-only>
+
+
     <p *ngIf="singleContent.text"
        class="single-content__text"
        [innerHTML]="singleContent.text"
