@@ -10,10 +10,10 @@
     unfold_more
   </mat-icon>
 
-  <agm-map [ngStyle]="{'height.vh': mapHeightVh}"
+  <agm-map [ngStyle]="{'height': mapHeight}"
            [latitude]=mapGeneralPosition.position.latitude
            [longitude]=mapGeneralPosition.position.longitude
-           [zoom]="mapGeneralPosition.zoom"
+           [zoom]="4"
            [styles]="styles"
            [clickableIcons]="false"
            (zoomChange)="zoomChanged($event)"

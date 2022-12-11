@@ -4,6 +4,7 @@ import {NavItemModel} from "../../../shared/models/nav-item.model";
 import {CardSingleDetailModel} from "../../../shared/models/card-single-detail.model";
 import {createHeaderText} from "../../../shared/commons/functions/html-creator.common";
 import {SortUtilService} from "../../../shared/services/utils/sort-util.service";
+import {TourStopUtilService} from "./tour-stop.util.service";
 
 export class TourDescriptionUtilService {
   constructor() {
@@ -45,7 +46,7 @@ export class TourDescriptionUtilService {
         mainTextTitle: "Mapa",
         content: [
           {
-            imageUrl: tourModel.mapImageUrl
+            mapElements: TourStopUtilService.extractMapPins(tourStopModels)
           }
         ]
       },

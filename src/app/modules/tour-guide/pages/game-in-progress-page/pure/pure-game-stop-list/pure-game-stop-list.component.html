@@ -1,9 +1,10 @@
 <div class="game-stops">
   <app-google-map-read-only
-    [defaultHeightVh]="30"
-    [expandedHeightVh]="60"
+    defaultHeight="30vh"
+    expandedHeight="60vh"
     [mapPins]="mapPins"
     [liveLocationEnabled]="true"
+    gestureHandling="greedy"
   >
   </app-google-map-read-only>
 
