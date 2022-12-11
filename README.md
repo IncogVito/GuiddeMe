@@ -7,7 +7,6 @@ www.guiddeme.pl (Preffered access from mobile browser)
 GuiddeMe is a web app that offers a real-time city game. The game can be used for tourism or entertainment purposes. The app guides users from one location to another and offers quizzes during gameplay. Users can choose from different routes.
 
 
-
 ## Technologies Used
 GuiddeMe uses the following technologies:
 

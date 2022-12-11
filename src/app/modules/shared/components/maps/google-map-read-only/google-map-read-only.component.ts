@@ -111,7 +111,6 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.agmMap);
     this.agmMap.mapReady
       .pipe(take(1))
       .subscribe(map => {
@@ -144,8 +143,6 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   zoomChanged(zoom: number) {
-    console.log(zoom);
-
     this.currentZoom = zoom;
     this.lastSentLongitude = this.currentLongitude;
     this.lastSentLatitude = this.currentLatitude;
