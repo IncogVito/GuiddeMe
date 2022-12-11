@@ -107,7 +107,9 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.convertDirections();
     this.subscribeLiveLocation();
 
-    this.renderFullRoute();
+    if (this.displayFullRoute) {
+      this.renderFullRoute();
+    }
   }
 
   ngAfterViewInit() {

@@ -13,7 +13,7 @@
   <agm-map [ngStyle]="{'height': mapHeight}"
            [latitude]=mapGeneralPosition.position.latitude
            [longitude]=mapGeneralPosition.position.longitude
-           [zoom]="4"
+           [zoom]="mapGeneralPosition.zoom"
            [styles]="styles"
            [clickableIcons]="false"
            (zoomChange)="zoomChanged($event)"
