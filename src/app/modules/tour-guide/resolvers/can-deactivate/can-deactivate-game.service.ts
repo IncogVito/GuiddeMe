@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {GamePageComponent} from "../../pages/game-in-progress-page/wrapper/game-page.component";
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {GameState} from "../../stores/game/game.state";
 import {map, Observable, of, switchMap, take} from "rxjs";
 import {

@@ -2,7 +2,7 @@ import {Injectable, OnDestroy, OnInit} from "@angular/core";
 import {combineLatestWith, distinctUntilChanged, EMPTY, filter, Observable, Subject, take, takeUntil} from "rxjs";
 import {GameStateModel} from "../../stores/game/game.state-model";
 import {GameState} from "../../stores/game/game.state";
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {
   DialogDecisionData,
   DialogDecisionPrimaryComponent

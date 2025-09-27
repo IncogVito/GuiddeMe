@@ -1,4 +1,4 @@
-import {PageEvent} from "@angular/material/paginator";
+import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
 import {EntityProcessResult, ProcessType} from "./entity-process-result.model";
 
 export interface FirestoreModel {

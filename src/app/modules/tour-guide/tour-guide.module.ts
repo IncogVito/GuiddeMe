@@ -21,7 +21,7 @@ import {
 import {PureGameComponent} from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
 import {GamePageComponent} from './pages/game-in-progress-page/wrapper/game-page.component';
 import {PureQuizComponent} from './pages/quiz/pure-quiz/pure-quiz.component';
-import {MatRadioModule} from "@angular/material/radio";
+import {MatLegacyRadioModule as MatRadioModule} from "@angular/material/legacy-radio";
 import {FormsModule} from "@angular/forms";
 import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component';
 import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
