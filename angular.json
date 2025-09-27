@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "GuiddeMe:build:production"
+              "buildTarget": "GuiddeMe:build:production"
             },
             "development": {
-              "browserTarget": "GuiddeMe:build:development"
+              "buildTarget": "GuiddeMe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "GuiddeMe:build"
+            "buildTarget": "GuiddeMe:build"
           }
         },
         "test": {
