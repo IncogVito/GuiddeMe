@@ -1,79 +1,84 @@
 <div class="u-invisible navigation__blank"
-     appOffsetFixedActivity
-     sourcePosition="top"
-     (onChangedFixedActivity)="changeState($event)"
-     [additionalOffset]="-100"
->
+  appOffsetFixedActivity
+  sourcePosition="top"
+  (onChangedFixedActivity)="changeState($event)"
+  [additionalOffset]="-100"
+  >
   &nbsp;
 </div>
 
 
 <div class="navigation__wrapper"
-     [class.navigation__wrapper--fixed]="navigationFixed"
->
-  <nav class="navigation"
-       [class.navigation--fixed]="navigationFixed"
+  [class.navigation__wrapper--fixed]="navigationFixed"
   >
-    <ul class="navigation__list"
-        [class.navigation__list--fixed]="navigationFixed"
+  <nav class="navigation"
+    [class.navigation--fixed]="navigationFixed"
     >
-      <li class="navigation__item"
-          *ngFor="let navItem of navigationList;let index = index;"
+    <ul class="navigation__list"
+      [class.navigation__list--fixed]="navigationFixed"
+      >
+      @for (navItem of navigationList; track navItem; let index = $index) {
+        <li class="navigation__item"
           [class.navigation__item--active]="activeIndex === index"
           (click)="scrollInto(navItem)"
-      >
-        <a class="navigation__link">
-          {{navItem.navTitle}}
-        </a>
-      </li>
+          >
+          <a class="navigation__link">
+            {{navItem.navTitle}}
+          </a>
+        </li>
+      }
     </ul>
   </nav>
 </div>
 
-<div class="single-content" *ngFor="let navItem of navigationList; let index = index;"
-     [id]="navItem.mainTextTitle"
-     visible
-     sourcePosition="top"
-     [additionalOffset]="250"
-     [range]="120"
-     (onVisible)="changeActivity(index)"
->
-
-  <h3 class="single-content__header">
-    {{navItem.mainTextTitle}}
-  </h3>
-
-  <div class="single-content__section" *ngFor="let singleContent of navItem.content">
-    <h5 *ngIf="singleContent.subtitle"
-        class="single-content__section-header header-tertiary"
+@for (navItem of navigationList; track navItem; let index = $index) {
+  <div class="single-content"
+    [id]="navItem.mainTextTitle"
+    visible
+    sourcePosition="top"
+    [additionalOffset]="250"
+    [range]="120"
+    (onVisible)="changeActivity(index)"
     >
-      {{singleContent.subtitle}}
-    </h5>
-
-    <img *ngIf="singleContent.imageUrl"
-         class="single-content__image"
-         [src]="singleContent.imageUrl"
-         [alt]=""
-    >
-    <!-- TODO - alt image-->
-
-    <app-google-map-read-only *ngIf="singleContent.mapElements"
-                              [readonly]="true"
-                              [displayFullRoute]="true"
-                              [mapPins]="singleContent.mapElements"
-                              gestureHandling="greedy"
-                              defaultHeight="35vh"
-                              class="u-mb-3"
-    >
-    </app-google-map-read-only>
-
-
-    <p *ngIf="singleContent.text"
-       class="single-content__text"
-       [innerHTML]="singleContent.text"
-    >
-    </p>
-
+    <h3 class="single-content__header">
+      {{navItem.mainTextTitle}}
+    </h3>
+    @for (singleContent of navItem.content; track singleContent) {
+      <div class="single-content__section">
+        @if (singleContent.subtitle) {
+          <h5
+            class="single-content__section-header header-tertiary"
+            >
+            {{singleContent.subtitle}}
+          </h5>
+        }
+        @if (singleContent.imageUrl) {
+          <img
+            class="single-content__image"
+            [src]="singleContent.imageUrl"
+            [alt]=""
+            >
+        }
+        <!-- TODO - alt image-->
+        @if (singleContent.mapElements) {
+          <app-google-map-read-only
+            [readonly]="true"
+            [displayFullRoute]="true"
+            [mapPins]="singleContent.mapElements"
+            gestureHandling="greedy"
+            defaultHeight="35vh"
+            class="u-mb-3"
+            >
+          </app-google-map-read-only>
+        }
+        @if (singleContent.text) {
+          <p
+            class="single-content__text"
+            [innerHTML]="singleContent.text"
+            >
+          </p>
+        }
+      </div>
+    }
   </div>
-
-</div>
+}

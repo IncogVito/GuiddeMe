@@ -1,74 +1,81 @@
 <div class="tile-secondary"
-     [class.tile-secondary--expanded]="expanded"
-     (click)=" expanded = !expanded"
->
+  [class.tile-secondary--expanded]="expanded"
+  (click)=" expanded = !expanded"
+  >
   <span class="tile-secondary__main-label">
     {{mainLabel}}
   </span>
 
   <img class="tile-secondary__main-image"
-       [src]="imageUrl"
-       alt="Main image"
-  />
+    [src]="imageUrl"
+    alt="Main image"
+    />
 
-  <mat-icon class="tile-secondary__right-icon">
-    {{topRightIcon}}
-  </mat-icon>
-
-  <div class="tile-secondary__description">
-    <mat-icon class="tile-secondary__description-icon" *ngIf="descriptionIcon">
-      {{descriptionIcon}}
+    <mat-icon class="tile-secondary__right-icon">
+      {{topRightIcon}}
     </mat-icon>
 
-    <span class="tile-secondary__description-text">
-      {{descriptionText}}
-    </span>
-  </div>
-
-  <div class="tile-secondary__expanded-elem">
-    <figure *ngIf="mapImageUrl"
-            class="tile-secondary__image"
-            [ngStyle]="{'background-image': 'url('+mapImageUrl+')'}"
-            [class.tile-secondary__missing-image]="missingImage"
-            (error)="handleMissingImage()"
-    >
-      &nbsp;
-    </figure>
-
-    <app-google-map-read-only *ngIf="displayAgmMap"
-                              [readonly]="true"
-                              [displayFullRoute]="true"
-                              [mapPins]="mapWayPoints"
-                              [hidePins]="true"
-                              gestureHandling="none"
-                              defaultHeight="10rem"
-    >
-
-    </app-google-map-read-only>
-
-    <div class="tile-secondary__extra-details">
-      <div class="tile-secondary__single-extra-detail"
-           *ngFor="let singleDetail of details;let odd = odd"
-           [class.tile-secondary__single-extra-detail--highlighted]="singleDetail.colorStyle"
-           [class.tile-secondary__single-extra-detail--second]="odd"
-           [ngStyle]="{color: singleDetail.colorStyle}"
-      >
-        <mat-icon *ngIf="singleDetail.icon">
-          {{singleDetail.icon}}
+    <div class="tile-secondary__description">
+      @if (descriptionIcon) {
+        <mat-icon class="tile-secondary__description-icon">
+          {{descriptionIcon}}
         </mat-icon>
+      }
 
-        <span>
-      {{singleDetail.text}}
-    </span>
-      </div>
+      <span class="tile-secondary__description-text">
+        {{descriptionText}}
+      </span>
     </div>
 
-    <app-button-primary class="tile-secondary__button"
-                        [label]="buttonText"
-                        iconName="chevron_right"
-                        (click)="expanded && clickButton($event)"
-    >
+    <div class="tile-secondary__expanded-elem">
+      @if (mapImageUrl) {
+        <figure
+          class="tile-secondary__image"
+          [ngStyle]="{'background-image': 'url('+mapImageUrl+')'}"
+          [class.tile-secondary__missing-image]="missingImage"
+          (error)="handleMissingImage()"
+          >
+          &nbsp;
+        </figure>
+      }
 
-    </app-button-primary>
+      @if (displayAgmMap) {
+        <app-google-map-read-only
+          [readonly]="true"
+          [displayFullRoute]="true"
+          [mapPins]="mapWayPoints"
+          [hidePins]="true"
+          gestureHandling="none"
+          defaultHeight="10rem"
+          >
+        </app-google-map-read-only>
+      }
+
+      <div class="tile-secondary__extra-details">
+        @for (singleDetail of details; track singleDetail; let odd = $odd) {
+          <div class="tile-secondary__single-extra-detail"
+            [class.tile-secondary__single-extra-detail--highlighted]="singleDetail.colorStyle"
+            [class.tile-secondary__single-extra-detail--second]="odd"
+            [ngStyle]="{color: singleDetail.colorStyle}"
+            >
+            @if (singleDetail.icon) {
+              <mat-icon>
+                {{singleDetail.icon}}
+              </mat-icon>
+            }
+            <span>
+              {{singleDetail.text}}
+            </span>
+          </div>
+        }
+      </div>
+
+      <app-button-primary class="tile-secondary__button"
+        [label]="buttonText"
+        iconName="chevron_right"
+        (click)="expanded && clickButton($event)"
+        >
+
+      </app-button-primary>
+    </div>
   </div>
-</div>

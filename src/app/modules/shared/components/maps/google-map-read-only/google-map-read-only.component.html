@@ -1,84 +1,90 @@
 <div class="map-wrapper">
-  <mat-icon class="map-icon map-change-center-icon" (click)="toggleMapCenter()"
-            *ngIf="!readonly"
-  >
-    {{centralisedOnCurrentPosition ? 'location_on' : 'my_location'}}
-  </mat-icon>
+  @if (!readonly) {
+    <mat-icon class="map-icon map-change-center-icon" (click)="toggleMapCenter()"
+      >
+      {{centralisedOnCurrentPosition ? 'location_on' : 'my_location'}}
+    </mat-icon>
+  }
 
-  <mat-icon class="map-icon map-toggle-icon" (click)="toggleMapHeight()"
-            *ngIf="!readonly">
-    unfold_more
-  </mat-icon>
+  @if (!readonly) {
+    <mat-icon class="map-icon map-toggle-icon" (click)="toggleMapHeight()"
+      >
+      unfold_more
+    </mat-icon>
+  }
 
   <agm-map [ngStyle]="{'height': mapHeight}"
-           [latitude]=mapGeneralPosition.position.latitude
-           [longitude]=mapGeneralPosition.position.longitude
-           [zoom]="mapGeneralPosition.zoom"
-           [styles]="styles"
-           [clickableIcons]="false"
-           (zoomChange)="zoomChanged($event)"
-           (centerChange)="mapDragged($event)"
-           (mapReady)="onMapReady()"
-           [usePanning]="true"
-           [streetViewControl]="false"
-           [gestureHandling]="gestureHandling"
-           [zoomControl]="false"
-  >
+    [latitude]=mapGeneralPosition.position.latitude
+    [longitude]=mapGeneralPosition.position.longitude
+    [zoom]="mapGeneralPosition.zoom"
+    [styles]="styles"
+    [clickableIcons]="false"
+    (zoomChange)="zoomChanged($event)"
+    (centerChange)="mapDragged($event)"
+    (mapReady)="onMapReady()"
+    [usePanning]="true"
+    [streetViewControl]="false"
+    [gestureHandling]="gestureHandling"
+    [zoomControl]="false"
+    >
 
-    <ng-container *ngIf="!hidePins">
-      <agm-overlay *ngFor="let singlePin of mapPins"
-                   [latitude]="singlePin.latitude"
-                   [longitude]="singlePin.longitude"
-      >
-        <div class="pin-wrapper">
-          <div class='pin'
-               [class.pin--highlighted]="singlePin.highlighted"
-               [class.pin--faded]="singlePin.inactive"
+    @if (!hidePins) {
+      @for (singlePin of mapPins; track singlePin) {
+        <agm-overlay
+          [latitude]="singlePin.latitude"
+          [longitude]="singlePin.longitude"
           >
-            <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-            <span>{{singlePin.index}}</span>
+          <div class="pin-wrapper">
+            <div class='pin'
+              [class.pin--highlighted]="singlePin.highlighted"
+              [class.pin--faded]="singlePin.inactive"
+              >
+              <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
+              <span>{{singlePin.index}}</span>
+            </div>
+            <div id="pulse-{{singlePin.index}}" class='pulse'></div>
           </div>
-          <div id="pulse-{{singlePin.index}}" class='pulse'></div>
+        </agm-overlay>
+      }
+    }
 
+    @if (currentLivePosition) {
+      <agm-overlay
+        [latitude]="currentLivePosition.latitude"
+        [longitude]="currentLivePosition.longitude"
+        >
+        <div class="live-location-pin-wrapper">
+          <span class="live-location-pin">
+            &nbsp;
+          </span>
+          <span class="live-location-pin__middle">
+            &nbsp;
+          </span>
         </div>
       </agm-overlay>
-    </ng-container>
+    }
 
-    <agm-overlay *ngIf="currentLivePosition"
-                 [latitude]="currentLivePosition.latitude"
-                 [longitude]="currentLivePosition.longitude"
-    >
-      <div class="live-location-pin-wrapper">
-        <span class="live-location-pin">
-          &nbsp;
-        </span>
-        <span class="live-location-pin__middle">
-          &nbsp;
-        </span>
-      </div>
-    </agm-overlay>
-
-    <agm-direction *ngIf="convertedDirOrigin && convertedDirDestination"
-                   [origin]="convertedDirOrigin"
-                   [destination]="convertedDirDestination"
-                   [renderOptions]="directionRenderOptions"
-                   [waypoints]="routeWaypoints"
-                   [travelMode]="travelMode"
-    >
-
-      <div class="pin-wrapper">
-        <div class='pin'
+    @if (convertedDirOrigin && convertedDirDestination) {
+      <agm-direction
+        [origin]="convertedDirOrigin"
+        [destination]="convertedDirDestination"
+        [renderOptions]="directionRenderOptions"
+        [waypoints]="routeWaypoints"
+        [travelMode]="travelMode"
         >
-          <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-          <span>{{0}}</span>
+        <div class="pin-wrapper">
+          <div class='pin'
+            >
+            <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
+            <span>{{0}}</span>
+          </div>
         </div>
-
-      </div>
-    </agm-direction>
+      </agm-direction>
+    }
 
     <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->
     <!--  >-->
-    <!--  </agm-marker>-->
-  </agm-map>
+  <!--  </agm-marker>-->
+</agm-map>
 </div>
 
