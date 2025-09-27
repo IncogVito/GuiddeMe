@@ -1,6 +1,6 @@
 import {Meta, moduleMetadata, Story} from '@storybook/angular';
 
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";

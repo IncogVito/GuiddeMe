@@ -46,13 +46,10 @@
     "@angular/compiler-cli": "^20.3.2",
     "@babel/core": "^7.19.3",
     "@compodoc/compodoc": "^1.1.19",
-    "@storybook/addon-a11y": "^6.5.12",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/angular": "^6.5.12",
-    "@storybook/builder-webpack5": "^6.5.12",
+    "@storybook/addon-a11y": "^9.1.8",
+    "@storybook/addon-links": "^9.1.8",
+    "@storybook/angular": "^9.1.8",
+    "@storybook/builder-webpack5": "^9.1.8",
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
     "@types/googlemaps": "^3.43.3",
@@ -67,7 +64,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "style-loader": "^3.3.1",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "@storybook/addon-docs": "9.1.8"
   },
   "readme": "ERROR: No README data found!",
   "_id": "guidde-me@0.0.1"
