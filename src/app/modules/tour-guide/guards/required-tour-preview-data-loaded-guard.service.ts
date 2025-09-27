@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {map, Observable, take, tap} from 'rxjs';
 import {Store} from "@ngxs/store";
 import {ToursState} from "../stores/tours/tours.state";
@@ -8,7 +8,7 @@ import {Navigate} from "@ngxs/router-plugin";
 @Injectable({
   providedIn: 'root'
 })
-export class RequiredTourPreviewDataLoadedGuard implements CanActivate {
+export class RequiredTourPreviewDataLoadedGuard  {
 
   constructor(private readonly store: Store,
               private readonly toursState: ToursState) {

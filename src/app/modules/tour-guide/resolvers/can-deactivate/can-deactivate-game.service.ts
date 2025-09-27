@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanDeactivate} from "@angular/router";
+
 import {GamePageComponent} from "../../pages/game-in-progress-page/wrapper/game-page.component";
 import {MatDialog} from "@angular/material/dialog";
 import {GameState} from "../../stores/game/game.state";
@@ -14,7 +14,7 @@ import {QUIT_GAME_CONFIRMATION} from "../../commons/modal.commons";
 @Injectable({
   providedIn: 'root'
 })
-export class CanDeactivateGame implements CanDeactivate<GamePageComponent> {
+export class CanDeactivateGame  {
   constructor(private dialog: MatDialog,
               private readonly gameState: GameState) {
   }
