@@ -11,6 +11,10 @@ import {ArrayUtilService} from "../../../../../shared/services/utils/array-util.
 @Component({
   selector: 'guidde-me-pure-game-stop-list',
   templateUrl: './pure-game-stop-list.component.html',
+  imports: [
+    GoogleMapReadOnlyComponent,
+    TaskListComponent
+  ],
   styleUrls: ['./pure-game-stop-list.component.scss']
 })
 export class PureGameStopListComponent implements OnInit {

@@ -2,23 +2,27 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
 import {LatLngBoundsLiteralCustom, MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
-import {AgmMap} from "@agm/core";
 import {NumberUtilService} from "../../../services/utils/number-util.service";
 import {ArrayUtilService} from "../../../services/utils/array-util.service";
 import DirectionsWaypoint = google.maps.DirectionsWaypoint;
 import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-stop.util.service";
 import {take} from "rxjs";
 import LatLngBounds = google.maps.LatLngBounds;
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-google-map-read-only',
   templateUrl: './google-map-read-only.component.html',
+  imports: [
+    MatIcon
+  ],
   styleUrls: ['./google-map-read-only.component.scss']
 })
 export class GoogleMapReadOnlyComponent implements OnInit {
 
-  @ViewChild(AgmMap)
-  public agmMap!: AgmMap
+  // TODO - change the map implementation
+  @ViewChild('agmMap')
+  public agmMap!: any;
 
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
@@ -115,7 +119,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   ngAfterViewInit() {
     this.agmMap.mapReady
       .pipe(take(1))
-      .subscribe(map => {
+      .subscribe((map: any) => {
         this.mapInstance = map;
 
         if (this.displayFullRoute) {

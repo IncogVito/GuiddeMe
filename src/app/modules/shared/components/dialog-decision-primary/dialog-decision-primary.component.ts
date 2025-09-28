@@ -1,6 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DecisionDialogResult, DecisionEnum} from "../../models/decision.model";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
 
 export interface DialogDecisionData {
   headerTitle: string;
@@ -12,6 +13,9 @@ export interface DialogDecisionData {
 @Component({
   selector: 'app-dialog-decision-primary',
   templateUrl: './dialog-decision-primary.component.html',
+  imports: [
+    ButtonPrimaryComponent
+  ],
   styleUrls: ['./dialog-decision-primary.component.scss']
 })
 export class DialogDecisionPrimaryComponent implements OnInit {

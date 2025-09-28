@@ -10,10 +10,11 @@ import {ArrayUtilService} from "../../../../shared/services/utils/array-util.ser
 import {GameModalHelperService} from "../../../services/helper/game-modal-helper.service";
 
 @Component({
-  selector: 'guidde-me-wrapper',
-  templateUrl: './game-page.component.html',
-  styleUrls: ['./game-page.component.scss'],
-  providers: [GameModalHelperService]
+    selector: 'guidde-me-wrapper',
+    templateUrl: './game-page.component.html',
+    styleUrls: ['./game-page.component.scss'],
+    standalone: false,
+    providers: [GameModalHelperService]
 })
 export class GamePageComponent implements OnInit, OnDestroy {
 

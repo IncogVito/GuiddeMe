@@ -1,8 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AddClassOnActionDirective} from "../../directives/add-class-on-action.directive";
+import {NgTemplateOutlet} from "@angular/common";
 
 @Component({
   selector: 'app-hamburger-menu',
   templateUrl: './hamburger-menu.component.html',
+  imports: [
+    AddClassOnActionDirective,
+    NgTemplateOutlet
+  ],
   styleUrls: ['./hamburger-menu.component.scss']
 })
 export class HamburgerMenuComponent implements OnInit {

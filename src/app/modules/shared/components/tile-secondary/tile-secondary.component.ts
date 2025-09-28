@@ -1,11 +1,21 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CardSingleDetailModel} from "../../models/card-single-detail.model";
 import {MapElement} from "../../models/map.model";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
+import {GoogleMapReadOnlyComponent} from "../maps/google-map-read-only/google-map-read-only.component";
+import {MatIcon} from "@angular/material/icon";
+import {NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-tile-secondary',
   templateUrl: './tile-secondary.component.html',
-  styleUrls: ['./tile-secondary.component.scss']
+  styleUrls: ['./tile-secondary.component.scss'],
+  imports: [
+    ButtonPrimaryComponent,
+    GoogleMapReadOnlyComponent,
+    MatIcon,
+    NgStyle
+  ]
 })
 export class TileSecondaryComponent implements OnInit {
 

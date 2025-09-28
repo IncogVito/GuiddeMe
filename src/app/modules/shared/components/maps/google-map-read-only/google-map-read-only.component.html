@@ -13,78 +13,81 @@
     </mat-icon>
   }
 
-  <agm-map [ngStyle]="{'height': mapHeight}"
-    [latitude]=mapGeneralPosition.position.latitude
-    [longitude]=mapGeneralPosition.position.longitude
-    [zoom]="mapGeneralPosition.zoom"
-    [styles]="styles"
-    [clickableIcons]="false"
-    (zoomChange)="zoomChanged($event)"
-    (centerChange)="mapDragged($event)"
-    (mapReady)="onMapReady()"
-    [usePanning]="true"
-    [streetViewControl]="false"
-    [gestureHandling]="gestureHandling"
-    [zoomControl]="false"
-    >
+<!--  AGM HAD BEEN REMOVED FROM THE PROJECT-->
+<!--  <agm-map [ngStyle]="{'height': mapHeight}"-->
+<!--    [latitude]=mapGeneralPosition.position.latitude-->
+<!--    [longitude]=mapGeneralPosition.position.longitude-->
+<!--    [zoom]="mapGeneralPosition.zoom"-->
+<!--    [styles]="styles"-->
+<!--    [clickableIcons]="false"-->
+<!--    (zoomChange)="zoomChanged($event)"-->
+<!--    (centerChange)="mapDragged($event)"-->
+<!--    (mapReady)="onMapReady()"-->
+<!--    [usePanning]="true"-->
+<!--    [streetViewControl]="false"-->
+<!--    [gestureHandling]="gestureHandling"-->
+<!--    [zoomControl]="false"-->
+<!--    >-->
 
-    @if (!hidePins) {
-      @for (singlePin of mapPins; track singlePin) {
-        <agm-overlay
-          [latitude]="singlePin.latitude"
-          [longitude]="singlePin.longitude"
-          >
-          <div class="pin-wrapper">
-            <div class='pin'
-              [class.pin--highlighted]="singlePin.highlighted"
-              [class.pin--faded]="singlePin.inactive"
-              >
-              <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-              <span>{{singlePin.index}}</span>
-            </div>
-            <div id="pulse-{{singlePin.index}}" class='pulse'></div>
-          </div>
-        </agm-overlay>
-      }
-    }
+<!--    @if (!hidePins) {-->
+<!--      @for (singlePin of mapPins; track singlePin) {-->
+<!--        <agm-overlay-->
+<!--          [latitude]="singlePin.latitude"-->
+<!--          [longitude]="singlePin.longitude"-->
+<!--          >-->
+<!--          <div class="pin-wrapper">-->
+<!--            <div class='pin'-->
+<!--              [class.pin&#45;&#45;highlighted]="singlePin.highlighted"-->
+<!--              [class.pin&#45;&#45;faded]="singlePin.inactive"-->
+<!--              >-->
+<!--              <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">-->
+<!--              <span>{{singlePin.index}}</span>-->
+<!--            </div>-->
+<!--            <div id="pulse-{{singlePin.index}}" class='pulse'></div>-->
+<!--          </div>-->
+<!--        </agm-overlay>-->
+<!--      }-->
+<!--    }-->
 
-    @if (currentLivePosition) {
-      <agm-overlay
-        [latitude]="currentLivePosition.latitude"
-        [longitude]="currentLivePosition.longitude"
-        >
-        <div class="live-location-pin-wrapper">
-          <span class="live-location-pin">
-            &nbsp;
-          </span>
-          <span class="live-location-pin__middle">
-            &nbsp;
-          </span>
-        </div>
-      </agm-overlay>
-    }
+<!--    @if (currentLivePosition) {-->
+<!--&lt;!&ndash;      REMOVED&ndash;&gt;-->
+<!--&lt;!&ndash;      <agm-overlay&ndash;&gt;-->
+<!--&lt;!&ndash;        [latitude]="currentLivePosition.latitude"&ndash;&gt;-->
+<!--&lt;!&ndash;        [longitude]="currentLivePosition.longitude"&ndash;&gt;-->
+<!--&lt;!&ndash;        >&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="live-location-pin-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;          <span class="live-location-pin">&ndash;&gt;-->
+<!--&lt;!&ndash;            &nbsp;&ndash;&gt;-->
+<!--&lt;!&ndash;          </span>&ndash;&gt;-->
+<!--&lt;!&ndash;          <span class="live-location-pin__middle">&ndash;&gt;-->
+<!--&lt;!&ndash;            &nbsp;&ndash;&gt;-->
+<!--&lt;!&ndash;          </span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </agm-overlay>&ndash;&gt;-->
+<!--    }-->
 
-    @if (convertedDirOrigin && convertedDirDestination) {
-      <agm-direction
-        [origin]="convertedDirOrigin"
-        [destination]="convertedDirDestination"
-        [renderOptions]="directionRenderOptions"
-        [waypoints]="routeWaypoints"
-        [travelMode]="travelMode"
-        >
-        <div class="pin-wrapper">
-          <div class='pin'
-            >
-            <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">
-            <span>{{0}}</span>
-          </div>
-        </div>
-      </agm-direction>
-    }
+<!--    @if (convertedDirOrigin && convertedDirDestination) {-->
+<!--&lt;!&ndash;      REMOVED&ndash;&gt;-->
+<!--&lt;!&ndash;      <agm-direction&ndash;&gt;-->
+<!--&lt;!&ndash;        [origin]="convertedDirOrigin"&ndash;&gt;-->
+<!--&lt;!&ndash;        [destination]="convertedDirDestination"&ndash;&gt;-->
+<!--&lt;!&ndash;        [renderOptions]="directionRenderOptions"&ndash;&gt;-->
+<!--&lt;!&ndash;        [waypoints]="routeWaypoints"&ndash;&gt;-->
+<!--&lt;!&ndash;        [travelMode]="travelMode"&ndash;&gt;-->
+<!--&lt;!&ndash;        >&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="pin-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class='pin'&ndash;&gt;-->
+<!--&lt;!&ndash;            >&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="/assets/mapa.jpg" alt="'Brak zdjecia'">&ndash;&gt;-->
+<!--&lt;!&ndash;            <span>{{0}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </agm-direction>&ndash;&gt;-->
+<!--    }-->
 
-    <!--  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"-->
-    <!--  >-->
-  <!--  </agm-marker>-->
-</agm-map>
+<!--    &lt;!&ndash;  <agm-marker *ngIf="markerCoordinate" [latitude]="markerCoordinate.lng" [longitude]="markerCoordinate.lat"&ndash;&gt;-->
+<!--    &lt;!&ndash;  >&ndash;&gt;-->
+<!--  &lt;!&ndash;  </agm-marker>&ndash;&gt;-->
+<!--</agm-map>-->
 </div>
 

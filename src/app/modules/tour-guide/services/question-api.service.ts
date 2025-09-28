@@ -3,9 +3,7 @@ import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abs
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFirestoreQueryBuilder} from "../../shared/services/utils/angular-firestore-query.builder";
 import {QuestionModel, QuestionSearchParams} from "../models/question.model";
-
-import firebase from "firebase/compat";
-import Query = firebase.firestore.Query;
+import { Query } from "firebase/firestore"
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class QuestionApiService extends FirebaseAbstractApiService<QuestionModel
     super(firestore);
   }
 
-  protected createSearchEntityQuery(params: Partial<QuestionSearchParams>): Query<QuestionModel> {
+  protected createSearchEntityQuery(params: Partial<QuestionSearchParams>): Query<QuestionModel, QuestionModel> {
     const queryBuilder = new AngularFirestoreQueryBuilder<QuestionModel>();
     return queryBuilder
       .addEqualsConstraint('id', params.id)

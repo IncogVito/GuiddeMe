@@ -4,10 +4,18 @@ import {filter, map, Subject, takeUntil} from "rxjs";
 import {ObjectUtilService} from "../../services/utils/object-utils.service";
 import {Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
+import {MatIcon} from "@angular/material/icon";
+import {HamburgerMenuComponent} from "../menu/hamburger-menu.component";
+import {AddClassOnActionDirective} from "../../directives/add-class-on-action.directive";
 
 @Component({
   selector: 'guidde-me-navbar-primary',
   templateUrl: './nav-bar-primary.component.html',
+  imports: [
+    MatIcon,
+    HamburgerMenuComponent,
+    AddClassOnActionDirective
+  ],
   styleUrls: ['./nav-bar-primary.component.scss']
 })
 export class NavBarPrimaryComponent implements OnInit, OnDestroy {

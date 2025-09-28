@@ -5,7 +5,7 @@ import {catchError, map, Observable, of, take} from "rxjs";
 import {EntityProcessResult, ProcessType} from "../../models/entity-process-result.model";
 
 import firebase from "firebase/compat/app";
-import Query = firebase.firestore.Query;
+import {Query} from "firebase/firestore"
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
@@ -139,7 +139,7 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
     }
   }
 
-  protected abstract createSearchEntityQuery(params: Partial<SEARCH_PARAMS>): Query<ENTITY>;
+  protected abstract createSearchEntityQuery(params: Partial<SEARCH_PARAMS>): Query<ENTITY, ENTITY>;
 
   // protected abstract createSearchEntityQueryWithPagination(params: EntityPaginationSearchParams<EntitySearchParams<any>>): Query<ENTITY>;
 }

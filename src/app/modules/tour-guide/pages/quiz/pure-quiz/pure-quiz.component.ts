@@ -3,6 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'guidde-me-pure-quiz',
   templateUrl: './pure-quiz.component.html',
+  standalone: false,
   styleUrls: ['./pure-quiz.component.scss']
 })
 export class PureQuizComponent implements OnInit {

@@ -8,7 +8,8 @@ import {Navigate} from "@ngxs/router-plugin";
 @Component({
   selector: 'app-tours-page',
   templateUrl: './tours-page.component.html',
-  styleUrls: ['./tours-page.component.scss']
+  standalone: false,
+  styleUrls: ['./tours-page.component.scss'],
 })
 export class ToursPageComponent implements OnInit {
 

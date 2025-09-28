@@ -11,9 +11,10 @@ import {GameActions} from "../../../stores/game/game.actions";
 import {Navigate} from "@ngxs/router-plugin";
 
 @Component({
-  selector: 'guidde-me-single-tour-wrapper',
-  templateUrl: './single-tour-page.component.html',
-  styleUrls: ['./single-tour-page.component.scss']
+    selector: 'guidde-me-single-tour-wrapper',
+    templateUrl: './single-tour-page.component.html',
+    standalone: false,
+    styleUrls: ['./single-tour-page.component.scss']
 })
 export class SingleTourPageComponent implements OnInit {
 

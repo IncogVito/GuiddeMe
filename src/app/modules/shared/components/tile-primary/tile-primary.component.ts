@@ -1,9 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SkeletonDirective} from "../../directives/skeleton.directive";
+import {NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-tile-primary',
   templateUrl: './tile-primary.component.html',
-  styleUrls: ['./tile-primary.component.scss']
+  styleUrls: ['./tile-primary.component.scss'],
+  imports: [
+    SkeletonDirective,
+    NgStyle
+  ]
 })
 export class TilePrimaryComponent implements OnInit {
 

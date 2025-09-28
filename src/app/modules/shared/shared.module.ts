@@ -15,7 +15,6 @@ import {TaskListComponent} from './components/task-list/task-list.component';
 import {FooterPrimaryComponent} from './components/footer-primary/footer-primary.component';
 import {ImageCarouselPrimaryComponent} from './components/image-carousel-primary/image-carousel-primary.component';
 import {HeaderTextPrimaryComponent} from './components/header-text-primary/header-text-primary.component';
-import {MatLegacyDialogModule as MatDialogModule} from "@angular/material/legacy-dialog";
 import {DialogDecisionPrimaryComponent} from './components/dialog-decision-primary/dialog-decision-primary.component';
 import {
   DialogDecisionPrimaryWrapperComponent
@@ -28,19 +27,47 @@ import {RouterLinkWithHref} from "@angular/router";
 import {SvgShapePrimaryComponent} from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
 import {SwipeRecogniseDirective} from './directives/swipe-recognise.directive';
 import {GoogleMapReadOnlyComponent} from "./components/maps/google-map-read-only/google-map-read-only.component";
-import {AgmOverlays} from "agm-overlays";
-import {AgmCoreModule} from "@agm/core";
-import {AgmDirectionModule} from "agm-direction";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
-  declarations: [
+  declarations: [],
+  exports: [
     ButtonPrimaryComponent,
     ButtonSecondaryComponent,
     TilePrimaryComponent,
     TileSecondaryComponent,
-    HamburgerMenuComponent,
+    CardPrimaryComponent,
+    NavbarScrollComponent,
+    SkeletonDirective,
     TogglePrimaryComponent,
+    TaskListComponent,
+    FooterPrimaryComponent,
+    ImageCarouselPrimaryComponent,
+    HeaderTextPrimaryComponent,
+    NavBarPrimaryComponent,
+    SvgShapePrimaryComponent,
+    GoogleMapReadOnlyComponent
+  ],
+
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatDialogModule,
+    RouterLinkWithHref,
+    // AgmOverlays, // REMOVED
+    // AgmCoreModule,// REMOVED
+    // AgmDirectionModule,// REMOVED
+    // AgmDirectionModule,// REMOVED
+    // AgmDirectionModule,// REMOVED
+    // AgmDirectionModule,// REMOVED
+    // AgmDirectionModule,// REMOVED
+    ButtonPrimaryComponent,
+    ButtonSecondaryComponent,
+    AddClassOnActionDirective,
+    SvgShapePrimaryComponent,
+    SwipeRecogniseDirective,
+    GoogleMapReadOnlyComponent,
     CardPrimaryComponent,
     NavbarScrollComponent,
     VisibleDirective,
@@ -54,41 +81,10 @@ import {AgmDirectionModule} from "agm-direction";
     SkeletonLoaderComponent,
     SkeletonDirective,
     NavBarPrimaryComponent,
-    AddClassOnActionDirective,
-    SvgShapePrimaryComponent,
-    SwipeRecogniseDirective,
-    GoogleMapReadOnlyComponent
-  ],
-    exports: [
-        ButtonPrimaryComponent,
-        ButtonSecondaryComponent,
-        TilePrimaryComponent,
-        TileSecondaryComponent,
-        CardPrimaryComponent,
-        NavbarScrollComponent,
-        SkeletonDirective,
-        TogglePrimaryComponent,
-        TaskListComponent,
-        FooterPrimaryComponent,
-        ImageCarouselPrimaryComponent,
-        HeaderTextPrimaryComponent,
-        NavBarPrimaryComponent,
-        SvgShapePrimaryComponent,
-        GoogleMapReadOnlyComponent
-    ],
-
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatDialogModule,
-    RouterLinkWithHref,
-    AgmOverlays,
-    AgmCoreModule,
-    AgmDirectionModule,
-    AgmDirectionModule,
-    AgmDirectionModule,
-    AgmDirectionModule,
-    AgmDirectionModule
+    TilePrimaryComponent,
+    TileSecondaryComponent,
+    HamburgerMenuComponent,
+    TogglePrimaryComponent
   ]
 })
 export class SharedModule {

@@ -7,10 +7,8 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../../.storybook/storybook-naming-convention";
 import {GoogleMapReadOnlyComponent} from "./google-map-read-only.component";
-import {AgmCoreModule} from "@agm/core";
-import {AgmOverlays} from "agm-overlays";
+// import {AgmOverlays} from "agm-overlays";
 import {MapElement, MapGeneralPosition} from "../../../models/map.model";
-import {AgmDirection, AgmDirectionModule} from "agm-direction";
 
 
 export default {
@@ -23,11 +21,12 @@ export default {
         BrowserModule,
         BrowserAnimationsModule,
         MatIconModule,
-        AgmCoreModule.forRoot({
-          libraries: ['places', 'drawing', 'geometry']
-        }),
-        AgmOverlays,
-        AgmDirectionModule
+        // TODO - HAS BEEN REMOVED FROM THE PROJECT
+        // AgmCoreModule.forRoot({
+        //   libraries: ['places', 'drawing', 'geometry']
+        // }),
+        // AgmOverlays,
+        // AgmDirectionModule
       ],
     }),
   ],

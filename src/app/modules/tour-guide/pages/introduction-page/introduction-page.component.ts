@@ -9,7 +9,8 @@ import {take} from "rxjs";
   selector: 'app-introduction-page',
   templateUrl: './introduction-page.component.html',
   styleUrls: ['./introduction-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class IntroductionPageComponent implements OnInit, AfterViewInit {
 
