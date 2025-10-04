@@ -27,11 +27,13 @@ import {RouterLinkWithHref} from "@angular/router";
 import {SvgShapePrimaryComponent} from './svg-shapes/svg-shape-primary/svg-shape-primary.component';
 import {SwipeRecogniseDirective} from './directives/swipe-recognise.directive';
 import {GoogleMapReadOnlyComponent} from "./components/maps/google-map-read-only/google-map-read-only.component";
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
+import {GoogleMapsModule} from '@angular/google-maps';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   exports: [
     ButtonPrimaryComponent,
     ButtonSecondaryComponent,
@@ -54,6 +56,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     CommonModule,
     MatIconModule,
     MatDialogModule,
+    GoogleMapsModule,
     RouterLinkWithHref,
     // AgmOverlays, // REMOVED
     // AgmCoreModule,// REMOVED

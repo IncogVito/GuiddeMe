@@ -1,0 +1,8 @@
+<div class="pin-wrapper" (mouseenter)="onEnter()" (mouseleave)="onLeave()" (click)="onClick()">
+  <div class="pin" [class.pin--highlighted]="pin?.highlighted" [class.pin--faded]="pin?.inactive">
+    <img src="/assets/mapa.jpg" alt="Brak zdjecia" />
+    <span>{{pin?.index}}</span>
+  </div>
+  <div id="pulse-{{id}}" class="pulse"></div>
+</div>
+

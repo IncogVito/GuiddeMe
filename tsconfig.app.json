@@ -2,9 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [
-      "googlemaps"
-    ],
+//    "types": [
+//      "googlemaps"
+//    ],
     "typeRoots": [
       "node_modules/@types"
     ]

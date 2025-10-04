@@ -1,25 +1,29 @@
 import {Injectable} from '@angular/core';
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
 import {TourModel, TourSearchParams} from "../models/tour.model";
-import {Query} from "firebase/firestore"
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AngularFirestoreQueryBuilder} from "../../shared/services/utils/angular-firestore-query.builder";
+import {where} from "firebase/firestore"
+import {Firestore, QueryConstraint} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToursApiService extends FirebaseAbstractApiService<TourModel, TourSearchParams> {
 
-  constructor(protected override readonly firestore: AngularFirestore) {
+  constructor(protected override readonly firestore: Firestore) {
     super(firestore);
   }
 
-  protected createSearchEntityQuery(params: Partial<TourSearchParams>): Query<TourModel, TourModel> {
-    const queryBuilder = new AngularFirestoreQueryBuilder<TourModel>();
-    return queryBuilder
-      .addEqualsConstraint('id', params.id)
-      .addEqualsConstraint('categoryId', params.categoryId)
-      .build() as any; // TODO typing
+  protected createSearchEntityQuery(params: Partial<TourSearchParams>): QueryConstraint[] {
+    const constraints: QueryConstraint[] = [];
+
+    if (params.id) {
+      constraints.push(where('id', '==', params.id));
+    }
+    if (params.categoryId) {
+      constraints.push(where('categoryId', '==', params.categoryId));
+    }
+
+    return constraints;
   }
 
   protected readonly entityPath: string = 'tours';

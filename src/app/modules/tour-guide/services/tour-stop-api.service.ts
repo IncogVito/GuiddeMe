@@ -1,24 +1,26 @@
 import {Injectable} from '@angular/core';
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AngularFirestoreQueryBuilder} from "../../shared/services/utils/angular-firestore-query.builder";
-import {Query} from "firebase/firestore"
+import {Query, where} from "firebase/firestore"
 import {TourStopModel, TourStopSearchParams} from "../models/tour-stop.model";
+import {Firestore, QueryConstraint} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourStopApiService extends FirebaseAbstractApiService<TourStopModel, TourStopSearchParams> {
 
-  constructor(protected override readonly firestore: AngularFirestore) {
+  constructor(protected override readonly firestore: Firestore) {
     super(firestore);
   }
 
-  protected createSearchEntityQuery(params: Partial<TourStopSearchParams>): Query<TourStopModel, TourStopModel> {
-    const queryBuilder = new AngularFirestoreQueryBuilder<TourStopModel>();
-    return queryBuilder
-      .addEqualsConstraint('tourId', params.tourId)
-      .build() as any; // TODO typing
+  protected createSearchEntityQuery(params: Partial<TourStopSearchParams>): QueryConstraint[] {
+    const constraints: QueryConstraint[] = [];
+
+    if (params.id) {
+      constraints.push(where('id', '==', params.tourId));
+    }
+
+    return constraints;
   }
 
   protected readonly entityPath: string = 'tour-stops';

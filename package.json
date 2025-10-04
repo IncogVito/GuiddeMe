@@ -52,7 +52,6 @@
     "@storybook/builder-webpack5": "^9.1.8",
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/testing-library": "^0.2.2",
-    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~5.1.9",
     "@types/lodash": "^4.17.20",
     "babel-loader": "^10.0.0",

@@ -6,23 +6,29 @@ import {NumberUtilService} from "../../../services/utils/number-util.service";
 import {ArrayUtilService} from "../../../services/utils/array-util.service";
 import DirectionsWaypoint = google.maps.DirectionsWaypoint;
 import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-stop.util.service";
-import {take} from "rxjs";
 import LatLngBounds = google.maps.LatLngBounds;
 import {MatIcon} from "@angular/material/icon";
+import {GoogleMap} from '@angular/google-maps';
+import {MapOverlayComponent} from "../map-overlay.component";
 
 @Component({
   selector: 'app-google-map-read-only',
   templateUrl: './google-map-read-only.component.html',
   imports: [
-    MatIcon
+    MatIcon,
+    GoogleMap,
+    MapOverlayComponent
   ],
   styleUrls: ['./google-map-read-only.component.scss']
 })
 export class GoogleMapReadOnlyComponent implements OnInit {
 
   // TODO - change the map implementation
-  @ViewChild('agmMap')
-  public agmMap!: any;
+  @ViewChild('googleMap')
+  public googleMap!: GoogleMap;
+
+  // google-map options
+  public mapOptions: google.maps.MapOptions = {};
 
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
@@ -114,18 +120,15 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     if (this.displayFullRoute) {
       this.renderFullRoute();
     }
-  }
 
-  ngAfterViewInit() {
-    this.agmMap.mapReady
-      .pipe(take(1))
-      .subscribe((map: any) => {
-        this.mapInstance = map;
-
-        if (this.displayFullRoute) {
-          this.extendMapToRouteBounds(this.mapPins);
-        }
-      });
+    // initialize map options using component properties
+    this.mapOptions = {
+      styles: this.styles,
+      clickableIcons: false,
+      streetViewControl: false,
+      zoomControl: false,
+      gestureHandling: this.gestureHandling as any
+    } as google.maps.MapOptions;
   }
 
   mouseOver(id: number) {
@@ -164,9 +167,114 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.checkIfExpandBoundAndSendEvent();
   }
 
-  onMapReady() {
+  onMapReady(map: google.maps.Map) {
+    this.mapInstance = map;
     this.getAntiqueOnPosition();
   }
+
+  //   if (this.displayFullRoute) {
+  //     this.extendMapToRouteBounds(this.mapPins);
+  //   }
+  //
+  //   // po załadowaniu mapy renderujemy HTML overlaye
+  //   this.renderOverlays();
+  // }
+  //
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   // odśwież overlaye jeśli zmieniły się piny lub live position
+  //   if (changes['mapPins'] || changes['currentLivePosition'] || changes['hidePins']) {
+  //     // jeśli mapa jest już gotowa to renderujemy od razu
+  //     if (this.mapInstance) {
+  //       this.renderOverlays();
+  //     }
+  //   }
+  // }
+  //
+  // ngOnDestroy(): void {
+  //   // usuń overlaye z mapy
+  //   this.clearOverlays();
+  // }
+  //
+  // private clearOverlays() {
+  //   this.htmlOverlays.forEach(o => o.setMap(null));
+  //   this.htmlOverlays = [];
+  // }
+  //
+  // private renderOverlays() {
+  //   // usuń stare
+  //   this.clearOverlays();
+  //
+  //   if (!this.mapInstance) {
+  //     return;
+  //   }
+  //
+  //   // piny
+  //   if (!this.hidePins && ArrayUtilService.lengthOf(this.mapPins) > 0) {
+  //     for (const singlePin of this.mapPins) {
+  //       const el = this.createPinElement(singlePin);
+  //       const overlay = new MapHtmlOverlay({lat: singlePin.latitude, lng: singlePin.longitude}, el);
+  //       overlay.setMap(this.mapInstance);
+  //       this.htmlOverlays.push(overlay);
+  //     }
+  //   }
+  //
+  //   // live position
+  //   if (this.currentLivePosition) {
+  //     const liveEl = this.createLiveElement(this.currentLivePosition);
+  //     const liveOverlay = new MapHtmlOverlay({lat: this.currentLivePosition.latitude, lng: this.currentLivePosition.longitude}, liveEl);
+  //     liveOverlay.setMap(this.mapInstance);
+  //     this.htmlOverlays.push(liveOverlay);
+  //   }
+  // }
+  //
+  // private createPinElement(singlePin: any): HTMLElement {
+  //   const wrapper = document.createElement('div');
+  //   wrapper.className = 'pin-wrapper';
+  //   // id używane w istniejących metodach mouseOver/leave
+  //   const id = singlePin.index ?? Math.floor(Math.random() * 1000000);
+  //   wrapper.id = 'pin-' + id;
+  //
+  //   const pin = document.createElement('div');
+  //   pin.className = 'pin' + (singlePin.highlighted ? ' pin--highlighted' : '') + (singlePin.inactive ? ' pin--faded' : '');
+  //
+  //   const img = document.createElement('img');
+  //   img.src = '/assets/mapa.jpg';
+  //   img.alt = "Brak zdjecia";
+  //   pin.appendChild(img);
+  //
+  //   const span = document.createElement('span');
+  //   span.textContent = (singlePin.index != null) ? String(singlePin.index) : '';
+  //   pin.appendChild(span);
+  //
+  //   const pulse = document.createElement('div');
+  //   pulse.className = 'pulse';
+  //   pulse.id = 'pulse-' + id;
+  //
+  //   wrapper.appendChild(pin);
+  //   wrapper.appendChild(pulse);
+  //
+  //   // eventy
+  //   wrapper.addEventListener('mouseenter', () => this.mouseOver(id));
+  //   wrapper.addEventListener('mouseleave', () => this.leave(id));
+  //   wrapper.addEventListener('click', () => this.chooseAntique(singlePin));
+  //
+  //   return wrapper;
+  // }
+  //
+  // private createLiveElement(pos: any): HTMLElement {
+  //   const wrapper = document.createElement('div');
+  //   wrapper.className = 'live-location-pin-wrapper';
+  //
+  //   const inner = document.createElement('span');
+  //   inner.className = 'live-location-pin';
+  //
+  //   const middle = document.createElement('span');
+  //   middle.className = 'live-location-pin__middle';
+  //   inner.appendChild(middle);
+  //
+  //   wrapper.appendChild(inner);
+  //   return wrapper;
+  // }
 
   private addNewCurrentMarker(id: number) {
     this.currentMarkedAntiqueId = id;

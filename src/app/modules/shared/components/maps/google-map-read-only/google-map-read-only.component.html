@@ -14,6 +14,22 @@
   }
 
 <!--  AGM HAD BEEN REMOVED FROM THE PROJECT-->
+<!--  Replaced agm-map with google-map from @angular/google-maps. -->
+
+  <google-map #googleMap
+    [style.height]="mapHeight"
+    [center]="{lat: mapGeneralPosition.position.latitude, lng: mapGeneralPosition.position.longitude}"
+    [zoom]="mapGeneralPosition.zoom"
+    [options]="mapOptions"
+    (mapInitialized)="onMapReady($event)"
+    >
+
+<!--    (centerChanged)="onCenterChanged()"-->
+<!--    (zoomChanged)="onZoomChanged()"-->
+    <!-- If you need custom HTML overlays, implement OverlayView or use MapMarker/MapInfoWindow here. -->
+
+  </google-map>
+
 <!--  <agm-map [ngStyle]="{'height': mapHeight}"-->
 <!--    [latitude]=mapGeneralPosition.position.latitude-->
 <!--    [longitude]=mapGeneralPosition.position.longitude-->
@@ -90,4 +106,3 @@
 <!--  &lt;!&ndash;  </agm-marker>&ndash;&gt;-->
 <!--</agm-map>-->
 </div>
-
