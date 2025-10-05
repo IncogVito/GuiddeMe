@@ -104,10 +104,6 @@ export const tourGuideRoutes: Routes = [
     SharedModule,
     MatRadioModule,
     FormsModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: environment.googleMapsApiKey,
-    //   libraries: []
-    // }),
     HeaderTextPrimaryComponent,
     PureGameStopListComponent
   ]

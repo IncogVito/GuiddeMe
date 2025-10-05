@@ -78,6 +78,8 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
   public convertedDirDestination: { lat: number, lng: number } | undefined;
   public routeWaypoints: DirectionsWaypoint[] = [];
+  private directionsService = new google.maps.DirectionsService();
+  private directionsRenderer = new google.maps.DirectionsRenderer();
 
   public directionRenderOptions = {
     polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
@@ -125,6 +127,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.mapOptions = {
       styles: this.styles,
       clickableIcons: false,
+      fullscreenControl: false,
       streetViewControl: false,
       zoomControl: false,
       gestureHandling: this.gestureHandling as any
@@ -168,8 +171,14 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   onMapReady(map: google.maps.Map) {
+    console.log("MAp ready");
     this.mapInstance = map;
     this.getAntiqueOnPosition();
+
+    this.directionsRenderer.setMap(map);
+    if (this.displayFullRoute) {
+      this.renderWaypoints();
+    }
   }
 
   //   if (this.displayFullRoute) {
@@ -411,6 +420,33 @@ export class GoogleMapReadOnlyComponent implements OnInit {
 
     const elementsBetween = this.mapPins.slice(1, this.mapPins.length);
     this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
+  }
+
+
+  private renderWaypoints() {
+    this.directionsService.route(
+      {
+        origin: this.convertedDirOrigin!,
+        destination: this.convertedDirDestination!,
+        waypoints: this.routeWaypoints,
+        travelMode: this.travelMode,
+      },
+      (response, status) => {
+        if (status === google.maps.DirectionsStatus.OK && response) {
+          this.directionsRenderer.setDirections(response);
+          this.directionsRenderer.setOptions({
+            suppressMarkers: true,
+            polylineOptions: {
+              strokeColor: '#bd0062',
+              strokeOpacity: 0.8,
+              strokeWeight: 6,
+            },
+          });
+        } else {
+          console.error('Directions request failed due to ' + status);
+        }
+      }
+    );
   }
 
   private extendMapToRouteBounds(mapPins: MapElement[]) {

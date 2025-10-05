@@ -3,9 +3,7 @@
   position: relative;
 }
 
-agm-map {
-  border-radius: 1.5rem;
-  overflow: hidden;
+.map-container {
   display: block;
   transition: var(--transition-default);
 }
