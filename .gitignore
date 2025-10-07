@@ -45,3 +45,5 @@ Thumbs.db
 firebase-debug.log*
 firestore-debug.log*
 debug-storybook.log
+
+src/environments/environment.dev.ts

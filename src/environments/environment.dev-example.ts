@@ -17,7 +17,6 @@ const firebaseConfig = {
   messagingSenderId: "496956095874",
   appId: "*****"
 };
-
 const googleMapsApiKey = "";
 
 export const environment = {
