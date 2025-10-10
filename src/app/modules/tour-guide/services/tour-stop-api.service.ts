@@ -15,8 +15,8 @@ export class TourStopApiService extends FirebaseAbstractApiService<TourStopModel
   protected createSearchEntityQuery(params: Partial<TourStopSearchParams>): QueryConstraint[] {
     const constraints: QueryConstraint[] = [];
 
-    if (params.id) {
-      constraints.push(where('id', '==', params.tourId));
+    if (params.tourId) {
+      constraints.push(where('tourId', '==', params.tourId));
     }
 
     return constraints;
