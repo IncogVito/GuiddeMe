@@ -7,8 +7,7 @@ import {CategoryMapperService} from "./mappers/category-mapper.service";
 import {EntityMapperService} from "../../shared/services/mappers/entity-mapper.service";
 import {withElementChanged} from "../../shared/commons/functions/custom-pipe.functions";
 import {EntityProcessResult} from "../../shared/models/entity-process-result.model";
-import {where} from "firebase/firestore"
-import {Firestore, QueryConstraint} from "@angular/fire/firestore";
+import {Firestore, QueryConstraint, where} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'

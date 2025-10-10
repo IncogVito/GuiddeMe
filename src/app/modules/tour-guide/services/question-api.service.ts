@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
 import {QuestionModel, QuestionSearchParams} from "../models/question.model";
-import {Query, where} from "firebase/firestore"
-import {Firestore, QueryConstraint} from "@angular/fire/firestore";
+import {Firestore, QueryConstraint, where} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +19,9 @@ export class QuestionApiService extends FirebaseAbstractApiService<QuestionModel
 
     if (params.id) {
       constraints.push(where('id', '==', params.id));
+    }
+
+    if (params.questionIds) {
       constraints.push(where('id', 'in', params.questionIds || []));
     }
 

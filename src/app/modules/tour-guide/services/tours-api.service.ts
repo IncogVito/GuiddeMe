@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
 import {TourModel, TourSearchParams} from "../models/tour.model";
-import {where} from "firebase/firestore"
-import {Firestore, QueryConstraint} from "@angular/fire/firestore";
+import {Firestore, QueryConstraint, where} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,7 @@ export class ToursApiService extends FirebaseAbstractApiService<TourModel, TourS
     if (params.categoryId) {
       constraints.push(where('categoryId', '==', params.categoryId));
     }
+    console.log(constraints);
 
     return constraints;
   }

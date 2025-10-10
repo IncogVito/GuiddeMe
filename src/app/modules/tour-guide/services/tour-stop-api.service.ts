@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FirebaseAbstractApiService} from "../../shared/services/api/firebase-abstract-api.service";
-import {Query, where} from "firebase/firestore"
 import {TourStopModel, TourStopSearchParams} from "../models/tour-stop.model";
-import {Firestore, QueryConstraint} from "@angular/fire/firestore";
+import {Firestore, QueryConstraint, where} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'

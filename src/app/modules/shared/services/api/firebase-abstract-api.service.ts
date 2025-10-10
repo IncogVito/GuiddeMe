@@ -8,9 +8,7 @@ import {EntitiesResult, EntitySearchParams, FirestoreModel, PaginationParams} fr
 import {catchError, from, map, Observable, of, take} from "rxjs";
 import {EntityProcessResult, ProcessType} from "../../models/entity-process-result.model";
 
-import {Query} from "firebase/firestore"
 import {collection, Firestore, getDocs} from "@angular/fire/firestore";
-import {CollectionReference} from "@firebase/firestore-types";
 
 @Injectable({
   providedIn: 'root'
@@ -105,7 +103,7 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
   // }
 
   public loadEntitiesByParams(params: Partial<SEARCH_PARAMS>): Observable<EntityProcessResult<EntitiesResult<ENTITY>>> {
-    const query = this.createSearchEntityQuery(params) as any; // TODO
+    const query = this.createSearchEntityQuery(params);
     return this.performSearchByQuery(query, params);
 
   }
@@ -134,10 +132,12 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
     params: EntitySearchParams,
     pagination?: PaginationParams
   ) {
-    const collectionRef: CollectionReference<ENTITY> = collection(this.firestore, this.entityPath) as unknown as CollectionReference<ENTITY, ENTITY>;
-    const q = query(collectionRef as any, ...constraints);
+    const collectionRef = collection(this.firestore, this.entityPath);
+    const createdQuery = query(collectionRef, ...constraints);
 
-    return from(getDocs(q)).pipe(
+    console.log(constraints);
+
+    return from(getDocs(createdQuery)).pipe(
       take(1),
       map(snapshot => {
         const entities = snapshot.docs.map(doc =>
