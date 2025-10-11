@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
 import {LatLngBoundsLiteralCustom, MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
@@ -9,15 +9,15 @@ import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-sto
 import LatLngBounds = google.maps.LatLngBounds;
 import {MatIcon} from "@angular/material/icon";
 import {GoogleMap} from '@angular/google-maps';
-import {MapOverlayComponent} from "../map-overlay.component";
+import {MapOverlayPinPhotoComponent} from "../map-overlay-pin-photo/map-overlay-pin-photo.component";
+import {createCustomOverlayClass} from "../overlay/custom-overlay";
 
 @Component({
   selector: 'app-google-map-read-only',
   templateUrl: './google-map-read-only.component.html',
   imports: [
     MatIcon,
-    GoogleMap,
-    MapOverlayComponent
+    GoogleMap
   ],
   styleUrls: ['./google-map-read-only.component.scss']
 })
@@ -105,10 +105,11 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   currentLatitude: number = 0;
   currentLongitude: number = 0;
   currentZoom: number = 4;
+  overlays: any[] = []; // TEMP
 
   private currentMarkedAntiqueId: number = 0;
 
-  constructor() {
+  constructor(private viewContainerRef: ViewContainerRef, private injector: Injector) {
   }
 
   ngOnInit(): void {
@@ -154,7 +155,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.addNewCurrentMarker(antique.antiqueId);
   }
 
-  zoomChanged(zoom: number) {
+  public onZoomChanged(zoom: number) {
     this.currentZoom = zoom;
     this.lastSentLongitude = this.currentLongitude;
     this.lastSentLatitude = this.currentLatitude;
@@ -178,6 +179,10 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.directionsRenderer.setMap(map);
     if (this.displayFullRoute) {
       this.renderWaypoints();
+    }
+
+    if (!this.hidePins) {
+      this.renderOverlays();
     }
   }
 
@@ -460,5 +465,21 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     bounds.extend(new google.maps.LatLng(minLatitude, minLongitude));
     bounds.extend(new google.maps.LatLng(maxLatitude, maxLongitude));
     this.mapInstance?.fitBounds(bounds, 5);
+  }
+
+  private renderOverlays() {
+    const CustomOverlay = createCustomOverlayClass();
+    for (const pin of this.mapPins) {
+      const overlay = new CustomOverlay(
+        this.mapInstance!,
+        {lat: pin.latitude, lng: pin.longitude},
+        this.viewContainerRef,
+        this.injector,
+        MapOverlayPinPhotoComponent,
+        pin
+      );
+      overlay.setMap(this.mapInstance!);
+      this.overlays.push(overlay);
+    }
   }
 }

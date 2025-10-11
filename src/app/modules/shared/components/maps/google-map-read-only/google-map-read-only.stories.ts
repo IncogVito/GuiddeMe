@@ -7,7 +7,6 @@ import {
   SbConventionMiddleDivision
 } from "../../../../../../../.storybook/storybook-naming-convention";
 import {GoogleMapReadOnlyComponent} from "./google-map-read-only.component";
-// import {AgmOverlays} from "agm-overlays";
 import {MapElement, MapGeneralPosition} from "../../../models/map.model";
 
 
