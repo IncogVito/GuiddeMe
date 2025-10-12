@@ -1,10 +1,10 @@
 
 .pin-wrapper {
   position: relative;
+  background-color: #1ea7fd;
 
   .pin-label-box {
     opacity: 0;
-
   }
 
   .pin-label {
@@ -51,14 +51,14 @@
   position: absolute;
   background: var(--main-color-tertiary);
   border: 1px solid var(--color-grey-2);
-  left: 50%;
-  top: 50%;
+
   margin: -3.33vh 0 0 -1.5vh;
   animation-name: bounce;
   animation-fill-mode: both;
   animation-duration: 1s;
   cursor: pointer;
   overflow: hidden;
+
 
   z-index: 1;
 
@@ -68,9 +68,6 @@
     border-radius: 50% 50% 50% 0;
     position: absolute;
     background: var(--main-color-primary);
-    left: 50%;
-    top: 50%;
-    margin: -3.33vh 0 0 -1.5vh;
     border-color: transparent;
   }
 
@@ -273,80 +270,80 @@
 @-moz-keyframes bounce {
   0% {
     opacity: 0;
-    transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000%) rotate(-45deg);
   }
 
   60% {
+    transform: translateY(-10%) rotate(-45deg);
     opacity: 1;
-    transform: translateY(30px) rotate(-45deg);
   }
 
   80% {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 
   100% {
-    transform: translateY(0) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
 
 @-webkit-keyframes bounce {
   0% {
     opacity: 0;
-    transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000%) rotate(-45deg);
   }
 
   60% {
+    transform: translateY(-10%) rotate(-45deg);
     opacity: 1;
-    transform: translateY(30px) rotate(-45deg);
   }
 
   80% {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 
   100% {
-    transform: translateY(0) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
 
 @-o-keyframes bounce {
   0% {
     opacity: 0;
-    transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000%) rotate(-45deg);
   }
 
   60% {
+    transform: translateY(-10%) rotate(-45deg);
     opacity: 1;
-    transform: translateY(30px) rotate(-45deg);
   }
 
   80% {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 
   100% {
-    transform: translateY(0) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
 
 @keyframes bounce {
   0% {
     opacity: 0;
-    transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000%) rotate(-45deg);
   }
 
   60% {
+    transform: translateY(-10%) rotate(-45deg);
     opacity: 1;
-    transform: translateY(30px) rotate(-45deg);
   }
 
   80% {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 
   100% {
-    transform: translateY(0) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
 

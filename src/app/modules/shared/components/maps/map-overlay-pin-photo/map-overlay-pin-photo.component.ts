@@ -10,8 +10,4 @@ export class MapOverlayPinPhotoComponent {
   @Input() index!: number;
   @Input() highlighted = false;
   @Input() inactive = false;
-
-  onClick() {
-    console.log(`Clicked pin #${this.index}`);
-  }
 }

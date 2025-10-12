@@ -1,4 +1,15 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  input,
+  Input, OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
 import {LatLngBoundsLiteralCustom, MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
@@ -21,7 +32,7 @@ import {createCustomOverlayClass} from "../overlay/custom-overlay";
   ],
   styleUrls: ['./google-map-read-only.component.scss']
 })
-export class GoogleMapReadOnlyComponent implements OnInit {
+export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
 
   // TODO - change the map implementation
   @ViewChild('googleMap')
@@ -33,8 +44,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
 
-  @Input()
-  public mapPins: MapElement[] = [];
+  public mapPins = input<MapElement[]>([]);
 
   @Input()
   public hidePins: boolean = false;
@@ -112,6 +122,14 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   constructor(private viewContainerRef: ViewContainerRef, private injector: Injector) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['mapPins'] || changes['currentLivePosition'] || changes['hidePins']) {
+      if (this.mapInstance) {
+        this.refreshOverlays();
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.currentZoom = this.zoom;
     this.assignCurrentPositionToObject();
@@ -182,7 +200,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     }
 
     if (!this.hidePins) {
-      this.renderOverlays();
+      this.refreshOverlays();
     }
   }
 
@@ -404,7 +422,7 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     }
 
     if (!this.centralisedOnCurrentPosition) {
-      const activeMapElement = this.mapPins.filter(singlePin => singlePin.highlighted);
+      const activeMapElement = this.mapPins().filter(singlePin => singlePin.highlighted);
 
       if (ArrayUtilService.isEmpty(activeMapElement)) {
         return;
@@ -416,14 +434,14 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   private renderFullRoute() {
-    if (ArrayUtilService.lengthOf(this.mapPins) < 2) {
+    if (ArrayUtilService.lengthOf(this.mapPins()) < 2) {
       return;
     }
-    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins);
-    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins);
+    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins());
+    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins());
     this.renderNextRoute(firstMapPins, lastMapPins);
 
-    const elementsBetween = this.mapPins.slice(1, this.mapPins.length);
+    const elementsBetween = this.mapPins().slice(1, this.mapPins.length);
     this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
   }
 
@@ -467,9 +485,19 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.mapInstance?.fitBounds(bounds, 5);
   }
 
+  private refreshOverlays() {
+    this.clearOverlays();
+    this.renderOverlays();
+  }
+
+  private clearOverlays() {
+    this.overlays.forEach(o => o.setMap(null));
+    this.overlays = [];
+  }
+
   private renderOverlays() {
     const CustomOverlay = createCustomOverlayClass();
-    for (const pin of this.mapPins) {
+    for (const pin of this.mapPins()) {
       const overlay = new CustomOverlay(
         this.mapInstance!,
         {lat: pin.latitude, lng: pin.longitude},
