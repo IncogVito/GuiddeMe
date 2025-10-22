@@ -136,9 +136,14 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: 2.2vh 0px 0px .25vh;
+  margin: .5vh 0 0 0;
   transform: rotateX(55deg);
   z-index: -2;
+
+  &--highlighted {
+
+    margin: 1.5vh 0 0 .75vh;
+  }
 }
 
 .live-location-pin-wrapper {

@@ -124,6 +124,7 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mapPins'] || changes['currentLivePosition'] || changes['hidePins']) {
+      console.log(changes);
       if (this.mapInstance) {
         this.refreshOverlays();
       }
@@ -149,28 +150,9 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
       fullscreenControl: false,
       streetViewControl: false,
       zoomControl: false,
-      gestureHandling: this.gestureHandling as any
+      gestureHandling: this.gestureHandling as any,
+      mapTypeControl: false
     } as google.maps.MapOptions;
-  }
-
-  mouseOver(id: number) {
-    const elem: Element = document.getElementById('pin-' + id)!;
-    elem.classList.add('pin-label-show');
-  }
-
-  leave(id: number) {
-    const elem: Element = document.getElementById('pin-' + id)!;
-    elem.classList.remove('pin-label-show');
-
-  }
-
-  chooseAntique(antique: any) {
-    if (antique.antiqueId === this.currentMarkedAntiqueId) {
-      return;
-    }
-
-    this.removeCurrentMarker();
-    this.addNewCurrentMarker(antique.antiqueId);
   }
 
   public onZoomChanged(zoom: number) {
@@ -190,7 +172,6 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   }
 
   onMapReady(map: google.maps.Map) {
-    console.log("MAp ready");
     this.mapInstance = map;
     this.getAntiqueOnPosition();
 
@@ -397,7 +378,10 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   public renderNextRoute(origin: MapElement, destination: MapElement) {
     this.directionOrigin = origin;
     this.directionDestination = destination;
+    this.routeWaypoints = [];
+
     this.convertDirections();
+    this.renderWaypoints();
   }
 
   private convertDirections() {
@@ -440,6 +424,7 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
     const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins());
     const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins());
     this.renderNextRoute(firstMapPins, lastMapPins);
+
 
     const elementsBetween = this.mapPins().slice(1, this.mapPins.length);
     this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
