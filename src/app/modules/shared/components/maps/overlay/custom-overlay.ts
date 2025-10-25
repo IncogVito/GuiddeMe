@@ -1,7 +1,15 @@
 import {ComponentRef, Injector, Type, ViewContainerRef} from '@angular/core';
 
+
+export interface CustomOverlay {
+  onRemove: () => void;
+  onAdd: () => void;
+  draw: () => void;
+  setMap: (map: google.maps.Map|null) => void;
+}
+
 export function createCustomOverlayClass() {
-  return class CustomOverlay extends google.maps.OverlayView {
+  return class CustomOverlayImpl extends google.maps.OverlayView implements CustomOverlay {
 
     private componentRef?: ComponentRef<any>;
     private div?: HTMLElement;

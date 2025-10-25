@@ -1,9 +1,12 @@
 import {
   Component,
   EventEmitter,
+  EffectRef,
   Injector,
+  signal,
+  effect,
   input,
-  Input, OnChanges,
+  Input, OnChanges, OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -21,7 +24,8 @@ import LatLngBounds = google.maps.LatLngBounds;
 import {MatIcon} from "@angular/material/icon";
 import {GoogleMap} from '@angular/google-maps';
 import {MapOverlayPinPhotoComponent} from "../map-overlay-pin-photo/map-overlay-pin-photo.component";
-import {createCustomOverlayClass} from "../overlay/custom-overlay";
+import {createCustomOverlayClass, CustomOverlay} from "../overlay/custom-overlay";
+import {MapCurrentLocationOverlayComponent} from "../current-location-overlay/map-current-location-overlay.component";
 
 @Component({
   selector: 'app-google-map-read-only',
@@ -82,7 +86,8 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   public directionOrigin: MapElement | undefined;
   public directionDestination: MapElement | undefined;
 
-  public currentLivePosition: MapElement | undefined;
+  public currentLivePosition = signal<MapElement | null>(null);
+
   public centralisedOnCurrentPosition: boolean = false;
 
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
@@ -90,12 +95,6 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   public routeWaypoints: DirectionsWaypoint[] = [];
   private directionsService = new google.maps.DirectionsService();
   private directionsRenderer = new google.maps.DirectionsRenderer();
-
-  public directionRenderOptions = {
-    polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
-    suppressMarkers: true,
-    preserveViewport: true
-  };
 
   private mapInstance: google.maps.Map | undefined;
 
@@ -115,11 +114,17 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   currentLatitude: number = 0;
   currentLongitude: number = 0;
   currentZoom: number = 4;
-  overlays: any[] = []; // TEMP
+  overlays: CustomOverlay[] = []; // TEMP
+  liveLocationOverlay: CustomOverlay[] = []; // TEMP
 
   private currentMarkedAntiqueId: number = 0;
 
   constructor(private viewContainerRef: ViewContainerRef, private injector: Injector) {
+    effect(() => {
+      if (this.currentLivePosition()) {
+        this.refreshLocationOverlays();
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -232,12 +237,7 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   //   }
   //
   //   // live position
-  //   if (this.currentLivePosition) {
-  //     const liveEl = this.createLiveElement(this.currentLivePosition);
-  //     const liveOverlay = new MapHtmlOverlay({lat: this.currentLivePosition.latitude, lng: this.currentLivePosition.longitude}, liveEl);
-  //     liveOverlay.setMap(this.mapInstance);
-  //     this.htmlOverlays.push(liveOverlay);
-  //   }
+  //
   // }
   //
   // private createPinElement(singlePin: any): HTMLElement {
@@ -274,20 +274,6 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   //   return wrapper;
   // }
   //
-  // private createLiveElement(pos: any): HTMLElement {
-  //   const wrapper = document.createElement('div');
-  //   wrapper.className = 'live-location-pin-wrapper';
-  //
-  //   const inner = document.createElement('span');
-  //   inner.className = 'live-location-pin';
-  //
-  //   const middle = document.createElement('span');
-  //   middle.className = 'live-location-pin__middle';
-  //   inner.appendChild(middle);
-  //
-  //   wrapper.appendChild(inner);
-  //   return wrapper;
-  // }
 
   private addNewCurrentMarker(id: number) {
     this.currentMarkedAntiqueId = id;
@@ -344,6 +330,8 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   }
 
   private subscribeLiveLocation() {
+    console.log(navigator.geolocation);
+    console.log(this.liveLocationEnabled);
     if (navigator.geolocation && this.liveLocationEnabled) {
       navigator.geolocation.watchPosition(
         (position: GeolocationPosition) => {
@@ -351,12 +339,11 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-
-          this.currentLivePosition = {
+          this.currentLivePosition.set({
             latitude: pos.lat,
             longitude: pos.lng,
             index: 0
-          }
+          });
         },
         () => {
           // handleLocationError(true, infoWindow, map.getCenter()!);
@@ -400,9 +387,9 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
   toggleMapCenter() {
     this.centralisedOnCurrentPosition = !this.centralisedOnCurrentPosition;
 
-    if (this.currentLivePosition && this.centralisedOnCurrentPosition) {
-      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(this.currentLivePosition?.latitude) + (0.0000000000100 * Math.random());
-      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(this.currentLivePosition?.longitude) + (0.0000000000100 * Math.random());
+    if (this.currentLivePosition() && this.centralisedOnCurrentPosition) {
+      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(this.currentLivePosition()?.latitude) + (0.0000000000100 * Math.random());
+      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(this.currentLivePosition()?.longitude) + (0.0000000000100 * Math.random());
     }
 
     if (!this.centralisedOnCurrentPosition) {
@@ -475,15 +462,25 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
     this.renderOverlays();
   }
 
+  private refreshLocationOverlays() {
+    this.clearLiveLocationOverlays();
+    this.renderLiveLocationOverlay();
+  }
+
   private clearOverlays() {
     this.overlays.forEach(o => o.setMap(null));
     this.overlays = [];
   }
 
+  private clearLiveLocationOverlays() {
+    this.liveLocationOverlay.forEach(o => o.setMap(null));
+    this.liveLocationOverlay = [];
+  }
+
   private renderOverlays() {
-    const CustomOverlay = createCustomOverlayClass();
+    const CustomOverlayImpl = createCustomOverlayClass();
     for (const pin of this.mapPins()) {
-      const overlay = new CustomOverlay(
+      const overlay = new CustomOverlayImpl(
         this.mapInstance!,
         {lat: pin.latitude, lng: pin.longitude},
         this.viewContainerRef,
@@ -493,6 +490,22 @@ export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
       );
       overlay.setMap(this.mapInstance!);
       this.overlays.push(overlay);
+    }
+  }
+
+  private renderLiveLocationOverlay() {
+    const CustomOverlayImpl = createCustomOverlayClass();
+    if (this.currentLivePosition()) {
+      const overlay = new CustomOverlayImpl(
+        this.mapInstance!,
+        {lat: this.currentLivePosition()!.latitude, lng: this.currentLivePosition()!.longitude},
+        this.viewContainerRef,
+        this.injector,
+        MapCurrentLocationOverlayComponent,
+        this.currentLivePosition
+      );
+      overlay.setMap(this.mapInstance!);
+      this.liveLocationOverlay.push(overlay);
     }
   }
 }
