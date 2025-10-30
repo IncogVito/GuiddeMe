@@ -7,7 +7,8 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
-import {random} from "lodash";
+import random from "lodash/random";
+
 import {SkeletonLoaderComponent} from "../components/skeleton-loader/skeleton-loader.component";
 
 @Directive({

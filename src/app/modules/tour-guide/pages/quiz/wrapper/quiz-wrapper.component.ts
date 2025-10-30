@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subject, take} from "rxjs";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {QuestionModalResponse, QuestionModel} from "../../../models/question.model";
 import {
   DialogDecisionData,
@@ -10,9 +10,10 @@ import {DecisionDialogResult, DecisionEnum} from "../../../../shared/models/deci
 import {DISABLE_QUIZ_CONFIRMATION} from "../../../commons/modal.commons";
 
 @Component({
-  selector: 'guidde-me-quiz-wrapper',
-  templateUrl: './quiz-wrapper.component.html',
-  styleUrls: ['./quiz-wrapper.component.scss']
+    selector: 'guidde-me-quiz-wrapper',
+    templateUrl: './quiz-wrapper.component.html',
+    standalone: false,
+    styleUrls: ['./quiz-wrapper.component.scss']
 })
 export class QuizWrapperComponent implements OnInit, OnDestroy {
 

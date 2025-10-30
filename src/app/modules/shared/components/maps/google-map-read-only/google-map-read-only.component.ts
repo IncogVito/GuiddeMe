@@ -1,30 +1,54 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  EffectRef,
+  Injector,
+  signal,
+  effect,
+  input,
+  Input, OnChanges, OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {MAP_DEFAULT_GENERAL_POSITION, MapConstants, SendEventBoundConstants} from './map-constants';
 import {GoogleStyle} from './google-style';
 import {LatLngBoundsLiteralCustom, MapCoordinates, MapElement, MapGeneralPosition} from "../../../models/map.model";
-import {AgmMap} from "@agm/core";
 import {NumberUtilService} from "../../../services/utils/number-util.service";
 import {ArrayUtilService} from "../../../services/utils/array-util.service";
 import DirectionsWaypoint = google.maps.DirectionsWaypoint;
 import {TourStopUtilService} from "../../../../tour-guide/services/util/tour-stop.util.service";
-import {take} from "rxjs";
 import LatLngBounds = google.maps.LatLngBounds;
+import {MatIcon} from "@angular/material/icon";
+import {GoogleMap} from '@angular/google-maps';
+import {MapOverlayPinPhotoComponent} from "../map-overlay-pin-photo/map-overlay-pin-photo.component";
+import {createCustomOverlayClass, CustomOverlay} from "../overlay/custom-overlay";
+import {MapCurrentLocationOverlayComponent} from "../current-location-overlay/map-current-location-overlay.component";
 
 @Component({
   selector: 'app-google-map-read-only',
   templateUrl: './google-map-read-only.component.html',
+  imports: [
+    MatIcon,
+    GoogleMap
+  ],
   styleUrls: ['./google-map-read-only.component.scss']
 })
-export class GoogleMapReadOnlyComponent implements OnInit {
+export class GoogleMapReadOnlyComponent implements OnInit, OnChanges {
 
-  @ViewChild(AgmMap)
-  public agmMap!: AgmMap
+  // TODO - change the map implementation
+  @ViewChild('googleMap')
+  public googleMap!: GoogleMap;
+
+  // google-map options
+  public mapOptions: google.maps.MapOptions = {};
 
   @Output()
   toggleMapExpansionTriggered = new EventEmitter<void>();
 
-  @Input()
-  public mapPins: MapElement[] = [];
+  public mapPins = input<MapElement[]>([]);
 
   @Input()
   public hidePins: boolean = false;
@@ -62,18 +86,15 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public directionOrigin: MapElement | undefined;
   public directionDestination: MapElement | undefined;
 
-  public currentLivePosition: MapElement | undefined;
+  public currentLivePosition = signal<MapElement | null>(null);
+
   public centralisedOnCurrentPosition: boolean = false;
 
   public convertedDirOrigin: { lat: number, lng: number } | undefined;
   public convertedDirDestination: { lat: number, lng: number } | undefined;
   public routeWaypoints: DirectionsWaypoint[] = [];
-
-  public directionRenderOptions = {
-    polylineOptions: {strokeColor: '#bd0062', strokeWeight: 6},
-    suppressMarkers: true,
-    preserveViewport: true
-  };
+  private directionsService = new google.maps.DirectionsService();
+  private directionsRenderer = new google.maps.DirectionsRenderer();
 
   private mapInstance: google.maps.Map | undefined;
 
@@ -93,10 +114,26 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   currentLatitude: number = 0;
   currentLongitude: number = 0;
   currentZoom: number = 4;
+  overlays: CustomOverlay[] = []; // TEMP
+  liveLocationOverlay: CustomOverlay[] = []; // TEMP
 
   private currentMarkedAntiqueId: number = 0;
 
-  constructor() {
+  constructor(private viewContainerRef: ViewContainerRef, private injector: Injector) {
+    effect(() => {
+      if (this.currentLivePosition()) {
+        this.refreshLocationOverlays();
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['mapPins'] || changes['currentLivePosition'] || changes['hidePins']) {
+      console.log(changes);
+      if (this.mapInstance) {
+        this.refreshOverlays();
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -110,41 +147,20 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     if (this.displayFullRoute) {
       this.renderFullRoute();
     }
+
+    // initialize map options using component properties
+    this.mapOptions = {
+      styles: this.styles,
+      clickableIcons: false,
+      fullscreenControl: false,
+      streetViewControl: false,
+      zoomControl: false,
+      gestureHandling: this.gestureHandling as any,
+      mapTypeControl: false
+    } as google.maps.MapOptions;
   }
 
-  ngAfterViewInit() {
-    this.agmMap.mapReady
-      .pipe(take(1))
-      .subscribe(map => {
-        this.mapInstance = map;
-
-        if (this.displayFullRoute) {
-          this.extendMapToRouteBounds(this.mapPins);
-        }
-      });
-  }
-
-  mouseOver(id: number) {
-    const elem: Element = document.getElementById('pin-' + id)!;
-    elem.classList.add('pin-label-show');
-  }
-
-  leave(id: number) {
-    const elem: Element = document.getElementById('pin-' + id)!;
-    elem.classList.remove('pin-label-show');
-
-  }
-
-  chooseAntique(antique: any) {
-    if (antique.antiqueId === this.currentMarkedAntiqueId) {
-      return;
-    }
-
-    this.removeCurrentMarker();
-    this.addNewCurrentMarker(antique.antiqueId);
-  }
-
-  zoomChanged(zoom: number) {
+  public onZoomChanged(zoom: number) {
     this.currentZoom = zoom;
     this.lastSentLongitude = this.currentLongitude;
     this.lastSentLatitude = this.currentLatitude;
@@ -160,9 +176,104 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     this.checkIfExpandBoundAndSendEvent();
   }
 
-  onMapReady() {
+  onMapReady(map: google.maps.Map) {
+    this.mapInstance = map;
     this.getAntiqueOnPosition();
+
+    this.directionsRenderer.setMap(map);
+    if (this.displayFullRoute) {
+      this.renderWaypoints();
+    }
+
+    if (!this.hidePins) {
+      this.refreshOverlays();
+    }
   }
+
+  //   if (this.displayFullRoute) {
+  //     this.extendMapToRouteBounds(this.mapPins);
+  //   }
+  //
+  //   // po załadowaniu mapy renderujemy HTML overlaye
+  //   this.renderOverlays();
+  // }
+  //
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   // odśwież overlaye jeśli zmieniły się piny lub live position
+  //   if (changes['mapPins'] || changes['currentLivePosition'] || changes['hidePins']) {
+  //     // jeśli mapa jest już gotowa to renderujemy od razu
+  //     if (this.mapInstance) {
+  //       this.renderOverlays();
+  //     }
+  //   }
+  // }
+  //
+  // ngOnDestroy(): void {
+  //   // usuń overlaye z mapy
+  //   this.clearOverlays();
+  // }
+  //
+  // private clearOverlays() {
+  //   this.htmlOverlays.forEach(o => o.setMap(null));
+  //   this.htmlOverlays = [];
+  // }
+  //
+  // private renderOverlays() {
+  //   // usuń stare
+  //   this.clearOverlays();
+  //
+  //   if (!this.mapInstance) {
+  //     return;
+  //   }
+  //
+  //   // piny
+  //   if (!this.hidePins && ArrayUtilService.lengthOf(this.mapPins) > 0) {
+  //     for (const singlePin of this.mapPins) {
+  //       const el = this.createPinElement(singlePin);
+  //       const overlay = new MapHtmlOverlay({lat: singlePin.latitude, lng: singlePin.longitude}, el);
+  //       overlay.setMap(this.mapInstance);
+  //       this.htmlOverlays.push(overlay);
+  //     }
+  //   }
+  //
+  //   // live position
+  //
+  // }
+  //
+  // private createPinElement(singlePin: any): HTMLElement {
+  //   const wrapper = document.createElement('div');
+  //   wrapper.className = 'pin-wrapper';
+  //   // id używane w istniejących metodach mouseOver/leave
+  //   const id = singlePin.index ?? Math.floor(Math.random() * 1000000);
+  //   wrapper.id = 'pin-' + id;
+  //
+  //   const pin = document.createElement('div');
+  //   pin.className = 'pin' + (singlePin.highlighted ? ' pin--highlighted' : '') + (singlePin.inactive ? ' pin--faded' : '');
+  //
+  //   const img = document.createElement('img');
+  //   img.src = '/assets/mapa.jpg';
+  //   img.alt = "Brak zdjecia";
+  //   pin.appendChild(img);
+  //
+  //   const span = document.createElement('span');
+  //   span.textContent = (singlePin.index != null) ? String(singlePin.index) : '';
+  //   pin.appendChild(span);
+  //
+  //   const pulse = document.createElement('div');
+  //   pulse.className = 'pulse';
+  //   pulse.id = 'pulse-' + id;
+  //
+  //   wrapper.appendChild(pin);
+  //   wrapper.appendChild(pulse);
+  //
+  //   // eventy
+  //   wrapper.addEventListener('mouseenter', () => this.mouseOver(id));
+  //   wrapper.addEventListener('mouseleave', () => this.leave(id));
+  //   wrapper.addEventListener('click', () => this.chooseAntique(singlePin));
+  //
+  //   return wrapper;
+  // }
+  //
 
   private addNewCurrentMarker(id: number) {
     this.currentMarkedAntiqueId = id;
@@ -219,6 +330,8 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   private subscribeLiveLocation() {
+    console.log(navigator.geolocation);
+    console.log(this.liveLocationEnabled);
     if (navigator.geolocation && this.liveLocationEnabled) {
       navigator.geolocation.watchPosition(
         (position: GeolocationPosition) => {
@@ -226,12 +339,11 @@ export class GoogleMapReadOnlyComponent implements OnInit {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-
-          this.currentLivePosition = {
+          this.currentLivePosition.set({
             latitude: pos.lat,
             longitude: pos.lng,
             index: 0
-          }
+          });
         },
         () => {
           // handleLocationError(true, infoWindow, map.getCenter()!);
@@ -253,7 +365,10 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   public renderNextRoute(origin: MapElement, destination: MapElement) {
     this.directionOrigin = origin;
     this.directionDestination = destination;
+    this.routeWaypoints = [];
+
     this.convertDirections();
+    this.renderWaypoints();
   }
 
   private convertDirections() {
@@ -272,13 +387,13 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   toggleMapCenter() {
     this.centralisedOnCurrentPosition = !this.centralisedOnCurrentPosition;
 
-    if (this.currentLivePosition && this.centralisedOnCurrentPosition) {
-      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(this.currentLivePosition?.latitude) + (0.0000000000100 * Math.random());
-      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(this.currentLivePosition?.longitude) + (0.0000000000100 * Math.random());
+    if (this.currentLivePosition() && this.centralisedOnCurrentPosition) {
+      this.mapGeneralPosition.position.latitude = NumberUtilService.convertToNumber(this.currentLivePosition()?.latitude) + (0.0000000000100 * Math.random());
+      this.mapGeneralPosition.position.longitude = NumberUtilService.convertToNumber(this.currentLivePosition()?.longitude) + (0.0000000000100 * Math.random());
     }
 
     if (!this.centralisedOnCurrentPosition) {
-      const activeMapElement = this.mapPins.filter(singlePin => singlePin.highlighted);
+      const activeMapElement = this.mapPins().filter(singlePin => singlePin.highlighted);
 
       if (ArrayUtilService.isEmpty(activeMapElement)) {
         return;
@@ -290,15 +405,43 @@ export class GoogleMapReadOnlyComponent implements OnInit {
   }
 
   private renderFullRoute() {
-    if (ArrayUtilService.lengthOf(this.mapPins) < 2) {
+    if (ArrayUtilService.lengthOf(this.mapPins()) < 2) {
       return;
     }
-    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins);
-    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins);
+    const firstMapPins = ArrayUtilService.getFirstRequired(this.mapPins());
+    const lastMapPins = ArrayUtilService.getLastRequired(this.mapPins());
     this.renderNextRoute(firstMapPins, lastMapPins);
 
-    const elementsBetween = this.mapPins.slice(1, this.mapPins.length);
+
+    const elementsBetween = this.mapPins().slice(1, this.mapPins.length);
     this.routeWaypoints = TourStopUtilService.convertToWaypoints(elementsBetween);
+  }
+
+
+  private renderWaypoints() {
+    this.directionsService.route(
+      {
+        origin: this.convertedDirOrigin!,
+        destination: this.convertedDirDestination!,
+        waypoints: this.routeWaypoints,
+        travelMode: this.travelMode,
+      },
+      (response, status) => {
+        if (status === google.maps.DirectionsStatus.OK && response) {
+          this.directionsRenderer.setDirections(response);
+          this.directionsRenderer.setOptions({
+            suppressMarkers: true,
+            polylineOptions: {
+              strokeColor: '#bd0062',
+              strokeOpacity: 0.8,
+              strokeWeight: 6,
+            },
+          });
+        } else {
+          console.error('Directions request failed due to ' + status);
+        }
+      }
+    );
   }
 
   private extendMapToRouteBounds(mapPins: MapElement[]) {
@@ -312,5 +455,57 @@ export class GoogleMapReadOnlyComponent implements OnInit {
     bounds.extend(new google.maps.LatLng(minLatitude, minLongitude));
     bounds.extend(new google.maps.LatLng(maxLatitude, maxLongitude));
     this.mapInstance?.fitBounds(bounds, 5);
+  }
+
+  private refreshOverlays() {
+    this.clearOverlays();
+    this.renderOverlays();
+  }
+
+  private refreshLocationOverlays() {
+    this.clearLiveLocationOverlays();
+    this.renderLiveLocationOverlay();
+  }
+
+  private clearOverlays() {
+    this.overlays.forEach(o => o.setMap(null));
+    this.overlays = [];
+  }
+
+  private clearLiveLocationOverlays() {
+    this.liveLocationOverlay.forEach(o => o.setMap(null));
+    this.liveLocationOverlay = [];
+  }
+
+  private renderOverlays() {
+    const CustomOverlayImpl = createCustomOverlayClass();
+    for (const pin of this.mapPins()) {
+      const overlay = new CustomOverlayImpl(
+        this.mapInstance!,
+        {lat: pin.latitude, lng: pin.longitude},
+        this.viewContainerRef,
+        this.injector,
+        MapOverlayPinPhotoComponent,
+        pin
+      );
+      overlay.setMap(this.mapInstance!);
+      this.overlays.push(overlay);
+    }
+  }
+
+  private renderLiveLocationOverlay() {
+    const CustomOverlayImpl = createCustomOverlayClass();
+    if (this.currentLivePosition()) {
+      const overlay = new CustomOverlayImpl(
+        this.mapInstance!,
+        {lat: this.currentLivePosition()!.latitude, lng: this.currentLivePosition()!.longitude},
+        this.viewContainerRef,
+        this.injector,
+        MapCurrentLocationOverlayComponent,
+        this.currentLivePosition
+      );
+      overlay.setMap(this.mapInstance!);
+      this.liveLocationOverlay.push(overlay);
+    }
   }
 }

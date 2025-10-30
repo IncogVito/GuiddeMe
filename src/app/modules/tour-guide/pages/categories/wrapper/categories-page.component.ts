@@ -11,6 +11,7 @@ import {ActionHandlerService} from "../../../../shared/services/utils/action-han
   selector: 'app-categories-wrapper',
   templateUrl: './categories-page.component.html',
   styleUrls: ['./categories-page.component.scss'],
+  standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesPageComponent implements OnInit, OnDestroy {

@@ -1,25 +1,27 @@
 <div class="card-primary">
   <div class="card-primary__image"
-       [ngStyle]="imageUrl ? {'background-image': 'url('+imageUrl+')'} : {}"
-  >
+    [ngStyle]="imageUrl ? {'background-image': 'url('+imageUrl+')'} : {}"
+    >
   </div>
 
   <span class="card-primary__title">
-      {{title}}
-    </span>
+    {{title}}
+  </span>
 
-  <div class="card-primary__single-detail"
-       [class.card-primary__single-detail--highlighted]="singleDetail.colorStyle"
-       [ngStyle]="{color: singleDetail.colorStyle}"
-       *ngFor="let singleDetail of details"
-  >
-    <mat-icon *ngIf="singleDetail.icon">
-      {{singleDetail.icon}}
-    </mat-icon>
-
-    <span>
-      {{singleDetail.text}}
-    </span>
-  </div>
+  @for (singleDetail of details; track singleDetail) {
+    <div class="card-primary__single-detail"
+      [class.card-primary__single-detail--highlighted]="singleDetail.colorStyle"
+      [ngStyle]="{color: singleDetail.colorStyle}"
+      >
+      @if (singleDetail.icon) {
+        <mat-icon>
+          {{singleDetail.icon}}
+        </mat-icon>
+      }
+      <span>
+        {{singleDetail.text}}
+      </span>
+    </div>
+  }
 
 </div>

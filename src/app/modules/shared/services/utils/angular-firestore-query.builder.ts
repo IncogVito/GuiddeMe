@@ -1,11 +1,7 @@
-import {CollectionReference} from "@angular/fire/compat/firestore/interfaces";
-import firebase from "firebase/compat";
-import Query = firebase.firestore.Query;
-import WhereFilterOp = firebase.firestore.WhereFilterOp;
-import OrderByDirection = firebase.firestore.OrderByDirection;
 import {ObjectUtilService} from "./object-utils.service";
 import {ArrayUtilService} from "./array-util.service";
 import {PaginationParams} from "../../models/firestore.model";
+import {OrderByDirection, WhereFilterOp} from "@firebase/firestore-types";
 
 
 interface Constraint<T> {
@@ -15,7 +11,7 @@ interface Constraint<T> {
 }
 
 export class AngularFirestoreQueryBuilder<T> {
-  queryFn?: (ref: CollectionReference<T>) => Query<T>;
+  queryFn?: (ref: any) => any; // TODO - old - Query<T>;
   private constraints: Constraint<T>[] = [];
 
   // TODO ewidentnie do jakiegoś innego utilsa albo pogrupować

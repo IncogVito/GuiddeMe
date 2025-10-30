@@ -5,18 +5,18 @@
     [mapPins]="mapPins"
     [liveLocationEnabled]="true"
     gestureHandling="greedy"
-  >
+    >
   </app-google-map-read-only>
 
   <app-task-list class="game-stops__list"
-                 [taskNames]="stopNameList">
+    [taskNames]="stopNameList">
   </app-task-list>
 
-  <ng-container *ngIf="quizAvailable">
+  @if (quizAvailable) {
     <div class="game-stops__quiz-trigger">
       <span (click)="toggleQuizState.emit(!quizEnabled)">
         {{quizEnabled ? 'Wyłącz quiz' : 'Włącz quiz'}}
       </span>
     </div>
-  </ng-container>
+  }
 </div>

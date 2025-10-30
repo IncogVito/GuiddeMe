@@ -1,45 +1,57 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, QueryFn} from "@angular/fire/compat/firestore";
+
+import {
+  query,
+  QueryConstraint
+} from '@angular/fire/firestore';
 import {EntitiesResult, EntitySearchParams, FirestoreModel, PaginationParams} from "../../models/firestore.model";
-import {catchError, map, Observable, of, take} from "rxjs";
+import {catchError, from, map, Observable, of, take} from "rxjs";
 import {EntityProcessResult, ProcessType} from "../../models/entity-process-result.model";
 
-import firebase from "firebase/compat/app";
-import Query = firebase.firestore.Query;
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {collection, Firestore, getDocs} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, SEARCH_PARAMS extends EntitySearchParams> {
 
-  protected constructor(protected firestore: AngularFirestore) {
+  protected constructor(protected firestore: Firestore) {
   }
 
   protected readonly abstract entityPath: string;
 
-  public loadEntityById(id: string): Observable<EntityProcessResult<ENTITY>> {
-    return this.firestore
-      .collection<ENTITY>(this.entityPath)
-      .doc(id)
-      .valueChanges({idField: 'id'})
-      .pipe(
-        take(1),
-        map((elem) => EntityProcessResult.ofSuccess(ProcessType.READ, elem!)),
-        catchError((err) => of(EntityProcessResult.ofError(ProcessType.READ, {id} as any, err)))
-      );
-  }
+  // public loadEntityById(id: string): Observable<EntityProcessResult<ENTITY>> {
+  //   return this.firestore
+  //     .collection<ENTITY>(this.entityPath)
+  //     .doc(id)
+  //     .valueChanges({idField: 'id'})
+  //     .pipe(
+  //       take(1),
+  //       map((elem) => EntityProcessResult.ofSuccess(ProcessType.READ, elem!)),
+  //       catchError((err) => of(EntityProcessResult.ofError(ProcessType.READ, {id} as any, err)))
+  //     );
+  // }
 
-  public loadAllEntities(): Observable<EntityProcessResult<EntitiesResult<ENTITY>>> {
-    return fromPromise(firebase.firestore().collection(this.entityPath).get())
-      .pipe(map(snapshot =>
-          snapshot.docs.map(doc => FirebaseAbstractApiService.combineWithGeneratedId(doc.data(), doc.id))
-        ),
-        map(entities => EntityProcessResult.ofSuccess(
-          ProcessType.READ,
-          {entities: entities as ENTITY[]}
-        ))
+  public loadAllEntities() {
+    const collRef = collection(this.firestore, this.entityPath);
+
+    return from(getDocs(collRef)).pipe(
+      map(snapshot => {
+        const entities = snapshot.docs.map(doc =>
+          FirebaseAbstractApiService.combineWithGeneratedId(doc.data() as ENTITY, doc.id)
+        );
+        return EntityProcessResult.ofSuccess<EntitiesResult<ENTITY>>(ProcessType.READ, {entities});
+      }),
+      catchError(err =>
+        of(
+          EntityProcessResult.ofError<EntitiesResult<ENTITY>>(
+            ProcessType.READ,
+            {entities: []},
+            err
+          )
+        )
       )
+    );
   }
 
 
@@ -91,7 +103,7 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
   // }
 
   public loadEntitiesByParams(params: Partial<SEARCH_PARAMS>): Observable<EntityProcessResult<EntitiesResult<ENTITY>>> {
-    const query = this.createSearchEntityQuery(params) as any; // TODO
+    const query = this.createSearchEntityQuery(params);
     return this.performSearchByQuery(query, params);
 
   }
@@ -108,29 +120,48 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
     }
   }
 
-  private performSearchByQuery(query: QueryFn, params: EntitySearchParams, pagination?: PaginationParams): Observable<EntityProcessResult<EntitiesResult<ENTITY>>> {
-    const userSingleCollectionRef = this.firestore.collection<ENTITY>(this.entityPath, query);
+  /**
+   * Performs a Firestore query using modular API.
+   *
+   * @param constraints - An array of QueryConstraint (e.g. where, orderBy, limit)
+   * @param params - Search parameters
+   * @param pagination - Optional pagination parameters
+   */
+  protected performSearchByQuery(
+    constraints: QueryConstraint[],
+    params: EntitySearchParams,
+    pagination?: PaginationParams
+  ) {
+    const collectionRef = collection(this.firestore, this.entityPath);
+    const createdQuery = query(collectionRef, ...constraints);
 
-    return userSingleCollectionRef.get()
-      .pipe(
-        take(1),
-        map(snapshot => {
-          const entities = snapshot.docs.map(doc => FirebaseAbstractApiService.combineWithGeneratedId(doc.data(), doc.id));
-          return EntityProcessResult.ofSuccess(
+    console.log(constraints);
+
+    return from(getDocs(createdQuery)).pipe(
+      take(1),
+      map(snapshot => {
+        const entities = snapshot.docs.map(doc =>
+          FirebaseAbstractApiService.combineWithGeneratedId(doc.data(), doc.id)
+        );
+
+        return EntityProcessResult.ofSuccess(
+          ProcessType.READ,
+          this.combinePaginatedResult(entities as any, {...params, page: pagination?.page})
+        );
+      }),
+      catchError(err => {
+        console.error(err);
+        return of(
+          EntityProcessResult.ofError(
             ProcessType.READ,
-            this.combinePaginatedResult(entities, {...params, page: pagination?.page})
+            this.combinePaginatedResult([], params),
+            err
           )
-        }),
-        catchError(err => {
-            console.error(err);
-            return of(EntityProcessResult.ofError(
-              ProcessType.READ,
-              this.combinePaginatedResult([], params),
-              err))
-          }
-        )
-      );
+        );
+      })
+    );
   }
+
 
   protected combinePaginatedResult(entities: ENTITY[], params: EntitySearchParams): EntitiesResult<ENTITY> {
     return {
@@ -139,7 +170,7 @@ export abstract class FirebaseAbstractApiService<ENTITY extends FirestoreModel, 
     }
   }
 
-  protected abstract createSearchEntityQuery(params: Partial<SEARCH_PARAMS>): Query<ENTITY>;
+  protected abstract createSearchEntityQuery(params: Partial<SEARCH_PARAMS>): QueryConstraint[];
 
   // protected abstract createSearchEntityQueryWithPagination(params: EntityPaginationSearchParams<EntitySearchParams<any>>): Query<ENTITY>;
 }

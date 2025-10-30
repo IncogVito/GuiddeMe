@@ -1,11 +1,15 @@
 <div class="header-text">
-  <mat-icon class="header-text__icon" *ngIf="icon">
-    {{icon}}
-  </mat-icon>
+  @if (icon) {
+    <mat-icon class="header-text__icon">
+      {{icon}}
+    </mat-icon>
+  }
 
-  <span class="header-text__icon" *ngIf="customStrIcon">
-    {{customStrIcon}}
-  </span>
+  @if (customStrIcon) {
+    <span class="header-text__icon">
+      {{customStrIcon}}
+    </span>
+  }
 
   <h3 class="header-text__main-text">
     {{mainText}}

@@ -18,7 +18,7 @@ const firebaseConfig = {
   appId: "*****"
 };
 
-const googleMapsApiKey = '*****';
+const googleMapsApiKey = "";
 
 export const environment = {
   production: false,

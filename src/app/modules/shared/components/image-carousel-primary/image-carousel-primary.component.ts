@@ -1,9 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ImageCarouselViewModel} from "../../models/image-carousel.model";
+import {SwipeRecogniseDirective} from "../../directives/swipe-recognise.directive";
 
 @Component({
   selector: 'app-image-carousel-primary',
   templateUrl: './image-carousel-primary.component.html',
+  imports: [
+    SwipeRecogniseDirective
+  ],
   styleUrls: ['./image-carousel-primary.component.scss']
 })
 export class ImageCarouselPrimaryComponent implements OnInit {

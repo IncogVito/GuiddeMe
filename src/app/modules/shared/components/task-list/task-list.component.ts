@@ -1,10 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TaskViewModel} from "../../models/task.model";
 import {ArrayUtilService} from "../../services/utils/array-util.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
+  imports: [
+    MatIcon
+  ],
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {

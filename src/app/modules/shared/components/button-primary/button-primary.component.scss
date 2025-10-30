@@ -15,6 +15,7 @@
   position: relative;
   min-height: 2.8rem;
   font-size: 1.1rem;
+  width: 100%;
 
   &--reversed-color {
     background-color: var(--main-color-primary-oposite);
@@ -27,8 +28,6 @@
     border-color: var(--color-grey-2);
     cursor: default;
   }
-
-  width: 100%;
 
   &:not(&--disabled):active {
     transform: scale(1.03);

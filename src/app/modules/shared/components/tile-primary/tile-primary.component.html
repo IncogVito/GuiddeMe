@@ -1,29 +1,28 @@
 <div class="tile-category-primary__wrapper">
   <span class="tile-category-primary__info">
     {{rightText}}
-</span>
+  </span>
   <div class="tile-category-primary__round-wrapper">
 
-    <div *ngIf="!loadingInProgress; else loadingSkeletonTemplate"
-         class="tile-category-primary"
-         [ngStyle]="backgroundStyle"
-    >
-
-      <div class="tile-category-primary__round-wrapper-button">
-        <button class="tile-category-primary__button"
-                (click)="buttonClicked.emit()"
+    @if (!loadingInProgress) {
+      <div
+        class="tile-category-primary"
+        [ngStyle]="backgroundStyle"
         >
-          {{buttonText}}
-        </button>
+        <div class="tile-category-primary__round-wrapper-button">
+          <button class="tile-category-primary__button"
+            (click)="buttonClicked.emit()"
+            >
+            {{buttonText}}
+          </button>
+        </div>
       </div>
-    </div>
+    } @else {
+      <div class="tile-category-primary"
+        *skeleton="true; repeat: 1; className: 'tile-category-primary'; height: '7.5rem'; width: '100%' "
+        >
+      </div>
+    }
   </div>
 </div>
 
-<ng-template #loadingSkeletonTemplate>
-  <div class="tile-category-primary"
-       *skeleton="true; repeat: 1; className: 'tile-category-primary'; height: '7.5rem'; width: '100%' "
-  >
-
-  </div>
-</ng-template>

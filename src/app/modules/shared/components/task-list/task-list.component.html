@@ -1,31 +1,32 @@
-<ol class="task-list" *ngIf="taskNames.length; else noTasksTemplate">
-  <ul class="task-item" *ngFor="let task of taskList; let index = index;">
-
-    <div class="task-item__icon"
-         [class.task-item__icon--done]="task.finished"
-         [class.task-item__icon--current]="task.currentActive"
-    >
-      <mat-icon *ngIf="task.finished; else numberIcon;">
-        check
-      </mat-icon>
-
-      <ng-template #numberIcon>
-        {{index + 1}}
-      </ng-template>
-    </div>
-
-    <span class="task-item__name"
+@if (taskNames.length) {
+  <ol class="task-list">
+    @for (task of taskList; track task; let index = $index) {
+      <ul class="task-item">
+        <div class="task-item__icon"
+          [class.task-item__icon--done]="task.finished"
+          [class.task-item__icon--current]="task.currentActive"
+          >
+          @if (task.finished) {
+            <mat-icon>
+              check
+            </mat-icon>
+          } @else {
+            {{index + 1}}
+          }
+        </div>
+        <span class="task-item__name"
           [class.task-item__name--active]="task.currentActive"
-    >
-      {{task.name}}
-    </span>
-  </ul>
-</ol>
-
-<ng-template #noTasksTemplate>
+          >
+          {{task.name}}
+        </span>
+      </ul>
+    }
+  </ol>
+} @else {
   <div class="d-flex align-center justify-content-center">
     <h3 class="header-tertiary">
       {{noTasksLabel}}
     </h3>
   </div>
-</ng-template>
+}
+

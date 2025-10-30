@@ -1,9 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot
-} from '@angular/router';
+import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import {combineLatestWith, filter, map, Observable, take, tap} from 'rxjs';
 import {Store} from "@ngxs/store";
 import {TourModel} from "../models/tour.model";
@@ -16,7 +12,7 @@ import {TourStopModel} from "../models/tour-stop.model";
 @Injectable({
   providedIn: 'root'
 })
-export class TourPreviewResolver implements Resolve<[TourModel, TourStopModel[]]> {
+export class TourPreviewResolver  {
 
   constructor(private readonly store: Store,
               private readonly toursState: ToursState,

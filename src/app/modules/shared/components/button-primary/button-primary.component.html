@@ -1,16 +1,18 @@
 <button class="button-primary" (click)="!disabled && buttonClicked()"
-        [class.button-primary--reversed-color]="reversedColor"
-        [class.button-primary--disabled]="disabled"
->
+  [class.button-primary--reversed-color]="reversedColor"
+  [class.button-primary--disabled]="disabled"
+  >
 
   <span class="button-primary__label"
-        [class.button-primary__label--with-icon]="iconName"
+    [class.button-primary__label--with-icon]="iconName"
   > {{label}} </span>
 
-  <mat-icon *ngIf="iconName"
-            [attr.aria-label]="iconName"
-            class="button-primary__icon"
-  >
-    {{iconName}}
-  </mat-icon>
+  @if (iconName) {
+    <mat-icon
+      [attr.aria-label]="iconName"
+      class="button-primary__icon"
+      >
+      {{iconName}}
+    </mat-icon>
+  }
 </button>

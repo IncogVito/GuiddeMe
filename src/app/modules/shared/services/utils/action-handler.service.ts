@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Actions, ofActionCompleted, ofActionDispatched} from "@ngxs/store";
-import {ActionType} from "@ngxs/store/src/actions/symbols";
-import {Category} from "../../../tour-guide/stores/categories/categories.state";
-import {combineLatest, combineLatestAll, map, merge, Observable} from "rxjs";
+import {Actions, ActionType, ofActionCompleted, ofActionDispatched} from "@ngxs/store";
+import {map, merge, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

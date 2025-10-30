@@ -1,11 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 import {DialogDecisionPrimaryComponent} from "./dialog-decision-primary.component";
+import {ButtonPrimaryComponent} from "../button-primary/button-primary.component";
 
 @Component({
   selector: 'app-dialog-decision-primary-wrapper',
-  template: '<app-button-primary (click)="triggerModal()" ' +
-    'label="Trigger modal"></app-button-primary>',
+  template: `<app-button-primary (click)="triggerModal()" label="Trigger modal"></app-button-primary>`,
+  imports: [
+    ButtonPrimaryComponent
+  ],
 })
 export class DialogDecisionPrimaryWrapperComponent implements OnInit {
 

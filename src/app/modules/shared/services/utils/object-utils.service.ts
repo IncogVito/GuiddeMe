@@ -167,8 +167,8 @@ export class ObjectUtilService {
     }
   }
 
-  public static areValuesFilled<T>(object: T, checkMode: 'ALL' | 'ANY'): boolean {
-    return this.areIndicatedValuesFilled(object, Object.keys(object) as any, checkMode);
+  public static areValuesFilled<T extends object>(obj: T, checkMode: 'ALL' | 'ANY'): boolean {
+    return this.areIndicatedValuesFilled(obj, Object.keys(obj) as any, checkMode);
   }
 
   public static isEmpty(elements: any[]): boolean {

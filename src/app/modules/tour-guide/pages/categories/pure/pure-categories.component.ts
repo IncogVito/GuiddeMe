@@ -5,7 +5,8 @@ import {CategoryViewModel} from "../../../models/category.model";
   selector: 'app-pure-categories',
   templateUrl: './pure-categories.component.html',
   styleUrls: ['./pure-categories.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PureCategoriesComponent implements OnInit {
 

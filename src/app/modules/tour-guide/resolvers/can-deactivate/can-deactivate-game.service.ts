@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {CanDeactivate} from "@angular/router";
+import {MatDialog} from '@angular/material/dialog';
 import {GamePageComponent} from "../../pages/game-in-progress-page/wrapper/game-page.component";
-import {MatDialog} from "@angular/material/dialog";
 import {GameState} from "../../stores/game/game.state";
 import {map, Observable, of, switchMap, take} from "rxjs";
 import {
@@ -14,7 +13,7 @@ import {QUIT_GAME_CONFIRMATION} from "../../commons/modal.commons";
 @Injectable({
   providedIn: 'root'
 })
-export class CanDeactivateGame implements CanDeactivate<GamePageComponent> {
+export class CanDeactivateGame {
   constructor(private dialog: MatDialog,
               private readonly gameState: GameState) {
   }
@@ -39,7 +38,9 @@ export class CanDeactivateGame implements CanDeactivate<GamePageComponent> {
     }).afterClosed()
       .pipe(
         take(1),
-        map(decisionWrapper => !!decisionWrapper && DecisionEnum.YES === decisionWrapper.decision)
+        map(decisionWrapper => !!decisionWrapper
+          && typeof decisionWrapper === "object"
+          && "decision" in decisionWrapper && DecisionEnum.YES === decisionWrapper.decision) // TODO typing
       )
   }
 }

@@ -4,12 +4,13 @@ import {ChildrenOutletContexts} from "@angular/router";
 import {tourGuideRouteAnimations} from "./modules/tour-guide/route-animations";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  animations: [
-    tourGuideRouteAnimations
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false,
+    animations: [
+        tourGuideRouteAnimations
+    ]
 })
 export class AppComponent {
   title = 'GuiddeMe';

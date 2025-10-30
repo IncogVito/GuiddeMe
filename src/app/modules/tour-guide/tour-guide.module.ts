@@ -1,4 +1,3 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {IntroductionPageComponent} from './pages/introduction-page/introduction-page.component';
 import {RouterModule, Routes} from "@angular/router";
@@ -13,22 +12,32 @@ import {ToursPageResolver} from "./resolvers/tours-page.resolver";
 import {SingleTourPageComponent} from './pages/single-tour/wrapper/single-tour-page.component';
 import {TourPreviewResolver} from "./resolvers/tour-preview.resolver";
 import {
-  PureGameStopListComponent
-} from './pages/game-in-progress-page/pure/pure-game-stop-list/pure-game-stop-list.component';
-import {
   PureGameCurrentStopComponent
 } from './pages/game-in-progress-page/pure/pure-game-current-stop/pure-game-current-stop.component';
 import {PureGameComponent} from './pages/game-in-progress-page/pure/pure-game/pure-game.component';
 import {GamePageComponent} from './pages/game-in-progress-page/wrapper/game-page.component';
 import {PureQuizComponent} from './pages/quiz/pure-quiz/pure-quiz.component';
-import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
 import {QuizWrapperComponent} from './pages/quiz/wrapper/quiz-wrapper.component';
 import {PureAuthorsComponent} from './pages/authors/pure/pure-authors.component';
 import {CanDeactivateGame} from "./resolvers/can-deactivate/can-deactivate-game.service";
 import {RequiredTourPreviewDataLoadedGuard} from "./guards/required-tour-preview-data-loaded-guard.service";
-import {AgmCoreModule} from "@agm/core";
+
 import {environment} from "../../../environments/environment";
+import {MatRadioModule} from "@angular/material/radio";
+import {HeaderTextPrimaryComponent} from "../shared/components/header-text-primary/header-text-primary.component";
+import {EnvironmentProviders, NgModule, Provider, Type} from "@angular/core";
+import {
+  PureGameStopListComponent
+} from "./pages/game-in-progress-page/pure/pure-game-stop-list/pure-game-stop-list.component";
+
+// TODO temp type definition
+declare module "@angular/core" {
+  interface ModuleWithProviders<T = any> {
+    ngModule: Type<T>;
+    providers?: (Provider | EnvironmentProviders)[] | undefined;
+  }
+}
 
 export const tourGuideRoutes: Routes = [
   {
@@ -72,23 +81,21 @@ export const tourGuideRoutes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
-    IntroductionPageComponent,
-    PureCategoriesComponent,
-    PureToursComponent,
-    PureSingleTourComponent,
     CategoriesPageComponent,
     ToursPageComponent,
     SingleTourPageComponent,
-    PureGameStopListComponent,
     PureGameCurrentStopComponent,
     PureGameComponent,
     GamePageComponent,
     PureQuizComponent,
     QuizWrapperComponent,
-    PureAuthorsComponent
+    PureAuthorsComponent,
+    IntroductionPageComponent,
+    PureCategoriesComponent,
+    PureToursComponent,
+    PureSingleTourComponent,
   ],
   imports: [
     CommonModule,
@@ -97,10 +104,8 @@ export const tourGuideRoutes: Routes = [
     SharedModule,
     MatRadioModule,
     FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleMapsApiKey,
-      libraries: []
-    }),
+    HeaderTextPrimaryComponent,
+    PureGameStopListComponent
   ]
 })
 export class TourGuideModule {

@@ -1,19 +1,21 @@
 <div class="tours-list">
-  <app-tile-secondary *ngFor="let singleTour of tours"
-                      class="tours__single-item"
-                      topRightIcon="expand_more"
-                      descriptionIcon="schedule"
-                      buttonText="Zobacz"
-                      (onToggle)="toggleTour(singleTour)"
-                      (buttonClicked)="chooseTour.emit(singleTour.id)"
-                      [mainLabel]="singleTour.title"
-                      [descriptionText]="singleTour.time + ' minut'"
-                      [imageUrl]="singleTour.previewImageUrl"
-                      [expanded]="singleTour.expanded"
-                      [details]="singleTour.tourDetails"
-                      [displayAgmMap]="true"
-                      [mapWayPoints]="singleTour.tourStops"
-  >
-    <!-- TODO directive for converting inflections -->
-  </app-tile-secondary>
+  @for (singleTour of convertedTours; track singleTour) {
+    <app-tile-secondary
+      class="tours__single-item"
+      topRightIcon="expand_more"
+      descriptionIcon="schedule"
+      buttonText="Zobacz"
+      (onToggle)="toggleTour(singleTour)"
+      (buttonClicked)="chooseTour.emit(singleTour.id)"
+      [mainLabel]="singleTour.title"
+      [descriptionText]="singleTour.time + ' minut'"
+      [imageUrl]="singleTour.previewImageUrl"
+      [expanded]="singleTour.expanded"
+      [details]="singleTour.tourDetails"
+      [displayAgmMap]="true"
+      [mapWayPoints]="singleTour.tourStops"
+      >
+      <!-- TODO directive for converting inflections -->
+    </app-tile-secondary>
+  }
 </div>

@@ -21,12 +21,14 @@
 
   <div class="quiz-page__responses">
 
-    <span class="quiz-page__single-option" *ngFor="let singleOption of availableResponses; let idx = index"
-          [class.quiz-page__single-option--active]="idx === chosenIndex"
-          (click)="chosenIndex = idx"
-    >
-      {{singleOption}}
-    </span>
+    @for (singleOption of availableResponses; track singleOption; let idx = $index) {
+      <span class="quiz-page__single-option"
+        [class.quiz-page__single-option--active]="idx === chosenIndex"
+        (click)="chosenIndex = idx"
+        >
+        {{singleOption}}
+      </span>
+    }
 
   </div>
 
@@ -35,12 +37,12 @@
       label="Dalej"
       [disabled]="chosenIndex === undefined || !(chosenIndex >= 0)"
       (btnClick)="chosenIndex !== undefined && (chosenIndex >= 0) && confirmChoice.emit(chosenIndex)"
-    >
+      >
     </app-button-primary>
 
     <span class="quiz-page__quit"
-          (click)="disableQuiz.emit()"
-    >
+      (click)="disableQuiz.emit()"
+      >
       Wyłącz quiz
     </span>
   </div>

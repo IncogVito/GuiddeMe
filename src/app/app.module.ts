@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {importProvidersFrom, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -21,6 +21,8 @@ import {GameState} from "./modules/tour-guide/stores/game/game.state";
 import {SharedModule} from "./modules/shared/shared.module";
 import {UxDetailsState} from "./modules/tour-guide/stores/ux-details/ux-details.state";
 import {QuestionsState} from "./modules/tour-guide/stores/questions/questions.state";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {getFirestore, provideFirestore} from "@angular/fire/firestore";
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {QuestionsState} from "./modules/tour-guide/stores/questions/questions.st
         host: 'localhost:7200',
         ssl: false
       } : undefined
-    }
+    },
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   exports: [],
   bootstrap: [AppComponent]
